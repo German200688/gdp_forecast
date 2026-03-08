@@ -25,7 +25,7 @@ int main()
 	SetConsoleCP(CP_UTF8);
 	
 	Config obj1;
-
+	nvidia obj4;
 
 	vector<string> indicators = {}; //параметры
 	vector<signed char> TheoWeights = {}; //весы индикаторов
@@ -83,7 +83,7 @@ int main()
 		linkfile
 		);
 #ifdef _DEBUG
-	nvidia obj4;
+	
 	obj4.nvidiadata();
 #endif
 

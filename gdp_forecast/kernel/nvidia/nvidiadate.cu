@@ -43,3 +43,5 @@ void nvidia::nvidiadata()
 	//	printf("Kernel execution timeout enabled: %s\n", deviceProp.kernelExecTimeoutEnabled ? "true" :"false");
 	scanf("");
 }
+
+

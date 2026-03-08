@@ -23,8 +23,8 @@ signed char Signch::scale(signed char draft) {
 
 signed char Signch::plusss(signed char ap, signed char bp)
 {
-	if (ap > 60 && bp > 60 || ap > 50 && bp > 70 || ap > 40 && bp > 80 || ap > 30 && bp > 90 || ap > 20 && bp > 100 || ap > 10 && bp > 110 || ap > 0 && bp > 120 || bp > 50 && ap > 70 || bp > 40 && ap > 80 || bp > 30 && ap > 90 || bp > 20 && ap > 100 || bp > 10 && ap > 110 || bp > 0 && ap > 120) return 100;
-	else if (ap < -60 && bp < -60 || ap < -50 && bp < -70 || ap < -40 && bp < -80 || ap < -30 && bp < -90 || ap < -20 && bp < -100 || ap < -10 && bp < -110 || ap < -0 && bp < -120 || bp < -50 && ap < -70 || bp < -40 && ap < -80 || bp < -30 && ap < -90 || bp < -20 && ap < -100 || bp < -10 && ap < -110 || bp < -0 && ap < -120) return -100;
+	if (ap > 60 && bp > 60 || ap > 50 && bp > 70 || ap > 40 && bp > 80 || ap > 30 && bp > 90 || ap > 20 && bp > 100 || ap > 10 && bp > 110 || ap > 0 && bp > 120 || bp > 50 && ap > 70 || bp > 40 && ap > 80 || bp > 30 && ap > 90 || bp > 20 && ap > 100 || bp > 10 && ap > 110 || bp > 0 && ap > 120) return 120;
+	else if (ap < -60 && bp < -60 || ap < -50 && bp < -70 || ap < -40 && bp < -80 || ap < -30 && bp < -90 || ap < -20 && bp < -100 || ap < -10 && bp < -110 || ap < -0 && bp < -120 || bp < -50 && ap < -70 || bp < -40 && ap < -80 || bp < -30 && ap < -90 || bp < -20 && ap < -100 || bp < -10 && ap < -110 || bp < -0 && ap < -120) return -120;
 	else
 	{
 		signed char d1 = ap + bp;
