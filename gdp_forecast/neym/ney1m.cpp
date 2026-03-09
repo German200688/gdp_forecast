@@ -242,19 +242,20 @@ void layer1m::teachdel1m(vector<signed char >& delta2m, int32_t& Quoter, vector<
 
 	Outputs = Outputs1m[Quoter];
 	Weightsl = Weights2m[0];
-
+	int32_t t2 = Outputs1m[Quoter].size();
 	int32_t t1 = delta2m.size();
 
 	signed char alpha = 100;
 
-	for (int32_t i1 = 0; i1 < t1; i1++)
+	for (int32_t i1 = 0; i1 < t2; i1++)
 	{
-		signed char a = delta2m[i1];
 
-		delta = obj2.deltaMiddlem(t1, Weightsl, delta, a, alpha, Outputs);
 
+		delta[i1] = obj2.deltaMiddle(t1, Weights2m[i1], delta2m, alpha, Outputs[i1]);
+		//summ (Weights4[i]*delta4[i])
 
 	}
+
 	delta1m = delta;
 }
 
@@ -269,7 +270,6 @@ void layer1m::teachdel1mam(vector<signed char >& delta2m, int32_t& Quoter, vecto
 	nvidiac obj2;
 
 
-	Neyron obj2;
 
 	int32_t t0 = Weights2m.size();
 	vector<signed char > delta(t0);

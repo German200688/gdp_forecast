@@ -265,21 +265,21 @@ void layer3::teachdel3(vector<signed char >& delta4, int32_t& Quoter, vector<vec
 	//int32_t t0 = Weights3.size();
 	int32_t t0 = Outputs3[Quoter].size();
 	vector<signed char > delta(t0);
-
+	
 	Outputs = Outputs3[Quoter];
 	Weightsl = Weights4[0];
 
 	int32_t t1 = delta4.size();
 	int32_t t2 = Outputs3[Quoter].size();
-
+	vector<signed char > delta1(t1);
 	signed char alpha = 100;
 
-	for (int32_t i1 = 0; i1 < t1; i1++)
+	for (int32_t i1 = 0; i1 < t2; i1++)
 	{
-		signed char a = delta4[i1];
 		
-		delta = obj2.deltaMiddle(t2, Weightsl, delta, a, alpha, Outputs);
-
+		
+		delta[i1] = obj2.deltaMiddle(t1, Weights4[i1], delta4, alpha, Outputs[i1]);
+		//summ (Weights4[i]*delta4[i])
 
 	}
 

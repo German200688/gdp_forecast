@@ -274,16 +274,16 @@ void layer2::teachdel2(vector<signed char >& delta3, int32_t& Quoter, vector<vec
 
 	signed char alpha = 100;
 
-	for (int32_t i1 = 0; i1 < t1; i1++)
+	for (int32_t i1 = 0; i1 < t2; i1++)
 	{
-		signed char a = delta3[i1];
-		
-		delta = obj2.deltaMiddle(t2, Weightsl, delta, a, alpha, Outputs);
 
+
+		delta[i1] = obj2.deltaMiddle(t1, Weights3[i1], delta3, alpha, Outputs[i1]);
+		//summ (Weights4[i]*delta4[i])
 
 	}
 
-	delta2 = delta;
+	delta3 = delta;
 }
 
 

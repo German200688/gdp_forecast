@@ -336,42 +336,52 @@ using namespace std;
  }
 
 
- vector<signed char > Neyron::deltaMiddle(int32_t& Weightslsize, vector <signed char>& Weightsl, vector <signed char>& delta, signed char& deltal, signed char& alpha , vector<signed char >& Outputs)
+ signed char Neyron::deltaMiddle(int32_t Weightslsize, vector<signed char >& Weights, vector<signed char >& delta, signed char& alpha, signed char& Outputs)
  {
 	 Relu obj;
 	 Signch obj1;
-	 
-
-
-	 for (int32_t i6 = 0; i6 < Weightslsize; i6++)
+	 signed char deltaraw = 0;
+	 if (obj.reludivp(Outputs) == 0) { return 0; }
+	 else
 	 {
-		 signed char t0 = obj.reludivp(Outputs[i6]);
-		// delta[i6] = obj1.multtt(alpha, deltal);
-		 delta[i6] = obj1.multtt(deltal, Weightsl[i6]);
-		 delta[i6] = obj1.multtt(delta[i6], t0);
+		 
+		 for (int32_t i6 = 0; i6 < Weightslsize; i6++)
+		 {
+			 
+			 signed char sdeltaraw = obj1.multtt(Weights[i6], delta[i6]);
+			 deltaraw = obj1.plusss(deltaraw, sdeltaraw);
+			 if (deltaraw == 120 || deltaraw == -120) break;
 
+		 }
+
+		 return deltaraw;
 	 }
-	 return delta;
+	 
+	 
  }
 
 
 
- vector<signed char > Neyron::deltaMiddlem(int32_t& Weightslsize, vector <signed char>& Weightsl, vector <signed char>& delta, signed char& deltal, signed char& alpha, vector<signed char >& Outputs)
+ signed char Neyron::deltaMiddlem(int32_t Weightslsize, vector<signed char >& Weights, vector<signed char >& delta, signed char& alpha, signed char& Outputs)
  {
 	 Relu obj;
 	 Signch obj1;
-
-
-
-	 for (int32_t i6 = 0; i6 < Weightslsize; i6++)
+	 signed char deltaraw = 0;
+	 if (obj.reludivm(Outputs) == 0) { return 0; }
+	 else
 	 {
-		 signed char t0 = obj.reludivm(Outputs[i6]);
-		 // delta[i6] = obj1.multtt(alpha, deltal);
-		 delta[i6] = obj1.multtt(deltal, Weightsl[i6]);
-		 delta[i6] = obj1.multtt(delta[i6], t0);
 
+		 for (int32_t i6 = 0; i6 < Weightslsize; i6++)
+		 {
+
+			 signed char sdeltaraw = obj1.multtt(Weights[i6], delta[i6]);
+			 deltaraw = obj1.plusss(deltaraw, sdeltaraw);
+			 if (deltaraw == 120 || deltaraw == -120) break;
+
+		 }
+
+		 return deltaraw;
 	 }
-	 return delta;
  }
 
 
