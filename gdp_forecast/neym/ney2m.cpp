@@ -6,6 +6,7 @@
 #include "ney1m.h"
 #include "ney2m.h"
 #include "../kernel/nvidia/cuda/nvidiac.h"
+#include "../kernel/OB1.h"
 
 using namespace std;
 
@@ -345,5 +346,36 @@ void layer2m::teach2m(int32_t& Quoter, vector<vector<signed char>>& Outputs2m, s
 		signed char t55 = delta2m[i];
 		Weights2m[i] = obj2.MiddleTeach(Weights2m[i], Outputs[i], delta2m[i], t1, alpha);
 
+	}
+}
+
+
+
+void layer2m::teach2mam(int32_t& Quoter, vector<vector<signed char>>& Outputs2m, signed char alpham, vector<vector<signed char>>& Weights2m, vector<signed char >& delta2m, signed char*& vec_d, signed char*& vec_a)
+
+{
+	nvidiac obj2;
+	Signch obj1;
+
+
+	//альфа*значение низ * дельта
+	int32_t t0 = Outputs2m[Quoter].size();
+	vector<signed char > Outputs(t0);
+	Outputs = Outputs2m[Quoter];
+	int32_t t1 = Weights2m[0].size();
+
+
+	for (int32_t i = 0; i < t0; i++)
+	{
+		/*
+		signed char Output = Outputs[i];
+		signed char delta = delta2[i];
+		vector<signed char > Weights = Weights2[i];
+		*/
+		signed char t55 = delta2m[i];
+		signed char t11 = obj1.multtt(Outputs[i], delta2m[i]);
+		signed char t21 = obj1.multtt(t1, alpham);
+		signed char* Weightsl = Weights2m[i].data();
+		obj2.MiddleTeachM(Weightsl, t1, t21, vec_d, vec_a);
 	}
 }

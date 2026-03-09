@@ -13,6 +13,7 @@
 #include "increase.cpp"
 #include "bp2.cpp"
 #include "bp3.cpp"
+#include "bp4.cpp"
 #include "neys/ney1s.h"
 #include "kernel/other.h"
 

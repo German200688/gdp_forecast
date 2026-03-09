@@ -126,6 +126,7 @@ void teachquoter(int32_t& Quoter1, signed char& result1, signed char& result2, s
 	obj41.teachdel2mam(delta3m, Quoter, Weights3m, Weights2m, Outputs2m, delta2m, vec_a, vec_b, vec_c, vec_d);
 
 	obj5.teachdel1ma(delta2, Quoter, Weights2, Weights1, Outputs1, delta1, vec_a, vec_b, vec_c, vec_d);
+	
 
 	obj51.teachdel1mam(delta2m, Quoter, Weights2m, Weights1m, Outputs1m, delta1m, vec_a, vec_b, vec_c, vec_d);
 
@@ -134,6 +135,41 @@ void teachquoter(int32_t& Quoter1, signed char& result1, signed char& result2, s
 
 	teachlayer3(Weights5m, Quoter, Outputs4m, delta5m);
 
+	// "Рассчет данных 4-го положительного слоя:" 
+
+	obj7.teach4ma(Quoter, Outputs4, alpha, Weights4, delta4, vec_a, vec_d);
+
+	// "Рассчет данных 4-го отрицательного слоя:" 
+
+	obj71.teach4mam(Quoter, Outputs4m, alpha, Weights4m, delta4m, vec_a, vec_d);
+
+
+	// "РАссчет весов 3-го положительного слоя:"
+
+	obj6.teach3ma(Quoter, Outputs3, alpha, Weights3, delta3, vec_a, vec_d);
+
+	// "Рассчет весов 3-го отрицательного слоя:" << endl;
+
+	obj61.teach3mam(Quoter, Outputs3m, alpha, Weights3m, delta3m, vec_a, vec_d);
+
+
+	// "Веса 2-го положительного слоя:" << endl;
+
+	obj4.teach2ma(Quoter, Outputs2, alpha, Weights2, delta2, vec_a, vec_d);
+
+
+
+	// "Веса 2-го отрицательного слоя:" << endl;
+
+	obj41.teach2mam(Quoter, Outputs2m, alpha, Weights2m, delta2m, vec_a, vec_d);
+
+	// "Веса первого положительного слоя:"
+
+	obj5.teach1(Quoter, Outputs1, alpha, Weights1, delta1);
+
+	// "Веса первого отрицательного слоя:" 
+
+	obj51.teach1m(Quoter, Outputs1m, alpha, Weights1m, delta1m);
 
 
 }

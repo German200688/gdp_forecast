@@ -20,5 +20,6 @@ public:
 	void summneyall1m(vector<int32_t>& Count, vector<vector<signed char>>& Cash1, vector<signed char>& Weights1m, vector<vector<signed char>>& Outputs1m, vector<string>& indicators);
 	void teachdel1m(vector<signed char >& delta2m, int32_t& Quoter, vector<vector<signed char>>& Weights2m, vector<signed char>& Weights1m, vector<vector<signed char>>& Outputs1m, vector<signed char >& delta1m);
 	void teach1m(int32_t& Quoter, vector<vector<signed char>>& Outputs1m, signed char alpha, vector<signed char>& Weights1m, vector<signed char >& delta1m);
-	void teachdel1mam(vector<signed char >& delta2m, int32_t& Quoter, vector<vector<signed char>>& Weights2m, vector<vector<signed char>>& Weights1m, vector<vector<signed char>>& Outputs1m, vector<signed char >& delta1m, signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d);
+	void teachdel1mam(vector<signed char >& delta2m, int32_t& Quoter, vector<vector<signed char>>& Weights2m, vector<signed char>& Weights1m, vector<vector<signed char>>& Outputs1m, vector<signed char >& delta1m, signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d);
+
 };

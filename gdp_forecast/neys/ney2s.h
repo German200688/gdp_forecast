@@ -23,4 +23,6 @@ public:
 	void teachdel2(vector<signed char >& delta3, int32_t & Quoter, vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Weights2, vector<vector<signed char>>& Outputs2, vector<signed char >& delta2);
 	void teach2(int32_t & Quoter, vector<vector<signed char>>& Outputs2, signed char alpha, vector<vector<signed char>>& Weights2, vector<signed char >& delta2);
 	void teachdel2ma(vector<signed char >& delta3, int32_t& Quoter, vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Weights2, vector<vector<signed char>>& Outputs2, vector<signed char >& delta2, signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d);
+	void teach2ma(int32_t& Quoter, vector<vector<signed char>>& Outputs2, signed char alpha, vector<vector<signed char>>& Weights2, vector<signed char >& delta2, signed char*& vec_d, signed char*& vec_a);
+
 };

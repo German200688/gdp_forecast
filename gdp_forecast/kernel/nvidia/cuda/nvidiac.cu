@@ -215,3 +215,29 @@ void nvidiac::deltaMiddlemam(int32_t& Weightslsize, signed char*& Weightsl, sign
 }
 
 
+void nvidiac::MiddleTeachM(signed char*& Weightsl, int32_t& size, signed char& rawdate, signed char*& vec_d, signed char*& vec_a)
+{
+	
+	int32_t t_block = 1;
+	int32_t t_thread = 512;
+	// определяю блоки Weightslsize - не более 1 500 000 
+	if (size < 512) { t_block = 1; }
+	else
+	{
+		int32_t t0 = size / 512;
+		int32_t t1 = size % 512;
+
+		if (t1 == 0) { t_block = t0; }
+		else { t_block = t0 + 1; }
+
+	}
+	
+	
+	cudaMemcpy(vec_d, Weightsl, size * sizeof(signed char), cudaMemcpyHostToDevice);
+
+	multttmrelm << < t_block, t_thread >> > (rawdate, vec_d, size);
+
+	cudaMemcpy(Weightsl, vec_d, size * sizeof(signed char), cudaMemcpyDeviceToHost);
+
+
+}

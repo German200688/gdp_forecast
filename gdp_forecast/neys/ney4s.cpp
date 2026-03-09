@@ -8,6 +8,7 @@
 #include "ney4s.h"
 #include "ney3s.h"
 #include "../kernel/nvidia/cuda/nvidiac.h"
+#include "../kernel/OB1.h"
 
 using namespace std;
 
@@ -351,5 +352,35 @@ void layer4::teach4(int32_t& Quoter, vector<vector<signed char>>& Outputs4, sign
 		signed char t55 = delta4[i];
 		Weights4[i] = obj2.MiddleTeach(Weights4[i], Outputs[i], delta4[i], t1, alpha);
 
+	}
+}
+
+
+void layer4::teach4ma(int32_t& Quoter, vector<vector<signed char>>& Outputs4, signed char alpha, vector<vector<signed char>>& Weights4, vector<signed char >& delta4, signed char*& vec_d, signed char*& vec_a)
+
+{
+	nvidiac obj2;
+	Signch obj1;
+
+
+	//альфа*значение низ * дельта
+	int32_t t0 = Outputs4[Quoter].size();
+	vector<signed char > Outputs(t0);
+	Outputs = Outputs4[Quoter];
+	int32_t t1 = Weights4[0].size();
+
+
+	for (int32_t i = 0; i < t0; i++)
+	{
+		/*
+		signed char Output = Outputs[i];
+		signed char delta = delta2[i];
+		vector<signed char > Weights = Weights2[i];
+		*/
+		signed char t55 = delta4[i];
+		signed char t11 = obj1.multtt(Outputs[i], delta4[i]);
+		signed char t21 = obj1.multtt(t1, alpha);
+		signed char* Weightsl = Weights4[i].data();
+		obj2.MiddleTeachM(Weightsl, t1, t21, vec_d, vec_a);
 	}
 }

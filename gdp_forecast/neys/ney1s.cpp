@@ -288,23 +288,23 @@ void layer1::teachdel1(vector<signed char >& delta2, int32_t& Quoter, vector<vec
 
 
 
-void layer1::teachdel1ma(vector<signed char >& delta2, int32_t& Quoter, vector<vector<signed char>>& Weights2, vector<vector<signed char>>& Weights1, vector<vector<signed char>>& Outputs1, vector<signed char >& delta1, signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d)
+void layer1::teachdel1ma(vector<signed char >& delta2, int32_t& Quoter, vector<vector<signed char>>& Weights2, vector<signed char>& Weights1, vector<vector<signed char>>& Outputs1, vector<signed char >& delta1, signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d)
 
 {
 
 	nvidiac obj2;
 
 
-	//int32_t t0 = Weights3.size();
-	int32_t t011 = Outputs1[Quoter].size();
-	vector<signed char > delta(t011);
+	Neyron obj2;
+	
+	int32_t t0 = Weights2.size();
+	vector<signed char > delta(t0);
 	signed char* deltama = delta.data();
 
-	signed char* Outputs = Outputs1[Quoter].data();
-	signed char* Weightsl = Weights2[0].data();
+	signed char*  Outputs = Outputs1[Quoter].data();
+	signed char*  Weightsl = Weights2[0].data();
 
 	int32_t t1 = delta2.size();
-	int32_t t2 = Outputs1[Quoter].size();
 
 	signed char alpha = 100;
 
@@ -314,8 +314,8 @@ void layer1::teachdel1ma(vector<signed char >& delta2, int32_t& Quoter, vector<v
 	for (int32_t i1 = 0; i1 < t1; i1++)
 	{
 		signed char a = delta2[i1];
-
-		obj2.deltaMiddlema(t2, Weightsl, deltama, a, alpha, Outputs, vec_a, vec_b, vec_c, vec_d);
+		
+		obj2.deltaMiddlema(t1, Weightsl, deltama, a, alpha, Outputs, vec_a, vec_b, vec_c, vec_d);
 
 
 	}

@@ -327,13 +327,13 @@ void teachquoter(int32_t& Quoter1, signed char& result1, signed char& result2, s
 
 	// "Рассчет данных 4-го положительного слоя:" 
 
-	obj6.teach3(Quoter, Outputs4, alpha, Weights4, delta4);
+	obj7.teach4(Quoter, Outputs4, alpha, Weights4, delta4);
 
 
 
 	// "Рассчет данных 4-го отрицательного слоя:" 
 
-	obj61.teach3m(Quoter, Outputs4m, alpha, Weights4m, delta4m);
+	obj71.teach4m(Quoter, Outputs4m, alpha, Weights4m, delta4m);
 
 
 
