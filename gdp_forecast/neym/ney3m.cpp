@@ -5,6 +5,7 @@
 #include "../kernel/neyron.h"
 #include "ney2m.h"
 #include "ney3m.h"
+#include "../kernel/nvidia/cuda/nvidiac.h"
 
 using namespace std;
 
@@ -283,6 +284,45 @@ void layer3m::teachdel3m(vector<signed char >& delta4m, int32_t& Quoter, vector<
 
 	delta3m = delta;
 }
+
+
+
+void layer3m::teachdel3mam(vector<signed char >& delta4m, int32_t& Quoter, vector<vector<signed char>>& Weights4m, vector<vector<signed char>>& Weights3m, vector<vector<signed char>>& Outputs3m, vector<signed char >& delta3m, signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d)
+
+{
+
+	nvidiac obj2;
+
+
+	//int32_t t0 = Weights3.size();
+	int32_t t011 = Outputs3m[Quoter].size();
+	vector<signed char > delta(t011);
+	signed char* deltama = delta.data();
+
+	signed char* Outputs = Outputs3m[Quoter].data();
+	signed char* Weightsl = Weights4m[0].data();
+
+	int32_t t1 = delta4m.size();
+	int32_t t2 = Outputs3m[Quoter].size();
+
+	signed char alpha = 100;
+
+
+
+
+	for (int32_t i1 = 0; i1 < t1; i1++)
+	{
+		signed char a = delta4m[i1];
+
+		obj2.deltaMiddlemam(t2, Weightsl, deltama, a, alpha, Outputs, vec_a, vec_b, vec_c, vec_d);
+
+
+	}
+
+	delta3m = delta;
+}
+
+
 
 
 

@@ -35,7 +35,7 @@ __constant__ signed char n1 = -10;
 __global__ void plusssm(signed char*& ap, signed char*& bp, signed char*& d2, int N)
 {
 	
-	int th0 = threadIdx.x;
+	int th0 = blockIdx.x * blockDim.x + threadIdx.x;
 	if (th0 > N - 1) return;
 	
 	if (ap[th0] > 60 && bp[th0] > 60 || ap[th0] > 50 && bp[th0] > 70 || ap[th0] > 40 && bp[th0] > 80 || ap[th0] > 30 && bp[th0] > 90 || ap[th0] > 20 && bp[th0] > 100 || ap[th0] > 10 && bp[th0] > 110 || ap[th0] > 0 && bp[th0] > 120 || bp[th0] > 50 && ap[th0] > 70 || bp[th0] > 40 && ap[th0] > 80 || bp[th0] > 30 && ap[th0] > 30 || bp[th0] > 20 && ap[th0] > 100 || bp[th0] > 10 && ap[th0] > 110 || bp[th0] > 0 && ap[th0] > 120) d2[th0] = 120;
@@ -58,7 +58,7 @@ __global__ void plusssm(signed char*& ap, signed char*& bp, signed char*& d2, in
 
 __global__ void minusssm(signed char*& am, signed char*& bm, signed char*& e2, int N)
 {
-	int th0 = threadIdx.x;
+	int th0 = blockIdx.x * blockDim.x + threadIdx.x;
 	if (th0 > N - 1) return;
 	signed char bm1 = -bm[th0];
 	
@@ -81,25 +81,46 @@ __global__ void minusssm(signed char*& am, signed char*& bm, signed char*& e2, i
 	}
 }
 
-__global__ void multttm(signed char*& amul, signed char*& bmul, signed char*& m4, int N)
+__global__ void multttmrelp(signed char& amul, signed char*& bmul, signed char*& rel, signed char*& m4, int N)
 {
 	
-	int th0 = threadIdx.x;
+	int th0 = blockIdx.x * blockDim.x + threadIdx.x;
 	if (th0 > N - 1) return;
-	
-	int m1 = amul[th0];
-	int m2 = bmul[th0];
-	int m3 = m1 * m2;
-	m3 = m3 / 100;
-	if (m3 > 120) m3 = 120;
-	if (m3 < -120) m3 = -120;
-	m4[th0] = signed char(m3);
-	
+	if (rel <= 0) { m4[th0] = 0;  return;}
+	else {
+		int m1 = amul;
+		int m2 = bmul[th0];
+		int m3 = m1 * m2;
+		m3 = m3 / 100;
+		if (m3 > 120) m3 = 120;
+		if (m3 < -120) m3 = -120;
+		m4[th0] = signed char(m3);
+	}
 
 }
 
 
-void nvidiac::addobj(int*& vec_a, int*& vec_b, int*& vec_c, int N)
+
+__global__ void multttmrelm(signed char& amul, signed char*& bmul, signed char*& rel, signed char*& m4, int N)
+{
+
+	int th0 = blockIdx.x * blockDim.x + threadIdx.x;
+	if (th0 > N - 1) return;
+	if (rel >= 0) { m4[th0] = 0;  return; }
+	else {
+		int m1 = amul;
+		int m2 = bmul[th0];
+		int m3 = m1 * m2;
+		m3 = m3 / 100;
+		if (m3 > 120) m3 = 120;
+		if (m3 < -120) m3 = -120;
+		m4[th0] = signed char(m3);
+	}
+
+}
+
+
+void nvidiac::addobj(signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d, int N)
 {
 
 
@@ -107,9 +128,10 @@ void nvidiac::addobj(int*& vec_a, int*& vec_b, int*& vec_c, int N)
 	unsigned __int64 t1, t2, t3, t4, t5, t6, t7;
 	t1 = __rdtsc();
 #endif
-	cudaMalloc((void**)&vec_a, N * sizeof(int));
-	cudaMalloc((void**)&vec_b, N * sizeof(int));
-	cudaMalloc((void**)&vec_c, N * sizeof(int));
+	cudaMalloc((void**)&vec_a, N * sizeof(signed char));
+	cudaMalloc((void**)&vec_b, N * sizeof(signed char));
+	cudaMalloc((void**)&vec_c, N * sizeof(signed char));
+	cudaMalloc((void**)&vec_d, N * sizeof(signed char));
 #ifdef _DEBUG	
 	t2 = __rdtsc();
 	t3 = t2 - t1;
@@ -124,10 +146,72 @@ void nvidiac::addobj(int*& vec_a, int*& vec_b, int*& vec_c, int N)
 }
 
 
-void nvidiac::delobj(int*& vec_a, int*& vec_b, int*& vec_c)
+void nvidiac::delobj(signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d)
 {
 	cudaFree(vec_a);
 	cudaFree(vec_b);
 	cudaFree(vec_c);
+	cudaFree(vec_d);
 
 }
+
+
+void nvidiac::deltaMiddlema(int32_t& Weightslsize, signed char*& Weightsl, signed char*& delta, signed char& deltal, signed char& alpha, signed char*& Outputs, signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d)
+{
+	int32_t t_block = 1;
+	int32_t t_thread = 512;
+	// определяю блоки Weightslsize - не более 1 500 000 
+	if (Weightslsize < 512) { t_block = 1;}
+	else
+	{
+		int32_t t0 = Weightslsize / 512;
+		int32_t t1 = Weightslsize % 512;
+
+		if (t1 == 0) { t_block = t0; }
+		else { t_block = t0 + 1; }
+
+	}
+
+	// копирую
+	
+	//cudaMemcpy(vec_a, deltal, Weightslsize * sizeof(signed char), cudaMemcpyHostToDevice);
+	cudaMemcpy(vec_b, Weightsl, Weightslsize * sizeof(signed char), cudaMemcpyHostToDevice);
+	cudaMemcpy(vec_c, Outputs, Weightslsize * sizeof(signed char), cudaMemcpyHostToDevice);
+
+	multttmrelp << < t_block, t_thread >> > (deltal, vec_b, vec_c, vec_d, Weightslsize);
+
+	cudaMemcpy(delta, vec_d, Weightslsize * sizeof(signed char), cudaMemcpyDeviceToHost);
+
+}
+
+
+
+void nvidiac::deltaMiddlemam(int32_t& Weightslsize, signed char*& Weightsl, signed char*& delta, signed char& deltal, signed char& alpha, signed char*& Outputs, signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d)
+{
+	int32_t t_block = 1;
+	int32_t t_thread = 512;
+	// определяю блоки Weightslsize - не более 1 500 000 
+	if (Weightslsize < 512) { t_block = 1; }
+	else
+	{
+		int32_t t0 = Weightslsize / 512;
+		int32_t t1 = Weightslsize % 512;
+
+		if (t1 == 0) { t_block = t0; }
+		else { t_block = t0 + 1; }
+
+	}
+
+	// копирую
+
+	//cudaMemcpy(vec_a, deltal, Weightslsize * sizeof(signed char), cudaMemcpyHostToDevice);
+	cudaMemcpy(vec_b, Weightsl, Weightslsize * sizeof(signed char), cudaMemcpyHostToDevice);
+	cudaMemcpy(vec_c, Outputs, Weightslsize * sizeof(signed char), cudaMemcpyHostToDevice);
+
+	multttmrelm << < t_block, t_thread >> > (deltal, vec_b, vec_c, vec_d, Weightslsize);
+
+	cudaMemcpy(delta, vec_d, Weightslsize * sizeof(signed char), cudaMemcpyDeviceToHost);
+
+}
+
+

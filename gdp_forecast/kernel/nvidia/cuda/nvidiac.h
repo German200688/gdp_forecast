@@ -4,6 +4,8 @@
 class nvidiac
 {
 public:
-	void addobj(int*& vec_a, int*& vec_b, int*& vec_c, int N);
-	void delobj(int*& vec_a, int*& vec_b, int*& vec_c);
+	void addobj(signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d, int N);
+	void delobj(signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d);
+	void deltaMiddlema(int32_t& Weightslsize, signed char*& Weightsl, signed char*& delta, signed char& deltal, signed char& alpha, signed char*& Outputs, signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d);
+	void deltaMiddlemam(int32_t& Weightslsize, signed char*& Weightsl, signed char*& delta, signed char& deltal, signed char& alpha, signed char*& Outputs, signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d);
 };

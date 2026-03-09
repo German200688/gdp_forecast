@@ -22,4 +22,6 @@ public:
 	void summneyall3m(vector<int32_t>& Count, vector<vector<signed char>>& Outputs2m, vector<vector<signed char>>& Weights3m, vector<vector<signed char>>& Outputs3m);
 	void teachdel3m(vector<signed char >& delta4m, int32_t& Quoter, vector<vector<signed char>>& Weights4m, vector<vector<signed char>>& Weights3m, vector<vector<signed char>>& Outputs3m, vector<signed char >& delta3m);
 	void teach3m(int32_t& Quoter, vector<vector<signed char>>& Outputs3m, signed char alpha, vector<vector<signed char>>& Weights3m, vector<signed char >& delta3m);
+	void teachdel3mam(vector<signed char >& delta4m, int32_t& Quoter, vector<vector<signed char>>& Weights4m, vector<vector<signed char>>& Weights3m, vector<vector<signed char>>& Outputs3m, vector<signed char >& delta3, signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d);
+
 };

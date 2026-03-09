@@ -4,6 +4,7 @@
 #include <cstdint>
 #include "../kernel/neyron.h"
 #include "ney1m.h"
+#include "../kernel/nvidia/cuda/nvidiac.h"
 
 using namespace std;
 
@@ -254,6 +255,43 @@ void layer1m::teachdel1m(vector<signed char >& delta2m, int32_t& Quoter, vector<
 
 
 	}
+	delta1m = delta;
+}
+
+
+
+void layer1m::teachdel1mam(vector<signed char >& delta2m, int32_t& Quoter, vector<vector<signed char>>& Weights2m, vector<vector<signed char>>& Weights1m, vector<vector<signed char>>& Outputs1m, vector<signed char >& delta1m, signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d)
+
+{
+
+	nvidiac obj2;
+
+
+	//int32_t t0 = Weights3.size();
+	int32_t t011 = Outputs1m[Quoter].size();
+	vector<signed char > delta(t011);
+	signed char* deltama = delta.data();
+
+	signed char* Outputs = Outputs1m[Quoter].data();
+	signed char* Weightsl = Weights2m[0].data();
+
+	int32_t t1 = delta2m.size();
+	int32_t t2 = Outputs1m[Quoter].size();
+
+	signed char alpha = 100;
+
+
+
+
+	for (int32_t i1 = 0; i1 < t1; i1++)
+	{
+		signed char a = delta2m[i1];
+
+		obj2.deltaMiddlemam(t2, Weightsl, deltama, a, alpha, Outputs, vec_a, vec_b, vec_c, vec_d);
+
+
+	}
+
 	delta1m = delta;
 }
 

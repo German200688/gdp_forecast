@@ -268,7 +268,7 @@ void teachquoter(int32_t& Quoter1, signed char& result1, signed char& result2, s
 
 
 
-	obj71.teachdel4m(delta5, Quoter, Weights5m, Weights4m, Outputs4m, delta4m);
+	obj71.teachdel4m(delta5m, Quoter, Weights5m, Weights4m, Outputs4m, delta4m);
 	
 
 

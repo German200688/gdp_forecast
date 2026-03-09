@@ -5,6 +5,7 @@
 #include "../kernel/neyron.h"
 #include "ney2s.h"
 #include "ney3s.h"
+#include "../kernel/nvidia/cuda/nvidiac.h"
 
 using namespace std;
 
@@ -284,6 +285,43 @@ void layer3::teachdel3(vector<signed char >& delta4, int32_t& Quoter, vector<vec
 	delta3 = delta;
 }
 
+
+
+
+void layer3::teachdel3ma(vector<signed char >& delta4, int32_t& Quoter, vector<vector<signed char>>& Weights4, vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Outputs3, vector<signed char >& delta3, signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d)
+
+{
+
+	nvidiac obj2;
+
+
+	//int32_t t0 = Weights3.size();
+	int32_t t011 = Outputs3[Quoter].size();
+	vector<signed char > delta(t011);
+	signed char* deltama = delta.data();
+
+	signed char* Outputs = Outputs3[Quoter].data();
+	signed char* Weightsl = Weights4[0].data();
+
+	int32_t t1 = delta4.size();
+	int32_t t2 = Outputs3[Quoter].size();
+
+	signed char alpha = 100;
+
+
+
+
+	for (int32_t i1 = 0; i1 < t1; i1++)
+	{
+		signed char a = delta4[i1];
+
+		obj2.deltaMiddlema(t2, Weightsl, deltama, a, alpha, Outputs, vec_a, vec_b, vec_c, vec_d);
+
+
+	}
+
+	delta3 = delta;
+}
 
 
 void layer3::teach3(int32_t& Quoter, vector<vector<signed char>>& Outputs3, signed char alpha, vector<vector<signed char>>& Weights3, vector<signed char >& delta3)
