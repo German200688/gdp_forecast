@@ -276,14 +276,14 @@ void layer4m::teachdel4m(vector<signed char >& delta5m, int32_t& Quoter, vector<
 
 	int32_t t1 = delta5m.size();
 	int32_t t2 = Outputs4m[Quoter].size();
-
+	signed char delta1m = delta5m[0];
 	signed char alpha = 100;
 
 	for (int32_t i1 = 0; i1 < t2; i1++)
 	{
 
-
-		delta[i1] = obj2.deltaMiddle(t1, Weights5m[i1], delta5m, alpha, Outputs[i1]);
+		delta[i1] = obj2.deltafin(t1, Weightsl[i1], delta1m, alpha, Outputs[i1]);
+		//delta[i1] = obj2.deltaMiddle(t1, Weights5m[i1], delta5m, alpha, Outputs[i1]);
 		//summ (Weights4[i]*delta4[i])
 
 	}

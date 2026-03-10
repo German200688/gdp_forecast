@@ -361,6 +361,30 @@ using namespace std;
  }
 
 
+ signed char Neyron::deltafin(int32_t Weightslsize, signed char & Weight, signed char& delta, signed char& alpha, signed char& Outputs)
+ {
+	 Relu obj;
+	 Signch obj1;
+	 signed char deltaraw = 0;
+	 if (obj.reludivp(Outputs) == 0) { return 0; }
+	 else
+	 {
+
+		 
+
+			 signed char sdeltaraw = obj1.multtt(Weight, delta);
+			 deltaraw = obj1.plusss(deltaraw, sdeltaraw);
+			 if (deltaraw == 120 || deltaraw == -120) 
+
+		 
+
+		 return deltaraw;
+	 }
+
+
+ }
+
+
 
  signed char Neyron::deltaMiddlem(int32_t Weightslsize, vector<signed char >& Weights, vector<signed char >& delta, signed char& alpha, signed char& Outputs)
  {
@@ -382,6 +406,29 @@ using namespace std;
 
 		 return deltaraw;
 	 }
+ }
+
+ signed char Neyron::deltafinm(int32_t Weightslsize, signed char& Weight, signed char& delta, signed char& alpha, signed char& Outputs)
+ {
+	 Relu obj;
+	 Signch obj1;
+	 signed char deltaraw = 0;
+	 if (obj.reludivp(Outputs) == 0) { return 0; }
+	 else
+	 {
+
+
+
+		 signed char sdeltaraw = obj1.multtt(Weight, delta);
+		 deltaraw = obj1.plusss(deltaraw, sdeltaraw);
+		 if (deltaraw == 120 || deltaraw == -120)
+
+
+
+			 return deltaraw;
+	 }
+
+
  }
 
 

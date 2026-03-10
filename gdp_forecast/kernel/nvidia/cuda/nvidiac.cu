@@ -209,6 +209,7 @@ void nvidiac::deltaMiddlemam(int32_t& Weightslsize, signed char*& Weightsl, sign
 	cudaMemcpy(vec_c, Outputs, Weightslsize * sizeof(signed char), cudaMemcpyHostToDevice);
 
 	multttmrelm << < t_block, t_thread >> > (deltal, vec_b, vec_c, vec_d, Weightslsize);
+	
 
 	cudaMemcpy(delta, vec_d, Weightslsize * sizeof(signed char), cudaMemcpyDeviceToHost);
 
@@ -233,11 +234,12 @@ void nvidiac::MiddleTeachM(signed char*& Weightsl, int32_t& size, signed char& r
 	}
 	
 	
-	cudaMemcpy(vec_d, Weightsl, size * sizeof(signed char), cudaMemcpyHostToDevice);
+	//cudaMemcpy(vec_d, Weightsl, size * sizeof(signed char), cudaMemcpyHostToDevice);
 
-	multttmrelm << < t_block, t_thread >> > (rawdate, vec_d, size);
+	//multttmrelm << < t_block, t_thread >> > (rawdate, vec_d, size);
+	
 
-	cudaMemcpy(Weightsl, vec_d, size * sizeof(signed char), cudaMemcpyDeviceToHost);
+	//cudaMemcpy(Weightsl, vec_d, size * sizeof(signed char), cudaMemcpyDeviceToHost);
 
 
 }

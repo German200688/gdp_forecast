@@ -274,11 +274,18 @@ void layer3m::teachdel3m(vector<signed char >& delta4m, int32_t& Quoter, vector<
 
 	signed char alpha = 100;
 
+	int32_t t9 = Weights4m.size();
+
 	for (int32_t i1 = 0; i1 < t2; i1++)
 	{
+		vector<signed char> Weightsll(t9);
+		for (int32_t i0 = 0; i0 < t9; i0++)
+		{
+			Weightsll[i0] = Weights4m[i0][i1];
 
+		}
 
-		delta[i1] = obj2.deltaMiddle(t1, Weights4m[i1], delta4m, alpha, Outputs[i1]);
+		delta[i1] = obj2.deltaMiddle(t1, Weightsll, delta4m, alpha, Outputs[i1]);
 		//summ (Weights4[i]*delta4[i])
 
 	}

@@ -17,4 +17,4 @@ add_executable (gdp_forecast  "main.cpp" "kernel/neyron.cpp" "kernel/neyron.h" "
 
 set_property(TARGET gdp_forecast PROPERTY CXX_STANDARD 20)
 
-# TODO: Добавьте тесты и целевые объекты, если это необходимо.
+# TODO: Добавьте тесты и целевые объекты, если это необходим

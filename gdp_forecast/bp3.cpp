@@ -247,81 +247,32 @@ void teachquoter(int32_t& Quoter1, signed char& result1, signed char& result2, s
 	}
 
 	signed char incr4 = static_cast<signed char>(incr3);
-	
-
 
 
 
 	teachdel3(result1, incr4, delta5);
 	
-
-
-
 	teachdel3(result2, incr4, delta5m);
 	
-
-
-
-
 	obj7.teachdel4(delta5, Quoter, Weights5, Weights4, Outputs4, delta4);
-	
-
-
 
 	obj71.teachdel4m(delta5m, Quoter, Weights5m, Weights4m, Outputs4m, delta4m);
-	
-
-
-
 
 	obj6.teachdel3(delta4, Quoter, Weights4, Weights3, Outputs3, delta3);
 
-	
-
-
-
 	obj61.teachdel3m(delta4m, Quoter, Weights4m, Weights3m, Outputs3m, delta3m);
 
-	
-
-
-
 	obj4.teachdel2(delta3, Quoter, Weights3, Weights2, Outputs2, delta2);
-	
-
-
 
 	obj41.teachdel2m(delta3m, Quoter, Weights3m, Weights2m, Outputs2m, delta2m);
-	
-
-
-
-
 
 	obj5.teachdel1(delta2, Quoter, Weights2, Weights1, Outputs1, delta1);
 
-	
-
-
-
 	obj51.teachdel1m(delta2m, Quoter, Weights2m, Weights1m, Outputs1m, delta1m);
-
-	
-
-
-
-
-
 
 	teachlayer3(Weights5, Quoter, Outputs4, delta5);
 
-	
-
-
 	teachlayer3(Weights5m, Quoter, Outputs4m, delta5m);
-
-	
-
 
 
 
@@ -329,14 +280,9 @@ void teachquoter(int32_t& Quoter1, signed char& result1, signed char& result2, s
 
 	obj7.teach4(Quoter, Outputs4, alpha, Weights4, delta4);
 
-
-
 	// "Рассчет данных 4-го отрицательного слоя:" 
 
 	obj71.teach4m(Quoter, Outputs4m, alpha, Weights4m, delta4m);
-
-
-
 
 	// "РАссчет весов 3-го положительного слоя:"
 
@@ -350,13 +296,9 @@ void teachquoter(int32_t& Quoter1, signed char& result1, signed char& result2, s
 
 	obj4.teach2(Quoter, Outputs2, alpha, Weights2, delta2);
 
-
-
 	// "Веса 2-го отрицательного слоя:" << endl;
 
 	obj41.teach2m(Quoter, Outputs2m, alpha, Weights2m, delta2m);
-
-
 
 	// "Веса первого положительного слоя:"
 
@@ -366,6 +308,8 @@ void teachquoter(int32_t& Quoter1, signed char& result1, signed char& result2, s
 
 	obj51.teach1m(Quoter, Outputs1m, alpha, Weights1m, delta1m);
 
-	cout << "\033[32m ----- Рассчет завершен -----" << endl;
+	cout << "\033[32m ----- Рассчет завершен -----\033[0m" << endl;
+
+
 	
 }

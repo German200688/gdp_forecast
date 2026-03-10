@@ -777,7 +777,7 @@ void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vecto
 		
 		else  {
 
-			std::cout << "Введите, пожалуйста корректный парирост ВВП и завершите его ; Пример - 12,5; " << endl << ">>> ";
+			std::cout << "Введите, пожалуйста корректный прирост ВВП и нажмите ENTER ; Пример - 12,5; " << endl << ">>> ";
 			vvod = "";
 			//bool check = obj3.checkcin();
 			//if (check == true) { cin >> vvod; }
@@ -795,7 +795,7 @@ void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vecto
 			);
 
 			b2 = 0;
-
+			getline(cin, err);
 		}
 
 		

@@ -276,14 +276,14 @@ void layer4::teachdel4(vector<signed char >& delta5, int32_t& Quoter, vector<vec
 
 	int32_t t1 = delta5.size();
 	int32_t t2 = Outputs4[Quoter].size();
-
+	signed char delta1 = delta5[0];
 	signed char alpha = 100;
 
 	for (int32_t i1 = 0; i1 < t2; i1++)
 	{
 
 
-		delta[i1] = obj2.deltaMiddle(t1, Weights5[i1], delta5, alpha, Outputs[i1]);
+		delta[i1] = obj2.deltafin(t1, Weightsl[i1], delta1, alpha, Outputs[i1]);
 		//summ (Weights4[i]*delta4[i])
 
 	}

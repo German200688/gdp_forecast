@@ -21,4 +21,6 @@ public:
 	signed char valueneyTwoOnerm(vector<signed char>& neyronin, vector<signed char>& weight);
 	vector<signed char> valueneyOneTworm(vector<signed char>& neyronin, vector<signed char>& weight);
 	signed char deltaMiddlem(int32_t Weightslsize, vector<signed char >& Weights, vector<signed char >& delta, signed char& alpha, signed char& Outputs);
+	signed char deltafin(int32_t Weightslsize, signed char& Weight, signed char& delta, signed char& alpha, signed char& Outputs);
+	signed char deltafinm(int32_t Weightslsize, signed char& Weight, signed char& delta, signed char& alpha, signed char& Outputs);
 };
