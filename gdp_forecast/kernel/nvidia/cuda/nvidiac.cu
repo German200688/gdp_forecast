@@ -32,6 +32,48 @@ __constant__ signed char n1 = -10;
 
 
 
+__global__ void finplussdelm(signed char& ab, signed char*& dvec_a4, signed char*& dvec_b4, int size, signed char*& dvec_c4)
+
+{
+
+
+	int th0 = blockIdx.x * blockDim.x + threadIdx.x;
+	if (th0 > size - 1) return;
+
+	if (dvec_a4[th0] >= 0) { return; }
+	else {
+		int m1 = ab;
+		int m2 = dvec_b4[th0];
+		int m3 = m1 * m2;
+		m3 = m3 / 100;
+		if (m3 > 120) m3 = 120;
+		if (m3 < -120) m3 = -120;
+		dvec_c4[th0] = signed char(m3);
+	}
+}
+
+
+__global__ void finplussdel(signed char& ab, signed char*& dvec_a4, signed char*& dvec_b4, int size, signed char*& dvec_c4)
+
+{
+	
+	
+	int th0 = blockIdx.x * blockDim.x + threadIdx.x;
+	if (th0 > size - 1) return;
+	
+	if (dvec_a4[th0] <= 0) { return; }
+	else {
+		int m1 = ab;
+		int m2 = dvec_b4[th0];
+		int m3 = m1 * m2;
+		m3 = m3 / 100;
+		if (m3 > 120) m3 = 120;
+		if (m3 < -120) m3 = -120;
+		dvec_c4[th0] = signed char(m3);
+	}
+}
+
+
 __global__ void plusssm(signed char*& ap, signed char*& bp, signed char*& d2, int N)
 {
 	
@@ -120,7 +162,7 @@ __global__ void multttmrelm(signed char& amul, signed char*& bmul, signed char*&
 }
 
 
-void nvidiac::addobj(signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d, int N)
+void nvidiac::addobj(signed char*& dvec_a1, signed char*& dvec_b1, signed char*& dvec_c1, signed char*& vec_a23, signed char*& vec_b23, signed char*& dvec_a4, signed char*& dvec_b4, signed char*& dvec_c4, signed char*& vec_a4, signed char*& vec_b4, int N1, int N23, int N4, int N44, signed char*& ab)
 {
 
 
@@ -128,10 +170,23 @@ void nvidiac::addobj(signed char*& vec_a, signed char*& vec_b, signed char*& vec
 	unsigned __int64 t1, t2, t3, t4, t5, t6, t7;
 	t1 = __rdtsc();
 #endif
-	cudaMalloc((void**)&vec_a, N * sizeof(signed char));
-	cudaMalloc((void**)&vec_b, N * sizeof(signed char));
-	cudaMalloc((void**)&vec_c, N * sizeof(signed char));
-	cudaMalloc((void**)&vec_d, N * sizeof(signed char));
+	cudaMalloc((void**)&dvec_a1, N1 * sizeof(signed char)); //3 нейрона
+	cudaMalloc((void**)&dvec_b1, N1 * sizeof(signed char)); //3 нейрона
+	cudaMalloc((void**)&dvec_c1, N1 * sizeof(signed char)); //3 нейрона
+	//cudaMalloc((void**)&vec_a1, N1 * sizeof(signed char)); //3 нейрона
+	//cudaMalloc((void**)&vec_b1, N1 * sizeof(signed char)); //3 нейрона
+	//cudaMalloc((void**)&vec_c1, N1 * sizeof(signed char)); //3 нейрона
+
+	cudaMalloc((void**)&vec_a23, N23 * sizeof(signed char)); //10 нейрона
+	cudaMalloc((void**)&vec_b23, N23 * sizeof(signed char)); //10 нейрона
+	//cudaMalloc((void**)&vec_c23, N23 * sizeof(signed char)); //10 нейрона
+	cudaMalloc((void**)&dvec_a4, N4 * sizeof(signed char)); //6 нейрона
+	cudaMalloc((void**)&dvec_b4, N4 * sizeof(signed char)); //6 нейрона
+	cudaMalloc((void**)&dvec_c4, N4 * sizeof(signed char)); //6 нейрона
+	cudaMalloc((void**)&vec_a4, N44 * sizeof(signed char)); //6 нейрона
+	cudaMalloc((void**)&vec_b4, N44 * sizeof(signed char)); //6 нейрона
+	//cudaMalloc((void**)&vec_c4, N44 * sizeof(signed char)); //6 нейрона
+	cudaMalloc((void**)&ab, sizeof(signed char)); //6 нейрона
 #ifdef _DEBUG	
 	t2 = __rdtsc();
 	t3 = t2 - t1;
@@ -139,19 +194,37 @@ void nvidiac::addobj(signed char*& vec_a, signed char*& vec_b, signed char*& vec
 #endif
 
 
-
+	//signed char*& vec_a1, 
+		//signed char*& vec_b1, 
+		//signed char*& vec_c1, 
+	//signed char*& vec_c23, 
+	//signed char*& vec_c4, 
 
 
 
 }
 
 
-void nvidiac::delobj(signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d)
+void nvidiac::delobj(signed char*& dvec_a1, signed char*& dvec_b1, signed char*& dvec_c1, signed char*& vec_a23, signed char*& vec_b23, signed char*& dvec_a4, signed char*& dvec_b4, signed char*& dvec_c4, signed char*& vec_a4, signed char*& vec_b4, signed char*& ab)
 {
-	cudaFree(vec_a);
-	cudaFree(vec_b);
-	cudaFree(vec_c);
-	cudaFree(vec_d);
+	cudaFree(dvec_a1);
+	cudaFree(dvec_b1);
+	cudaFree(dvec_c1);
+	//cudaFree(vec_a1);
+	//cudaFree(vec_b1);
+	//cudaFree(vec_c1);
+	
+	cudaFree(vec_a23);
+	cudaFree(vec_b23);
+	//cudaFree(vec_c23);
+	cudaFree(dvec_a4);
+	cudaFree(dvec_b4);
+	cudaFree(dvec_c4);
+	cudaFree(vec_a4);
+	cudaFree(vec_b4);
+	//cudaFree(vec_c4);
+	cudaFree(ab);
+	
 
 }
 
@@ -243,3 +316,77 @@ void nvidiac::MiddleTeachM(signed char*& Weightsl, int32_t& size, signed char& r
 
 
 }
+
+
+
+
+void nvidiac::deltafimanma4(signed char*& delta, signed char& delta1, int32_t& size, signed char*& Outputs, signed char*& Weightsl, signed char*& dvec_a4, signed char*& dvec_b4, signed char*& dvec_c4, signed char*& ab)
+{
+	
+	
+	
+	int32_t t_block = 1;
+	int32_t t_thread = 512;
+	// определяю блоки size - не более 1 500 000 
+	if (size < 512) { t_block = 1; }
+	else
+	{
+		int32_t t0 = size / 512;
+		int32_t t1 = size % 512;
+
+		if (t1 == 0) { t_block = t0; }
+		else { t_block = t0 + 1; }
+
+	}
+
+	cudaMemcpy(dvec_b4, Weightsl, size * sizeof(signed char), cudaMemcpyHostToDevice);
+	cudaMemcpy(dvec_a4, Outputs, size * sizeof(signed char), cudaMemcpyHostToDevice);
+	//cudaMemcpy(ab, &delta1, sizeof(signed char), cudaMemcpyHostToDevice);
+
+	finplussdel << < t_block, t_thread >> > (delta1, dvec_a4, dvec_b4, size, dvec_c4);
+
+
+	cudaMemcpy(delta, dvec_c4, size * sizeof(signed char), cudaMemcpyDeviceToHost);
+
+
+
+}
+
+
+
+void nvidiac::deltafimanmam4(signed char*& delta, signed char& delta1, int32_t& size, signed char*& Outputs, signed char*& Weightsl, signed char*& dvec_a4, signed char*& dvec_b4, signed char*& dvec_c4, signed char*& ab)
+{
+
+
+
+	int32_t t_block = 1;
+	int32_t t_thread = 512;
+	// определяю блоки size - не более 1 500 000 
+	if (size < 512) { t_block = 1; }
+	else
+	{
+		int32_t t0 = size / 512;
+		int32_t t1 = size % 512;
+
+		if (t1 == 0) { t_block = t0; }
+		else { t_block = t0 + 1; }
+
+	}
+
+	cudaMemcpy(dvec_b4, Weightsl, size * sizeof(signed char), cudaMemcpyHostToDevice);
+	cudaMemcpy(dvec_a4, Outputs, size * sizeof(signed char), cudaMemcpyHostToDevice);
+	//cudaMemcpy(ab, &delta1, sizeof(signed char), cudaMemcpyHostToDevice);
+
+	finplussdelm << < t_block, t_thread >> > (delta1, dvec_a4, dvec_b4, size, dvec_c4);
+
+
+	cudaMemcpy(delta, dvec_c4, size * sizeof(signed char), cudaMemcpyDeviceToHost);
+
+
+
+}
+
+
+
+
+

@@ -299,31 +299,35 @@ void layer3m::teachdel3mam(vector<signed char >& delta4m, int32_t& Quoter, vecto
 
 {
 
-	nvidiac obj2;
+	Neyron obj2;
 
-
+	vector<signed char > Outputs;
+	vector<signed char> Weightsl;
 	//int32_t t0 = Weights3.size();
-	int32_t t011 = Outputs3m[Quoter].size();
-	vector<signed char > delta(t011);
-	signed char* deltama = delta.data();
+	int32_t t0 = Outputs3m[Quoter].size();
+	vector<signed char > delta(t0);
 
-	signed char* Outputs = Outputs3m[Quoter].data();
-	signed char* Weightsl = Weights4m[0].data();
+	Outputs = Outputs3m[Quoter];
+	Weightsl = Weights4m[0];
 
 	int32_t t1 = delta4m.size();
 	int32_t t2 = Outputs3m[Quoter].size();
 
 	signed char alpha = 100;
 
+	int32_t t9 = Weights4m.size();
 
-
-
-	for (int32_t i1 = 0; i1 < t1; i1++)
+	for (int32_t i1 = 0; i1 < t2; i1++)
 	{
-		signed char a = delta4m[i1];
+		vector<signed char> Weightsll(t9);
+		for (int32_t i0 = 0; i0 < t9; i0++)
+		{
+			Weightsll[i0] = Weights4m[i0][i1];
 
-		obj2.deltaMiddlemam(t2, Weightsl, deltama, a, alpha, Outputs, vec_a, vec_b, vec_c, vec_d);
+		}
 
+		delta[i1] = obj2.deltaMiddle(t1, Weightsll, delta4m, alpha, Outputs[i1]);
+		//summ (Weights4[i]*delta4[i])
 
 	}
 

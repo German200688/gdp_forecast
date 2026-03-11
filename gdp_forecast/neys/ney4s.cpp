@@ -292,40 +292,31 @@ void layer4::teachdel4(vector<signed char >& delta5, int32_t& Quoter, vector<vec
 }
 
 
-void layer4::teachdel4ma(vector<signed char >& delta5, int32_t& Quoter, vector<vector<signed char>>& Weights5, vector<vector<signed char>>& Weights4, vector<vector<signed char>>& Outputs4, vector<signed char >& delta4, signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d)
+void layer4::teachdel4ma(vector<signed char >& delta5, int32_t& Quoter, vector<vector<signed char>>& Weights5, vector<vector<signed char>>& Weights4, vector<vector<signed char>>& Outputs4, vector<signed char >& delta4, signed char*& dvec_a4, signed char*& dvec_b4, signed char*& dvec_c4, signed char*& ab)
 
 {
 
 	nvidiac obj2;
 
-	
+
+
+
 	//int32_t t0 = Weights3.size();
-	int32_t t011 = Outputs4[Quoter].size();
-	vector<signed char > delta(t011);
-	signed char* deltama = delta.data();
+	int32_t t0 = Outputs4[Quoter].size();
+	signed char* delta = delta4.data();
 
 	signed char* Outputs = Outputs4[Quoter].data();
 	signed char* Weightsl = Weights5[0].data();
 
 	int32_t t1 = delta5.size();
 	int32_t t2 = Outputs4[Quoter].size();
-
+	signed char delta1 = delta5[0];
 	signed char alpha = 100;
 
+	obj2.deltafimanma4(delta, delta1, t0, Outputs, Weightsl, dvec_a4, dvec_b4, dvec_c4, ab);
 	
 
-
-	for (int32_t i1 = 0; i1 < t1; i1++)
-	{
-		signed char a = delta5[i1];
-
-		obj2.deltaMiddlema(t2, Weightsl, deltama, a, alpha, Outputs, vec_a, vec_b, vec_c, vec_d);
-		
-
 	}
-
-	delta4 = delta;
-}
 
 
 

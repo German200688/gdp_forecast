@@ -295,40 +295,44 @@ void layer3::teachdel3(vector<signed char >& delta4, int32_t& Quoter, vector<vec
 
 
 
-void layer3::teachdel3ma(vector<signed char >& delta4, int32_t& Quoter, vector<vector<signed char>>& Weights4, vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Outputs3, vector<signed char >& delta3, signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d)
+void layer3::teachdel3ma(vector<signed char >& delta4, int32_t& Quoter, vector<vector<signed char>>& Weights4, vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Outputs3, vector<signed char >& delta3, signed char*& dvec_a23, signed char*& dvec_b23)
 
 {
 
-	nvidiac obj2;
+	Neyron obj2;
 
-
+	vector<signed char > Outputs;
+	vector<signed char> Weightsl;
 	//int32_t t0 = Weights3.size();
-	int32_t t011 = Outputs3[Quoter].size();
-	vector<signed char > delta(t011);
-	signed char* deltama = delta.data();
+	int32_t t0 = Outputs3[Quoter].size();
+	vector<signed char > delta(t0);
 
-	signed char* Outputs = Outputs3[Quoter].data();
-	signed char* Weightsl = Weights4[0].data();
+	Outputs = Outputs3[Quoter];
+	Weightsl = Weights4[0];
 
 	int32_t t1 = delta4.size();
 	int32_t t2 = Outputs3[Quoter].size();
-
+	vector<signed char > delta1(t1);
 	signed char alpha = 100;
+	int32_t t9 = Weights4.size();
 
-
-
-
-	for (int32_t i1 = 0; i1 < t1; i1++)
+	for (int32_t i1 = 0; i1 < t2; i1++)
 	{
-		signed char a = delta4[i1];
+		vector<signed char> Weightsll(t9);
+		for (int32_t i0 = 0; i0 < t9; i0++)
+		{
+			Weightsll[i0] = Weights4[i0][i1];
 
-		obj2.deltaMiddlema(t2, Weightsl, deltama, a, alpha, Outputs, vec_a, vec_b, vec_c, vec_d);
+		}
 
+		delta[i1] = obj2.deltaMiddle(t1, Weightsll, delta4, alpha, Outputs[i1]);
+		//summ (Weights4[i]*delta4[i])
 
 	}
 
 	delta3 = delta;
 }
+
 
 
 void layer3::teach3(int32_t& Quoter, vector<vector<signed char>>& Outputs3, signed char alpha, vector<vector<signed char>>& Weights3, vector<signed char >& delta3)
