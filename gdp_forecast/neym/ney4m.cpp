@@ -301,7 +301,8 @@ void layer4m::teachdel4mam(vector<signed char >& delta5m, int32_t& Quoter, vecto
 	
 
 	int32_t t0 = Outputs4m[Quoter].size();
-	signed char* delta = delta4m.data();
+	vector<signed char > deltaw(t0);
+	signed char* delta = deltaw.data();
 
 	signed char* Outputs = Outputs4m[Quoter].data();
 	signed char* Weightsl = Weights5m[0].data();
@@ -312,6 +313,8 @@ void layer4m::teachdel4mam(vector<signed char >& delta5m, int32_t& Quoter, vecto
 	signed char alpha = 100;
 
 	obj2.deltafimanmam4(delta, delta1, t0, Outputs, Weightsl, dvec_a4, dvec_b4, dvec_c4, ab);
+	delta4m = deltaw;
+
 }
 
 
