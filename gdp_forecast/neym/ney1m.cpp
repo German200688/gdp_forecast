@@ -267,9 +267,9 @@ void layer1m::teachdel1m(vector<signed char >& delta2m, int32_t& Quoter, vector<
 
 
 
+/*
 
-
-void layer1m::teachdel1mam(vector<signed char >& delta2m, int32_t& Quoter, vector<vector<signed char>>& Weights2m, vector<signed char>& Weights1m, vector<vector<signed char>>& Outputs1m, vector<signed char >& delta1m, signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d)
+void layer1m::teachdel1mam(vector<signed char >& delta2m, int32_t& Quoter, vector<vector<signed char>>& Weights2m, vector<signed char>& Weights1m, vector<vector<signed char>>& Outputs1m, vector<signed char >& delta1m, signed char*& dvec_a1, signed char*& dvec_b1, signed char*& dvec_c1)
 
 {
 
@@ -295,7 +295,7 @@ void layer1m::teachdel1mam(vector<signed char >& delta2m, int32_t& Quoter, vecto
 	{
 		signed char a = delta2m[i1];
 
-		obj2.deltaMiddlema(t1, Weightsl, deltama, a, alpha, Outputs, vec_a, vec_b, vec_c, vec_d);
+		obj2.deltaMiddlemam(t1, Weightsl, deltama, a, alpha, Outputs, dvec_a1, dvec_b1, dvec_c1);
 
 
 	}
@@ -303,7 +303,7 @@ void layer1m::teachdel1mam(vector<signed char >& delta2m, int32_t& Quoter, vecto
 	delta1m = delta;
 }
 
-
+*/
 void layer1m::teach1m(int32_t& Quoter, vector<vector<signed char>>& Outputs1m, signed char alpha, vector<signed char>& Weights1m, vector<signed char >& delta1m)
 
 {

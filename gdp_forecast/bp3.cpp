@@ -21,7 +21,7 @@
 #include "neym/ney4m.h"
 #include "neyout.cpp"
 
-
+#pragma once
 
 using namespace std;
 

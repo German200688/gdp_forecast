@@ -9,11 +9,11 @@
 #include <regex>
 #include <map>
 #include <cstdint>
-#include <cstdint>
 #include "increase.cpp"
 #include "bp2.cpp"
 #include "bp3.cpp"
 #include "bp4.cpp"
+#include "bp5.cpp"
 #include "neys/ney1s.h"
 #include "kernel/other.h"
 
@@ -227,7 +227,7 @@ void info()
 		<< "   \033[34m theorlist \033[35m Команда выводит список теоретических коэффициентов \033[0m Пример - theorlist нажимаем enter" << endl
 		<< "   \033[34m uploadtheor \033[35m Команда загружает теоретические веса для каждого показателя. Показатель может быть от минус 100 процентов до 100 процентов. \033[0m Пример1 - uploadtheor param: 10 нажимаем enter. Пример2 - uploadtheor param: -15 нажимаем enter." << endl
 		<< "   \033[34m calcgdp \033[35m Команда рассчитывает прогноз прироста ВВП в определенном квартале. \033[0m Пример - calcgdp 3.2010" << endl
-		<< "   Обучить модель - teach далее вообится квартал.год размер ВВП" << endl
+		<< "   \033[34m teachonline \033[35m Команда осуществляет обучение на основе нужного количества кварталов. \033[0m Пример - teachonline 4.1999 28,5; 2.1998 28; нажимаем enter" << endl
 		<< "   \033[34m info \033[35m Команда выводит текущую справку по командам. \033[0m Пример - info нажимаем enter" << endl
 		<< "   \033[34m end \033[35m Команда заверщает программу с сохранением всех данных. Если надо завершить программу без сохранения, нажмите крестик в текущем окне. \033[0m  Пример - end нажимаем enter" << endl;
 	
@@ -646,7 +646,10 @@ void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vecto
 	vector<vector<signed char>>& Outputs2m, 
 	vector<vector<signed char>>& Outputs3m, 
 	vector<vector<signed char>>& Outputs4m, 
-		const signed char alpha
+		const signed char& alpha,
+		const int32_t& iterationney,
+		const int32_t& iteration
+
 	)
 {
 	
@@ -672,7 +675,7 @@ void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vecto
 	string m6 = "theorlist";
 	string m7 = "uploadtheor";
 	string m8 = "calcgdp";
-	string m9 = "teach";
+	string m9 = "teachonline";
 	string m10 = "info";
 	string m11 = "end";
 	string m12 = "calcgdpt";
@@ -723,12 +726,24 @@ void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vecto
 					Outputs2m,
 					Outputs3m,
 					Outputs4m
-				); 
+				);
 				if (a11) b2 = 2;
 				else b2 = 0;
 				getline(cin, err);
 			}
-			else if (vvod == m9);
+			else if (vvod == m9) teachonline(indicators, indicatDate, TheoWeights, indicatDateInc, Cash1, Weights1, Count, Outputs1, Weights2, Outputs2, Weights3, Outputs3, Weights4, Outputs4, Weights5, result1, result2, result,
+				Weights1m,
+				Weights2m,
+				Weights3m,
+				Weights4m,
+				Weights5m,
+				Outputs1m,
+				Outputs2m,
+				Outputs3m,
+				Outputs4m,
+				alpha,
+				iterationney,
+				iteration);
 			
 #ifdef _DEBUG 
 			else if (vvod == m12) { calcgdpt(indicators, indicatDate, TheoWeights, indicatDateInc, Cash1, Weights1, Count, Outputs1, Weights2, Outputs2, Quoter, Weights3, Outputs3, Weights4, Outputs4, Weights5, result1, result2, result,

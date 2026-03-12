@@ -21,7 +21,9 @@
 #include "neym/ney4m.h"
 #include "neyout.cpp"
 
+#pragma once
 
+using namespace std;
 
 
 
@@ -84,40 +86,7 @@ void teachquoterm(int32_t& Quoter1, signed char& result1, signed char& result2, 
 
 
 
-	/*
-
-	char t0 = dateraw.back();
-
-	char t5 = ';';
-	int32_t a = 4;
-	double d0 = 0.0;
-	if (t0 != t5) { std::cout << "Некорректно введены данные " << dateraw << endl; getline(cin, err); return; }
-	else
-	{
-		dateraw.pop_back();
-		d0 = stod(dateraw);
-		std::cout << "Введены данные = " << d0 << endl;
-	}
-
-	double incr2 = d0 * 5; //x*100*10/2 - 100-Р 
-
-
-	int32_t incr3 = int32_t(incr2);
-	//std::cout << "incr3 = " << int(incr2) << endl;
-
-	while (incr3 > 100)
-	{
-		incr3 = 100;
-	}
-
-	while (incr3 < -100)
-	{
-		incr3 = -100;
-	}
-
-	signed char incr4 = static_cast<signed char>(incr3);
-
-	*/
+	
 
 	//Считаем дельту
 
@@ -140,10 +109,9 @@ void teachquoterm(int32_t& Quoter1, signed char& result1, signed char& result2, 
 
 	obj41.teachdel2m(delta3m, Quoter, Weights3m, Weights2m, Outputs2m, delta2m);
 
-//	obj5.teachdel1ma(delta2, Quoter, Weights2, Weights1, Outputs1, delta1, vec_a, vec_b, vec_c, vec_d);
-	
+	obj5.teachdel1(delta2, Quoter, Weights2, Weights1, Outputs1, delta1);
 
-//	obj51.teachdel1mam(delta2m, Quoter, Weights2m, Weights1m, Outputs1m, delta1m, vec_a, vec_b, vec_c, vec_d);
+	obj51.teachdel1m(delta2m, Quoter, Weights2m, Weights1m, Outputs1m, delta1m);
 
 	//Считаем веса
 	teachlayer3(Weights5, Quoter, Outputs4, delta5);
@@ -185,6 +153,105 @@ void teachquoterm(int32_t& Quoter1, signed char& result1, signed char& result2, 
 	// "Веса первого отрицательного слоя:" 
 
 	obj51.teach1m(Quoter, Outputs1m, alpha, Weights1m, delta1m);
+
+
+}
+
+
+
+
+void calcgdpteach(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<signed char>& TheoWeights, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<signed char> Weights1, vector<int32_t>& Count, vector<vector<signed char>>& Outputs1, vector<vector<signed char>>& Weights2, vector<vector<signed char>>& Outputs2, int32_t& Quoter, vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Outputs3, vector<vector<signed char>>& Weights4, vector<vector<signed char>>& Outputs4, vector<vector<signed char>>& Weights5, signed char& result1, signed char& result2, signed char& result,
+	vector<signed char>& Weights1m,
+	vector<vector<signed char>>& Weights2m,
+	vector<vector<signed char>>& Weights3m,
+	vector<vector<signed char>>& Weights4m,
+	vector<vector<signed char>>& Weights5m,
+	vector<vector<signed char>>& Outputs1m,
+	vector<vector<signed char>>& Outputs2m,
+	vector<vector<signed char>>& Outputs3m,
+	vector<vector<signed char>>& Outputs4m
+)
+{
+
+
+	layer1 obj2;
+	layer2 obj4;
+	layer3 obj5;
+	layer4 obj44;
+
+	layer1m obj21;
+	layer2m obj41;
+	layer3m obj51;
+	layer4m obj441;
+
+
+	int32_t qy2 = Quoter - 1;
+
+	
+	// "Прирост данных:" 
+	incrquotercalc(qy2, indicatDate, indicatDateInc);
+	cashquoter(qy2, TheoWeights, indicatDateInc, Cash1);
+
+
+
+	// "Данные идущие на вход второго положительного слоя:" 
+
+	obj2.summneyquoter1(Count, Cash1, Weights1, Outputs1, qy2, indicators);
+
+
+	// "Данные идущие на вход второго отрицательного слоя:" 
+
+	obj21.summneyquoter1m(Count, Cash1, Weights1m, Outputs1m, qy2, indicators);
+
+
+
+	// "Расчет весов для 2-го положительного слоя:" 
+	obj4.summneyquoter2(Count, Outputs1, Weights2, Outputs2, qy2);
+
+
+	//"Расчет весов для 2-го отрицательного слоя:"
+	obj41.summneyquoter2m(Count, Outputs1m, Weights2m, Outputs2m, qy2);
+
+	// "Данные идущие на вход 3-го положительного слоя:"
+
+	obj4.summneyquoter2(Count, Outputs1, Weights2, Outputs2, qy2);
+
+	// "Данные идущие на вход 3-го отрицательного слоя:"
+
+	obj41.summneyquoter2m(Count, Outputs1m, Weights2m, Outputs2m, qy2);
+
+	// "Расчет весов 3-го положительного слоя:"
+	obj5.summneyquoter3(Count, Outputs2, Weights3, Outputs3, qy2);
+
+	// "Расчет весов 3-го отрицательного слоя:"
+	obj51.summneyquoter3m(Count, Outputs2m, Weights3m, Outputs3m, qy2);
+
+
+
+
+	// "Рассчет весов 4-го положительно слоя:"
+	obj44.summneyquoter4(Count, Outputs3, Weights4, Outputs4, qy2);
+
+
+
+	//"Рассчет весов 4-го отрицателльного слоя:"
+	obj441.summneyquoter4m(Count, Outputs3m, Weights4m, Outputs4m, qy2);
+
+
+
+	//рассчет результата 5го слоя положительного
+	result1 = weightsumm(Weights5, Outputs4, qy2);
+
+
+	//рассчет результата 5го слоя отрицительного
+	result2 = weightsumm(Weights5m, Outputs4m, qy2);
+
+
+	if (std::abs(static_cast<int32_t>(result1)) > std::abs(static_cast<int32_t>(result2))) result = result1;
+	else result = result2;
+
+
+	printerrr(result);
 
 
 }

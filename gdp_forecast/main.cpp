@@ -105,7 +105,9 @@ int main()
 	Outputs2m, 
 	Outputs3m, 
 	Outputs4m, 
-		alpha
+		alpha,
+		iterationney,
+		iteration
 		
 		);
 	

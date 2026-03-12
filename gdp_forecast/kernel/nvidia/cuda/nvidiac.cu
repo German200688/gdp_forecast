@@ -229,7 +229,7 @@ void nvidiac::delobj(signed char*& dvec_a1, signed char*& dvec_b1, signed char*&
 }
 
 
-void nvidiac::deltaMiddlema(int32_t& Weightslsize, signed char*& Weightsl, signed char*& delta, signed char& deltal, signed char& alpha, signed char*& Outputs, signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d)
+void nvidiac::deltaMiddlema(int32_t& Weightslsize, signed char*& Weightsl, signed char*& delta, signed char& deltal, signed char& alpha, signed char*& Outputs, signed char*& dvec_a1, signed char*& dvec_b1, signed char*& dvec_c1)
 {
 	int32_t t_block = 1;
 	int32_t t_thread = 512;
@@ -247,13 +247,13 @@ void nvidiac::deltaMiddlema(int32_t& Weightslsize, signed char*& Weightsl, signe
 
 	// копирую
 	
-	//cudaMemcpy(vec_a, deltal, Weightslsize * sizeof(signed char), cudaMemcpyHostToDevice);
-	cudaMemcpy(vec_b, Weightsl, Weightslsize * sizeof(signed char), cudaMemcpyHostToDevice);
-	cudaMemcpy(vec_c, Outputs, Weightslsize * sizeof(signed char), cudaMemcpyHostToDevice);
+	
+	cudaMemcpy(dvec_a1, Weightsl, Weightslsize * sizeof(signed char), cudaMemcpyHostToDevice);
+	cudaMemcpy(dvec_b1, Outputs, Weightslsize * sizeof(signed char), cudaMemcpyHostToDevice);
 
-	multttmrelp << < t_block, t_thread >> > (deltal, vec_b, vec_c, vec_d, Weightslsize);
+	multttmrelp << < t_block, t_thread >> > (deltal, dvec_a1, dvec_b1, dvec_c1, Weightslsize);
 
-	cudaMemcpy(delta, vec_d, Weightslsize * sizeof(signed char), cudaMemcpyDeviceToHost);
+	cudaMemcpy(delta, dvec_c1, Weightslsize * sizeof(signed char), cudaMemcpyDeviceToHost);
 
 }
 
