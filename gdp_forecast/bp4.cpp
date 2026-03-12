@@ -251,7 +251,7 @@ void calcgdpteach(vector<string>& indicators, vector<vector<double>>& indicatDat
 	else result = result2;
 
 
-	printerrr(result);
+	//printerrr(result);
 
 
 }

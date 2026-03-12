@@ -244,11 +244,6 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 	}
 
 
-
-
-
-
-
 	obj1.delobj(dvec_a1, dvec_b1, dvec_c1, vec_a23, vec_b23, dvec_a4, dvec_b4, dvec_c4, vec_a4, vec_b4, ab);
 
 
