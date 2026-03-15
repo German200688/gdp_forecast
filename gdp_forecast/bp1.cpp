@@ -25,7 +25,7 @@
 using namespace std;
 
 
-void uploadparamd(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<int32_t>& Count, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1 ) // Пример - uploadparamd param: 4.1999 28,5; 2.1998 28; Нажимаем enter"
+void uploadparamd(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<int64_t>& Count, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1 ) // Пример - uploadparamd param: 4.1999 28,5; 2.1998 28; Нажимаем enter"
 
 {
 	Other obj3;
@@ -37,10 +37,10 @@ void uploadparamd(vector<string>& indicators, vector<vector<double>>& indicatDat
 	string space = " ";
 	string vvodindic;
 	char t1 = ':';
-	int32_t t2 = 0;
-	map<int32_t, double> dates;
+	int64_t t2 = 0;
+	map<int64_t, double> dates;
 	double d0 = 0.0; 
-	vector<int32_t> index;
+	vector<int64_t> index;
 
 	while (t2 < 1)
 	{
@@ -67,8 +67,8 @@ void uploadparamd(vector<string>& indicators, vector<vector<double>>& indicatDat
 
 	}
 	
-	int32_t t0 = vvodindicv.size();
-	for (int32_t t1 = 0; t1 < t0; t1++)
+	int64_t t0 = vvodindicv.size();
+	for (int64_t t1 = 0; t1 < t0; t1++)
 	{
 		indicator = indicator + vvodindicv[t1] + space;
 
@@ -89,10 +89,10 @@ void uploadparamd(vector<string>& indicators, vector<vector<double>>& indicatDat
 	string dateraw = "";
 	
 	double date2 = 0.0;
-	int32_t w = 1;
+	int64_t w = 1;
 	while (w < 2)
 	{
-		int32_t st0 = std::cin.peek();
+		int64_t st0 = std::cin.peek();
 
 		if (st0 == 10) { w = 2; }
 		else
@@ -113,7 +113,7 @@ void uploadparamd(vector<string>& indicators, vector<vector<double>>& indicatDat
 
 				////что-то делаем с годом и кварталом
 				char q10 = dateraw[0];
-				int32_t q0 = 0;
+				int64_t q0 = 0;
 				char q5 = 52;
 				char q6 = 49;
 				if (q10 == 49)  q0 = 1;
@@ -122,12 +122,12 @@ void uploadparamd(vector<string>& indicators, vector<vector<double>>& indicatDat
 				else if (q10 == 52)  q0 = 4;
 				else { std::cout << "Неверно введен квартал года " << dateraw << endl << "Пример - 4.1999 " << endl; getline(cin, err);  return; }
 				string q1 = dateraw.substr(2, 4);
-				int32_t q2 = stoi(q1);
+				int64_t q2 = stoi(q1);
 				if (q2 < 1990) { std::cout << "Неверно введен год " << dateraw << endl << "Пример - 4.1999 " << endl; getline(cin, err); return; }
 				
 				
 
-				int32_t qy = q2 - 1990;
+				int64_t qy = q2 - 1990;
 				qy = qy * 4;
 				qy -= 1;
 				qy += q0; // индекс в векторе
@@ -140,7 +140,7 @@ void uploadparamd(vector<string>& indicators, vector<vector<double>>& indicatDat
 				t0 = dateraw.back();
 
 				char t5 = ';';
-				int32_t a = 4;
+				int64_t a = 4;
 
 				if (t0 != t5) { std::cout << "Где-то пропущена ; или значение. Ошибка выявлена на цифре -  " << dateraw << endl; getline(cin, err); return; }
 				else
@@ -161,20 +161,20 @@ void uploadparamd(vector<string>& indicators, vector<vector<double>>& indicatDat
 	
 
 	//наполянем финальный вектор
-	int32_t dq0 = index.size();
+	int64_t dq0 = index.size();
 	
 
-	for (int32_t i = 0; i < dq0; i++)
+	for (int64_t i = 0; i < dq0; i++)
 	{
 	
-		int32_t dq1 = index[i];
-		int32_t dq2 = indicatDate[t9].size()-1;
+		int64_t dq1 = index[i];
+		int64_t dq2 = indicatDate[t9].size()-1;
 		signed char dq3 = 0;
 		if (dq2 < dq1)
 		{
 			
-			int32_t qd5 = indicatDate.size();
-			for (int32_t i = 0; i < qd5; i++)
+			int64_t qd5 = indicatDate.size();
+			for (int64_t i = 0; i < qd5; i++)
 			{
 				
 				dq2 = indicatDate[i].size() - 1;
@@ -243,7 +243,7 @@ void info()
 
 
 
-void addparam(vector<string>& indicators, vector<signed char>& TheoWeights, vector<vector<double>>& indicatDate, int32_t count1, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<signed char>& Weights1, vector<signed char>& Weights1m, vector<int32_t>& Count)
+void addparam(vector<string>& indicators, vector<signed char>& TheoWeights, vector<vector<double>>& indicatDate, int64_t count1, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<signed char>& Weights1, vector<signed char>& Weights1m, vector<int64_t>& Count)
 {
 	
 	
@@ -268,8 +268,8 @@ void addparam(vector<string>& indicators, vector<signed char>& TheoWeights, vect
 		{
 			std::cout << "Параметр не введен." << endl; return;
 		}
-		int32_t b3 = indicators.size();
-		int32_t b6 = indicators.size();
+		int64_t b3 = indicators.size();
+		int64_t b6 = indicators.size();
 
 	
 		if (b1 == indicators.end())
@@ -281,8 +281,8 @@ void addparam(vector<string>& indicators, vector<signed char>& TheoWeights, vect
 		vector<signed char > dates2 = {};
 		double b2 = 0.0;
 		signed char b3 = 0;
-		for (int32_t i = 0; i < count1; i++) {
-			int32_t i1 = i - 1; dates.push_back(b2); dates2.push_back(b3);
+		for (int64_t i = 0; i < count1; i++) {
+			int64_t i1 = i - 1; dates.push_back(b2); dates2.push_back(b3);
 		}
 		
 		indicatDate.push_back(dates);
@@ -308,11 +308,11 @@ void addparam(vector<string>& indicators, vector<signed char>& TheoWeights, vect
 void paramlist(vector<string>& indicators)
 {
 	 
-	locale::global(locale("ru_RU.UTF-8"));
+	//locale::global(locale("ru_RU.UTF-8"));
 	string err;
-	int32_t i1 = indicators.size();
+	int64_t i1 = indicators.size();
 	if (i1 == 0) { std::cout << "Список параметров пуст." << endl; getline(cin, err); return; }
-	for (int32_t i = 0; i < i1; i++)
+	for (int64_t i = 0; i < i1; i++)
 	{
 		std::cout << indicators[i] << ";" << endl;
 		
@@ -334,7 +334,7 @@ void uploadtheor(vector<string>& indicators, vector<signed char>& TheoWeights) /
 	string indicator = "";
 	string vvoduploadtheor; 
 	char t1 = ':';
-	int32_t t2 = 0;
+	int64_t t2 = 0;
 
 	while (t2 < 1)
 	{
@@ -359,8 +359,8 @@ void uploadtheor(vector<string>& indicators, vector<signed char>& TheoWeights) /
 
 	}
 
-	int32_t t0 = vvoduploadtheo.size();
-	for (int32_t t1 = 0; t1 < t0; t1++)
+	int64_t t0 = vvoduploadtheo.size();
+	for (int64_t t1 = 0; t1 < t0; t1++)
 	{
 		indicator = indicator + vvoduploadtheo[t1] + space;
 
@@ -379,13 +379,13 @@ void uploadtheor(vector<string>& indicators, vector<signed char>& TheoWeights) /
 
 
 
-	int32_t t5;
-	int32_t t6 = 0;
+	int64_t t5;
+	int64_t t6 = 0;
 	while (t6 < 1 && cin >> t5) { t6++;}
 	if (t5>100 && t5 < -100) { std::cout << t5 << " не явялется показателем от -100 до 100." << endl; getline(cin, err); return;}
 	signed char TheoWeight = static_cast<signed char>(t5);
 	TheoWeights[t9] = TheoWeight;
-	std::cout << "В параметр " << indicator << " добавили теоретичиский коэффициент равный " << int32_t(TheoWeight) << "%." << endl;
+	std::cout << "В параметр " << indicator << " добавили теоретичиский коэффициент равный " << int64_t(TheoWeight) << "%." << endl;
 	getline(cin, err);
 
 
@@ -396,11 +396,11 @@ void uploadtheor(vector<string>& indicators, vector<signed char>& TheoWeights) /
 void theorlist(vector<string>& indicators, vector<signed char>& TheoWeights)
 {
 	string err;
-	int32_t i1 = indicators.size();
+	int64_t i1 = indicators.size();
 
-	for (int32_t i = 0; i < i1; i++)
+	for (int64_t i = 0; i < i1; i++)
 	{
-		std::cout << "Параматр " << indicators[i] << "  вес " << int32_t(TheoWeights[i])  << "%" << ";" << endl;
+		std::cout << "Параматр " << indicators[i] << "  вес " << int64_t(TheoWeights[i])  << "%" << ";" << endl;
 
 	}
 	getline(cin, err);
@@ -432,28 +432,28 @@ void quoterlist(vector<string>& indicators, vector<vector<double>>& indicatDate)
 	
 	
 		////что-то делаем с годом и кварталом
-	int32_t q0 = quoteraw[0];
+	int64_t q0 = quoteraw[0];
 
 		char q5 = 52;
 		char q6 = 49;
 		if (q0 > q5 || q0 < 49) { std::cout << "Неверно введен квартал года " << quoteraw << endl << "Пример - 4.1999 " << endl; getline(cin, err);  return; }
 		string q1 = quoteraw.substr(2, 4);
-		int32_t q2 = stoi(q1);
+		int64_t q2 = stoi(q1);
 		if (q2 < 1990) { std::cout << "Неверно введен год " << quoteraw << endl << "Пример - 4.1999 " << endl; getline(cin, err);  return; }
-		int32_t qy = q2 - 1990;
+		int64_t qy = q2 - 1990;
 		qy = qy * 4;
 		qy -= 1;
-		int32_t q10 = 0;
+		int64_t q10 = 0;
 		if (q0 == 49) { q10 = 1; }
 		if (q0 == 50) { q10 = 2; }
 		if (q0 == 51) { q10 = 3; }
 		if (q0 == 52) { q10 = 4; }
 		qy += q10;
-		int32_t q3 = indicators.size();
+		int64_t q3 = indicators.size();
 		if (q3 == 0) { std::cout << "Нет данных" << endl; return; }
-		int32_t q4 = indicatDate[0].size();
+		int64_t q4 = indicatDate[0].size();
 		if (q4 == 0) { std::cout << "Нет данных" << endl; return; }
-		for (int32_t i = 0; i < q3; i++)
+		for (int64_t i = 0; i < q3; i++)
 		{
 			std::cout << indicators[i] << "    " << indicatDate[i][qy] << endl;
 
@@ -467,7 +467,7 @@ void paramdatelist(vector<string>& indicators, vector<vector<double>>& indicatDa
 {
 	Other obj3;
 	
-	int32_t st10 = std::cin.peek();
+	int64_t st10 = std::cin.peek();
 
 	if (st10 != 10)
 	{
@@ -479,14 +479,14 @@ void paramdatelist(vector<string>& indicators, vector<vector<double>>& indicatDa
 		string space = " ";
 		string vvodindic;
 		char t1 = ' ';
-		int32_t t2 = 0;
-		map<int32_t, double> dates;
+		int64_t t2 = 0;
+		map<int64_t, double> dates;
 		double d0 = 0.0;
-		vector<int32_t> index;
+		vector<int64_t> index;
 
 		while (t2 < 1)
 		{
-			int32_t st11 = std::cin.peek();
+			int64_t st11 = std::cin.peek();
 			if (st11 != 10)
 			{
 				bool check = obj3.checkcin();
@@ -512,8 +512,8 @@ void paramdatelist(vector<string>& indicators, vector<vector<double>>& indicatDa
 		}
 
 
-		int32_t t0 = vvodindicv.size();
-		for (int32_t t1 = 0; t1 < t0; t1++)
+		int64_t t0 = vvodindicv.size();
+		for (int64_t t1 = 0; t1 < t0; t1++)
 		{
 			indicator = indicator + vvodindicv[t1] + space;
 
@@ -533,13 +533,13 @@ void paramdatelist(vector<string>& indicators, vector<vector<double>>& indicatDa
 		auto t9 = std::distance(indicators.begin(), t4);
 
 
-		int32_t t10 = indicatDate[t9].size();
-		int32_t i11 = 0;
+		int64_t t10 = indicatDate[t9].size();
+		int64_t i11 = 0;
 		while( i11 < t10 )
 		{
-			int32_t t11 = i11+1;
-			int32_t t12 = t11 / 4;
-			int32_t t13 = t11 % 4;
+			int64_t t11 = i11+1;
+			int64_t t12 = t11 / 4;
+			int64_t t13 = t11 % 4;
 			t12 += 1990;
 			if (t13 == 0) { t12 -= 1;  t13 = 4; }
 			string t14 = to_string(t12);
@@ -583,35 +583,35 @@ void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vecto
 
 
 		////что-то делаем с годом и кварталом
-		int32_t q0 = quoteraw[0];
+		int64_t q0 = quoteraw[0];
 
 		char q5 = 52;
 		char q6 = 49;
 		if (q0 > q5 || q0 < 49) { std::cout << "Неверно введен квартал года " << quoteraw << endl << "Пример - 4.1999 " << endl; getline(cin, err);  return; }
 		string q1 = quoteraw.substr(2, 4);
-		int32_t q2 = stoi(q1);
+		int64_t q2 = stoi(q1);
 		if (q2 < 1990) { std::cout << "Неверно введен год " << quoteraw << endl << "Пример - 4.1999 " << endl; getline(cin, err);  return; }
-		int32_t qy = q2 - 1990;
+		int64_t qy = q2 - 1990;
 		qy = qy * 4;
 		qy -= 1;
-		int32_t q10 = 0;
+		int64_t q10 = 0;
 		if (q0 == 49) { q10 = 1; }
 		if (q0 == 50) { q10 = 2; }
 		if (q0 == 51) { q10 = 3; }
 		if (q0 == 52) { q10 = 4; }
 		qy += q10;
-		int32_t q3 = indicators.size();
+		int64_t q3 = indicators.size();
 		if (q3 == 0) { std::cout << "Нет данных" << endl; return; }
-		int32_t q4 = indicatDate[0].size();
+		int64_t q4 = indicatDate[0].size();
 		if (q4 == 0) { std::cout << "Нет данных" << endl; return; }
 
 		incrquotercalc(qy, indicatDate, indicatDateInc);
 
 
-		for (int32_t i = 0; i < q3; i++)
+		for (int64_t i = 0; i < q3; i++)
 		{
 			signed char in0 = indicatDateInc[i][qy];
-			int32_t in1 = int32_t(in0);
+			int64_t in1 = int64_t(in0);
 			in1 = in1 * 2; // нивелируем шаг
 			double in2 = in1;
 			in2 = in2 / 10; // корректно отображаем десятые процента
@@ -627,7 +627,7 @@ void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vecto
 
 
 
-	void bpv(vector<string>& indicators, vector<signed char>& TheoWeights, vector<vector<double>>& indicatDate, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<int32_t>& Count,
+	void bpv(vector<string>& indicators, vector<signed char>& TheoWeights, vector<vector<double>>& indicatDate, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<int64_t>& Count,
 		vector<signed char>& Weights1,
 		vector<vector<signed char>>& Outputs1, 
 		vector<vector<signed char>>& Weights2, 
@@ -647,8 +647,8 @@ void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vecto
 	vector<vector<signed char>>& Outputs3m, 
 	vector<vector<signed char>>& Outputs4m, 
 		const signed char& alpha,
-		const int32_t& iterationney,
-		const int32_t& iteration
+		const int64_t& iterationney,
+		const int64_t& iteration
 
 	)
 {
@@ -663,7 +663,7 @@ void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vecto
 	string err;
 	signed char p0 = 0;
 
-	int32_t Quoter;
+	int64_t Quoter;
 
 
 	string m0 = "uploadparamd";
@@ -691,8 +691,8 @@ void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vecto
 	{
 
 		string vvod;
-		int32_t count = 0;
-		int32_t s0 = Count.size();
+		int64_t count = 0;
+		int64_t s0 = Count.size();
 		if (s0 != 0) count = Count[0];
 		if (b2 == 0)
 		{
@@ -810,7 +810,7 @@ void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vecto
 			);
 
 			b2 = 0;
-			getline(cin, err);
+			
 		}
 
 		

@@ -25,7 +25,7 @@ class Filework
 public:
 	vector<T> myfileread(const string& filename, vector<T>& datumr, const string& filelink);
 	void myfilerewtite(const string& filename, vector<T>& datumw, const string& filelink);
-	int32_t checkfile(string filename, const string& filelink);
+	int64_t checkfile(string filename, const string& filelink);
 
 };
 
@@ -37,7 +37,7 @@ vector<T> Filework<T>::myfileread(const string& filename, vector<T>& datumr, con
 	
 	setlocale(LC_ALL, "Russian");
 	
-	static_assert(is_same_v<T, signed char> || is_same_v<T, string> || is_same_v<T, double> || is_same_v<T, int32_t>);
+	static_assert(is_same_v<T, signed char> || is_same_v<T, string> || is_same_v<T, double> || is_same_v<T, int64_t>);
 
 	string filelinc = filelink; /////"C:\\Users\\Legion\\Documents\\testney\\";
 	string txt = ".txt";
@@ -65,7 +65,7 @@ vector<T> Filework<T>::myfileread(const string& filename, vector<T>& datumr, con
 	{
 		while (getline(file, line)) {
 
-			int32_t t0 = stoi(line);
+			int64_t t0 = stoi(line);
 			if (t0 > 100) t0 = 100;
 			if (t0 < -100) t0 = -100;
 			signed char t1 = (signed char)t0;
@@ -76,11 +76,11 @@ vector<T> Filework<T>::myfileread(const string& filename, vector<T>& datumr, con
 		};
 	}
 
-		if constexpr (is_same_v<T, int32_t>)
+		if constexpr (is_same_v<T, int64_t>)
 		{
 			while (getline(file, line)) {
 
-				int32_t t0 = stoi(line);
+				int64_t t0 = stoi(line);
 				if (t0 > 100) t0 = 100;
 				if (t0 < -100) t0 = -100;
 
@@ -113,7 +113,7 @@ void Filework<T1>::myfilerewtite(const string& filename, vector<T1>& datumw, con
 {
 	setlocale(LC_ALL, "Russian");
 	
-	static_assert(is_same_v<T1, signed char> || is_same_v<T1, string> || is_same_v<T1, double> || is_same_v<T1, int32_t>);
+	static_assert(is_same_v<T1, signed char> || is_same_v<T1, string> || is_same_v<T1, double> || is_same_v<T1, int64_t>);
 
 	if (datumw.size() > 0)
 	{
@@ -122,9 +122,9 @@ void Filework<T1>::myfilerewtite(const string& filename, vector<T1>& datumw, con
 		string txt = ".txt";
 		filelinc = filelinc + filename + txt;
 
-		int32_t c0 = datumw.size();
+		int64_t c0 = datumw.size();
 		std::string content;
-		int32_t i = 0;
+		int64_t i = 0;
 		while (i < c0) {
 			std::string c1;
 			std::string c2;
@@ -132,11 +132,11 @@ void Filework<T1>::myfilerewtite(const string& filename, vector<T1>& datumw, con
 
 			if constexpr (is_same_v<T1, string>) c1 = datumw[i];
 			if constexpr (is_same_v<T1, double>) { c3 = datumw[i]; c1 = to_string(c3); }
-			if constexpr (is_same_v<T1, int32_t>) { c3 = datumw[i]; c1 = to_string(c3); }
+			if constexpr (is_same_v<T1, int64_t>) { c3 = datumw[i]; c1 = to_string(c3); }
 			if constexpr (is_same_v<T1, signed char>) {
 signed char t0 = datumw[i];
 
-int32_t t1 = int32_t(t0);
+int64_t t1 = int64_t(t0);
 c1 = to_string(t1);
 
 
@@ -165,7 +165,7 @@ c1 = to_string(t1);
 
 }
 
-int32_t Filework<string>::checkfile(string filename, const string& filelink)
+int64_t Filework<string>::checkfile(string filename, const string& filelink)
 {
 	string filelinc = filelink; //"C:\\Users\\Legion\\Documents\\testney\\";
 	string txt = ".txt";

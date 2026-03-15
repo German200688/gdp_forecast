@@ -8,6 +8,8 @@
 #include <regex>
 #include <map>
 #include <cstdint>
+#include <thread>
+//#include <x86intrin.h>
 #include "kernel/other.h"
 #include "kernel/nvidia/cuda/nvidiac.h"
 #include "bp3.cpp"
@@ -17,7 +19,7 @@
 
 using namespace std;
 
-void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<signed char>& TheoWeights, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<signed char> Weights1, vector<int32_t>& Count, vector<vector<signed char>>& Outputs1, vector<vector<signed char>>& Weights2, vector<vector<signed char>>& Outputs2,  vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Outputs3, vector<vector<signed char>>& Weights4, vector<vector<signed char>>& Outputs4, vector<vector<signed char>>& Weights5, signed char& result1, signed char& result2, signed char& result,
+void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<signed char>& TheoWeights, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<signed char> Weights1, vector<int64_t>& Count, vector<vector<signed char>>& Outputs1, vector<vector<signed char>>& Weights2, vector<vector<signed char>>& Outputs2,  vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Outputs3, vector<vector<signed char>>& Weights4, vector<vector<signed char>>& Outputs4, vector<vector<signed char>>& Weights5, signed char& result1, signed char& result2, signed char& result,
 	vector<signed char>& Weights1m,
 	vector<vector<signed char>>& Weights2m,
 	vector<vector<signed char>>& Weights3m,
@@ -28,8 +30,8 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 	vector<vector<signed char>>& Outputs3m,
 	vector<vector<signed char>>& Outputs4m,
 	const signed char& alpha,
-	const int32_t& iterationney,
-	const int32_t& iteration)
+	const int64_t& iterationney,
+	const int64_t& iteration)
 {
 	Other obj3;
 	nvidiac obj1;
@@ -41,10 +43,10 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 	//string space = " ";
 	//string vvodindic;
 	//char t1 = ':';
-	//int32_t t2 = 0;
-	vector <vector <int32_t>> dates;
+	//int64_t t2 = 0;
+	vector <vector <int64_t>> dates;
 	double d0 = 0.0;
-	vector<int32_t> index;
+	vector<int64_t> index;
 
 		bool check = obj3.checkcin();
 		if (!check) { std::cout << "Вы ничего не ввели. Введите пожалуйста данные." << endl;  return;}
@@ -57,10 +59,10 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 	string dateraw = "";
 
 	double date2 = 0.0;
-	int32_t w = 1;
+	int64_t w = 1;
 	while (w < 2)
 	{
-		int32_t st0 = std::cin.peek();
+		int64_t st0 = std::cin.peek();
 
 		if (st0 == 10) { w = 2; }
 		else
@@ -81,7 +83,7 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 
 			////что-то делаем с годом и кварталом
 			char q10 = dateraw[0];
-			int32_t q0 = 0;
+			int64_t q0 = 0;
 			char q5 = 52;
 			char q6 = 49;
 			if (q10 == 49)  q0 = 1;
@@ -90,17 +92,17 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 			else if (q10 == 52)  q0 = 4;
 			else { std::cout << "Неверно введен квартал года " << dateraw << endl << "Пример - 4.1999 " << endl; getline(cin, err);  return; }
 			string q1 = dateraw.substr(2, 4);
-			int32_t q2 = stoi(q1);
+			int64_t q2 = stoi(q1);
 			if (q2 < 1990) { std::cout << "Неверно введен год " << dateraw << endl << "Пример - 4.1999 " << endl; getline(cin, err); return; }
 
 
 
-			int32_t qy = q2 - 1990;
+			int64_t qy = q2 - 1990;
 			qy = qy * 4;
 			qy -= 1;
 			qy += q0; // индекс в векторе
 			qy--;
-			int32_t te1 = indicatDate[0].size();
+			int64_t te1 = indicatDate[0].size();
 			if (qy > te1) { cout << "К сожалению данные за предыдущий квартал отсутствуют и рассчет не может быть осуществлен. Введите данные и повторите снова." << endl; }
 			dateraw = "";
 
@@ -110,7 +112,7 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 			char t0 = dateraw.back();
 
 			char t5 = ';';
-			int32_t a = 4;
+			int64_t a = 4;
 
 			if (t0 != t5) { std::cout << "Где-то пропущена ; или значение. Ошибка выявлена на цифре -  " << dateraw << endl; getline(cin, err); return; }
 			else
@@ -121,7 +123,7 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 				double incr2 = d0 * 5; //x*100*10/2 - 100-Р 
 
 
-				int32_t incr3 = int32_t(incr2);
+				int64_t incr3 = int64_t(incr2);
 				//std::cout << "incr3 = " << int(incr2) << endl;
 
 				while (incr3 > 100)
@@ -135,11 +137,11 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 				}
 
 				signed char incr4 = static_cast<signed char>(incr3);
-				int32_t incrf = int(incr4);
+				int64_t incrf = int(incr4);
 
-				vector <int32_t > dates12(2);
+				vector <int64_t > dates12(2);
 				dates12[0] = qy;
-				dates12[1] = d0;
+				dates12[1] = incrf;
 				dates.push_back(dates12);
 
 
@@ -157,7 +159,13 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 	signed char* dvec_a1, * dvec_b1, * dvec_c1, *vec_a23, *vec_b23, *dvec_a4, *dvec_b4, *dvec_c4, *vec_a4, *vec_b4, * ab;
 		//int N1, int N23, int N4, int N44, signed char*& ab
 
-	int32_t Quoter = dates[0][0];
+	int64_t Quoter = dates[0][0];
+
+	unsigned long long tact1 = __rdtsc();
+	this_thread::sleep_for(std::chrono::seconds(1));
+	unsigned long long tact2 = __rdtsc();
+	unsigned long long tactraw = (tact2 - tact1) /1000;
+	std::cout << tactraw << endl;
 
 	calcgdpteach(indicators, indicatDate, TheoWeights, indicatDateInc, Cash1, Weights1, Count, Outputs1, Weights2, Outputs2, Quoter, Weights3, Outputs3, Weights4, Outputs4, Weights5, result1, result2, result,
 		Weights1m,
@@ -170,26 +178,31 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 		Outputs3m,
 		Outputs4m
 	);
-	int32_t N1 = 3;
-	int32_t N23 = Weights2[0].size();
-	int32_t N44 = Weights4[0].size();
-	int32_t N4 = Weights5[0].size();
+	int64_t N1 = 3;
+	int64_t N23 = Weights2[0].size();
+	int64_t N44 = Weights4[0].size();
+	int64_t N4 = Weights5[0].size();
 
 
 	obj1.addobj(dvec_a1, dvec_b1, dvec_c1, vec_a23, vec_b23, dvec_a4, dvec_b4, dvec_c4, vec_a4, vec_b4, N1, N23, N4, N44, ab);
 	int t12 = dates.size();
-
-	for (int32_t i0 = 0; i0 < iteration; i0++)
+	int percraw = iterationney * t12 * iteration;
+	double percdr = 0;
+	int t666 = 1;
+	unsigned long long tact5 = 0;
+	for (int64_t i0 = 0; i0 < iteration; i0++)
 	{
-		for (int32_t i1 = 0; i1 < t12; i1++)
+		for (int64_t i1 = 0; i1 < t12; i1++)
 		{
-			int quot = dates[i1][0];
-			int resi = dates[i1][1];
+			int64_t quot = dates[i1][0];
+			int64_t resi = dates[i1][1];
+			//cout << resi << endl;
 			signed char res = static_cast<signed char>(resi);
 
-			for (int32_t i2 = 0; i2 < iterationney; i2++)
+			for (int64_t i2 = 0; i2 < iterationney; i2++)
 
 			{
+				unsigned long long tact3 = __rdtsc();
 				calcgdpteach(indicators, indicatDate, TheoWeights, indicatDateInc, Cash1, Weights1, Count, Outputs1, Weights2, Outputs2, quot, Weights3, Outputs3, Weights4, Outputs4, Weights5, result1, result2, result,
 					Weights1m,
 					Weights2m,
@@ -230,11 +243,49 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 					vec_b4,
 					//signed char*& vec_c4, 
 					ab
+					
 				);
+				percdr += 1.0;
+				unsigned long long tact4 = __rdtsc();
+				tact5 = (tact5 + (tact4 - tact3)) / 2;
+				std::cout << tact5 << endl;
 
+				t666++;
+				
 			}
+			double percfd = percdr / double(percraw) * 100.0;
+				int percf = int(percfd);
 
+				std::cout << " __________ Пройдено " << percf << "% __________" << endl;
+				unsigned long long tact6 = tact5 * percdr / tactraw;
+				unsigned long long tact7 = tact6 / percf * (100 - percf);
+				unsigned long long tact8 = 0;
+				if (tact7 > 7200000)
+				{
+					tact8 = tact7 / 3600000;
+					std::cout << " __________ До завершения обучения осталось около " << tact8 << " часов __________" << endl;
+				}
+				else if (tact7 > 3600000 && tact7 <= 7200000)
+				{
+					//tact8 = tact7 / 3600000;
+					std::cout << " __________ До завершения обучения осталось около " << "1" << " часа __________" << endl;
+				}
 
+				else if (tact7 > 60000 && tact7 <= 3600000)
+				{
+					tact8 = tact7 / 60000;
+					std::cout << " __________ До завершения обучения осталось около " << tact8 << " минут __________" << endl;
+				}
+
+				else if (tact7 > 1000 && tact7 <= 60000)
+				{
+					tact8 = tact7 / 1000;
+					std::cout << " __________ До завершения обучения осталось около " << tact7 << " секунд __________" << endl;
+				}
+
+				else
+					std::cout << " __________ Рассчет почти завешен __________" << endl; 
+				tact8 = 0;
 		}
 
 

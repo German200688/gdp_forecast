@@ -18,6 +18,12 @@ using namespace std;
 
 int main()
 {
+	SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS);
+	/*
+	HANDLE Thread0 = GetCurrentThread();
+	DWORD_PTR MyThread0 = 0x02;
+	DWORD_PTR previousMask = SetThreadAffinityMask(Thread0, MyThread0);
+	*/
 	//setlocale(LC_ALL, "RU");
 	locale::global(locale("ru_RU.UTF-8"));
 	system("chcp 65001");
@@ -31,7 +37,7 @@ int main()
 	vector<signed char> TheoWeights = {}; //весы индикаторов
 	vector<vector<double>> indicatDate = {}; //данные индикатора
 	vector<vector<signed char>> indicatDateInc = {}; //прирост за квартал
-	vector<int32_t> Count = {}; //служебный
+	vector<int64_t> Count = {}; //служебный
 	vector<vector<signed char>> Cash1; //драфтовые параметры
 	vector<signed char> Weights1; //слой
 	vector<vector<signed char>> Weights2; //слой
@@ -55,15 +61,15 @@ int main()
 
 	string linkfile = "";
 	signed char alpha = 100;
-	int32_t iterationney = 1;
-	int32_t iteration = 1;
+	int64_t iterationney = 1;
+	int64_t iteration = 1;
 
 	map<string, string> configf;
 
 	configf = obj1.configread();
 	linkfile = configf["linkfile:"];
 	string alphas = configf["alpha:"];
-	int32_t alphai = stoi(alphas);
+	int64_t alphai = stoi(alphas);
 	alpha = static_cast<signed char>(alphai);
 	string iterationneys = configf["iterationney:"];
 	iterationney = stoi(iterationneys);
@@ -110,7 +116,8 @@ int main()
 		iteration
 		
 		);
-	
+	cout << "Идет процесс сохранения данных. Пожалуйста дождитесь окончания..." << endl;
+
 	endfile(indicators, TheoWeights, indicatDate, indicatDateInc, Cash1, Count, Weights1, Outputs1, Weights2, Outputs2, Outputs3, Weights3, Outputs4, Weights4, Weights5,
 		Weights1m,
 		Weights2m,

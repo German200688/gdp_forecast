@@ -48,9 +48,9 @@ signed char Signch::minusss(signed char am, signed char bm)
 
 signed char Signch::multtt(signed char amul, signed char bmul)
 {
-	int32_t m1 = amul;
-	int32_t m2 = bmul;
-	int32_t m3 = m1 * m2;
+	int64_t m1 = amul;
+	int64_t m2 = bmul;
+	int64_t m3 = m1 * m2;
 	m3 = m3 / 100;
 	if (m3 > 120) m3 = 120;
 	if (m3 < - 120) m3 = - 120;
@@ -61,12 +61,12 @@ signed char Signch::multtt(signed char amul, signed char bmul)
 }
 
 
-int32_t Signch::maxWeight(const vector<signed char>& neyronout)
+int64_t Signch::maxWeight(const vector<signed char>& neyronout)
 {
 	
 	
 	signed char maxWeight = neyronout[0];
-	int32_t t0 = 0;
+	int64_t t0 = 0;
 
 	for (size_t i = 1; i < neyronout.size(); ++i) {
 		if (neyronout[i] > maxWeight) {

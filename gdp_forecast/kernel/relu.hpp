@@ -43,9 +43,9 @@ signed char Relu::relup(signed char& reluin)
 
 vector<signed char> Relu::reluvp(vector<signed char>& reluinv)
 {
-	int32_t t0 = reluinv.size();
+	int64_t t0 = reluinv.size();
 
-	for (int32_t i = 0; i < t0; i++)
+	for (int64_t i = 0; i < t0; i++)
 
 	{
 		if (reluinv[i] < 0) reluinv[i] = 0;
@@ -69,9 +69,9 @@ signed char Relu::reludivp(const signed char& reludivin)
 
 vector<signed char> Relu::reluvp(vector<signed char> reludivinv)
 {
-	int32_t t0 = reludivinv.size();
+	int64_t t0 = reludivinv.size();
 
-	for (int32_t i = 0; i < t0; i++)
+	for (int64_t i = 0; i < t0; i++)
 
 	{
 		if (reludivinv[i] < 0) reludivinv[i] = 0;
@@ -99,9 +99,9 @@ signed char Relu::relum(signed char& reluin)
 
 vector <signed char> Relu::reluvm(vector <signed char>& reluinv)
 {
-	int32_t t0 = reluinv.size();
+	int64_t t0 = reluinv.size();
 
-	for (int32_t i = 0; i < t0; i++)
+	for (int64_t i = 0; i < t0; i++)
 
 	{
 		if (reluinv[i] > 0) reluinv[i] = 0;
@@ -125,9 +125,9 @@ signed char Relu::reludivm(const signed char& reludivin)
 
 vector <signed char> Relu::reluvm(vector <signed char> reludivinv)
 {
-	int32_t t0 = reludivinv.size();
+	int64_t t0 = reludivinv.size();
 
-	for (int32_t i = 0; i < t0; i++)
+	for (int64_t i = 0; i < t0; i++)
 
 	{
 		if (reludivinv[i] > 0) reludivinv[i] = 0;

@@ -10,19 +10,19 @@
 
 using namespace std;
 
-void layer2m::neyronoutindadd2m(vector<vector<signed char>>& Outputs2m, vector<int32_t>& Count, int32_t& CountOutputs1)
+void layer2m::neyronoutindadd2m(vector<vector<signed char>>& Outputs2m, vector<int64_t>& Count, int64_t& CountOutputs1)
 
 {
 
-	int32_t t2 = Outputs2m.size();
-	int32_t t3 = Outputs2m[0].size();
-	int32_t t4 = CountOutputs1 - t3;
+	int64_t t2 = Outputs2m.size();
+	int64_t t3 = Outputs2m[0].size();
+	int64_t t4 = CountOutputs1 - t3;
 
 	if (Count.size() == 3) { Count.push_back(0); }
 	Count[3] = t3;
-	for (int32_t i = 0; i < t4; i++)
+	for (int64_t i = 0; i < t4; i++)
 	{
-		for (int32_t i1 = 0; i1 < t2; i1++)
+		for (int64_t i1 = 0; i1 < t2; i1++)
 		{
 			Outputs2m[i1].push_back(0);
 			
@@ -37,19 +37,19 @@ void layer2m::neyronoutindadd2m(vector<vector<signed char>>& Outputs2m, vector<i
 
 
 
-void layer2m::neyronoutqadd2m(vector<vector<signed char>>& Outputs2m, int32_t Quoter)
+void layer2m::neyronoutqadd2m(vector<vector<signed char>>& Outputs2m, int64_t Quoter)
 
 {
 
 	vector<signed char> t0 = { 0 };
 	if (Outputs2m.size() == 0) { Outputs2m.push_back(t0); }
-	int32_t t1 = Outputs2m.size();
+	int64_t t1 = Outputs2m.size();
 	t1 -= 1;
-	int32_t t2 = Outputs2m[0].size();
+	int64_t t2 = Outputs2m[0].size();
 
 
 	vector<signed char> t3 = {};
-	for (int32_t i = 0; i < t1; i++)
+	for (int64_t i = 0; i < t1; i++)
 	{
 		t3.push_back(0);
 
@@ -70,26 +70,26 @@ void layer2m::neyronoutqadd2m(vector<vector<signed char>>& Outputs2m, int32_t Qu
 
 
 
-void layer2m::weightsaddl12m(vector<vector<signed char>>& Weights2m, int32_t ney1)
+void layer2m::weightsaddl12m(vector<vector<signed char>>& Weights2m, int64_t ney1)
 
 
 {
-	int32_t t0 = Weights2m.size();
-	int32_t t01 = Weights2m[0].size();
+	int64_t t0 = Weights2m.size();
+	int64_t t01 = Weights2m[0].size();
 
 
 	
 	signed char t1 = 0;
-	int32_t t4 = ney1 - t0;
+	int64_t t4 = ney1 - t0;
 
 	
 
 
-	for (int32_t i = 0; i < t0; i++)
+	for (int64_t i = 0; i < t0; i++)
 	{
-		for (int32_t i1 = 0; i1 < t4; i1++)
+		for (int64_t i1 = 0; i1 < t4; i1++)
 		{
-			int32_t a = 0;
+			int64_t a = 0;
 			
 			if (t1 < 5 && a == 0) {
 				Weights2m[i].push_back(t1); t1++; a = 1;
@@ -113,7 +113,7 @@ void layer2m::weightsaddl12m(vector<vector<signed char>>& Weights2m, int32_t ney
 
 
 
-void layer2m::weightsaddl22m(vector<vector<signed char>>& Weights2m, int32_t CountWeights2)
+void layer2m::weightsaddl22m(vector<vector<signed char>>& Weights2m, int64_t CountWeights2)
 
 {
 	if (Weights2m.size() == 0) { vector<signed char> t0 = { 0 }; Weights2m.push_back(t0); }
@@ -121,17 +121,17 @@ void layer2m::weightsaddl22m(vector<vector<signed char>>& Weights2m, int32_t Cou
 
 	
 
-	int32_t t1 = Weights2m[0].size();
-	int32_t t2 = Weights2m.size();
-	int32_t t4 = CountWeights2 - t2;
+	int64_t t1 = Weights2m[0].size();
+	int64_t t2 = Weights2m.size();
+	int64_t t4 = CountWeights2 - t2;
 	t2 -= 1;
 
 
 	vector<signed char> t3 = {};
 	signed char t5 = 5;
-	for (int32_t i = 0; i < t1; i++)
+	for (int64_t i = 0; i < t1; i++)
 	{
-		int32_t a = 0;
+		int64_t a = 0;
 		if (t5 < 25 && a ==0) {
 			t3.push_back(t5); t5+=5; a = 1;
 		}
@@ -156,28 +156,28 @@ void layer2m::weightsaddl22m(vector<vector<signed char>>& Weights2m, int32_t Cou
 
 
 
-void layer2m::summneyquoter2m(vector<int32_t>& Count, vector<vector<signed char>>& Outputs1m, vector<vector<signed char>>& Weights2m, vector<vector<signed char>>& Outputs2m, int32_t Quoter) //квартал идет от 0 у каждого нейрона свой вектор
+void layer2m::summneyquoter2m(vector<int64_t>& Count, vector<vector<signed char>>& Outputs1m, vector<vector<signed char>>& Weights2m, vector<vector<signed char>>& Outputs2m, int64_t Quoter) //квартал идет от 0 у каждого нейрона свой вектор
 
 {
 	Neyron obj1;
 	layer2m obj2;
 
-	int32_t t0 = Outputs1m.size(); //квартал
-	int32_t t01 = Outputs1m[0].size(); // нейроны
+	int64_t t0 = Outputs1m.size(); //квартал
+	int64_t t01 = Outputs1m[0].size(); // нейроны
 
 
 
-	int32_t t11 = t01;
+	int64_t t11 = t01;
 	signed char t1 = 0;
 	vector<signed char> neyronin(t01, t1);
-	int32_t t2 = Outputs2m.size();
+	int64_t t2 = Outputs2m.size();
 	t0 -= 1;
 	//t2 -= 1;
 	if (t2 < Quoter) { obj2.neyronoutqadd2m(Outputs2m, Quoter); 
 	} // не хватает квартала в нейронах слоя 2
 
 	
-	int32_t t3 = Outputs2m[0].size();
+	int64_t t3 = Outputs2m[0].size();
 
 	t3 -= 1;
 	if (t01 > t3) {
@@ -188,11 +188,11 @@ void layer2m::summneyquoter2m(vector<int32_t>& Count, vector<vector<signed char>
 	vector<signed char> neyronout(t3, t1);
 
 	if (Weights2m.size() == 0) { vector<signed char> v0 = { 0 }; Weights2m.push_back(v0); }
-	int32_t t4 = Weights2m[0].size();
+	int64_t t4 = Weights2m[0].size();
 
 	if (t01 > t4) { obj2.weightsaddl12m(Weights2m, t01); } //не хватает весов для слоя 1
 
-	int32_t t5 = Weights2m.size();
+	int64_t t5 = Weights2m.size();
 	
 	if (t5 < t01) { obj2.weightsaddl22m(Weights2m, t11); 
 	} // не хватает весов для нейрона слоя 2
@@ -201,11 +201,11 @@ void layer2m::summneyquoter2m(vector<int32_t>& Count, vector<vector<signed char>
 
 		neyronin = Outputs1m[Quoter];
 
-	int32_t f0 = neyronout.size();
+	int64_t f0 = neyronout.size();
 
 
 	/////
-	for (int32_t i = 0; i < f0; i++)
+	for (int64_t i = 0; i < f0; i++)
 
 	{
 
@@ -235,17 +235,17 @@ void layer2m::summneyquoter2m(vector<int32_t>& Count, vector<vector<signed char>
 
 
 
-void layer2m::summneyall2m(vector<int32_t>& Count, vector<vector<signed char>>& Outputs1m, vector<vector<signed char>>& Weights2m, vector<vector<signed char>>& Outputs2m)
+void layer2m::summneyall2m(vector<int64_t>& Count, vector<vector<signed char>>& Outputs1m, vector<vector<signed char>>& Weights2m, vector<vector<signed char>>& Outputs2m)
 
 {
 	layer2m obj2;
 	
-	int32_t Quoter = 0;
-	int32_t t0 = Outputs1m[0].size();
+	int64_t Quoter = 0;
+	int64_t t0 = Outputs1m[0].size();
 
 	
 
-	for (int32_t Quoter = 0; Quoter < t0; Quoter++)
+	for (int64_t Quoter = 0; Quoter < t0; Quoter++)
 	{
 		obj2.summneyquoter2m(Count, Outputs1m, Weights2m, Outputs2m, Quoter);
 
@@ -254,7 +254,7 @@ void layer2m::summneyall2m(vector<int32_t>& Count, vector<vector<signed char>>& 
 }
 
 
-void layer2m::teachdel2m(vector<signed char >& delta3m, int32_t& Quoter, vector<vector<signed char>>& Weights3m, vector<vector<signed char>>& Weights2m, vector<vector<signed char>>& Outputs2m, vector<signed char >& delta2m)
+void layer2m::teachdel2m(vector<signed char >& delta3m, int64_t& Quoter, vector<vector<signed char>>& Weights3m, vector<vector<signed char>>& Weights2m, vector<vector<signed char>>& Outputs2m, vector<signed char >& delta2m)
 
 {
 	
@@ -262,24 +262,24 @@ void layer2m::teachdel2m(vector<signed char >& delta3m, int32_t& Quoter, vector<
 
 	vector<signed char > Outputs;
 	vector<signed char> Weightsl;
-	//int32_t t0 = Weights3.size();
-	int32_t t0 = Outputs2m[Quoter].size();
+	//int64_t t0 = Weights3.size();
+	int64_t t0 = Outputs2m[Quoter].size();
 	vector<signed char > delta(t0);
 
 	Outputs = Outputs2m[Quoter];
 	Weightsl = Weights3m[0];
 
-	int32_t t1 = delta3m.size();
-	int32_t t2 = Outputs2m[Quoter].size();
+	int64_t t1 = delta3m.size();
+	int64_t t2 = Outputs2m[Quoter].size();
 
 	signed char alpha = 100;
 
-	int32_t t9 = Weights3m.size();
+	int64_t t9 = Weights3m.size();
 
-	for (int32_t i1 = 0; i1 < t2; i1++)
+	for (int64_t i1 = 0; i1 < t2; i1++)
 	{
 		vector<signed char> Weightsll(t9);
-		for (int32_t i0 = 0; i0 < t9; i0++)
+		for (int64_t i0 = 0; i0 < t9; i0++)
 		{
 			Weightsll[i0] = Weights3m[i0][i1];
 
@@ -294,7 +294,7 @@ void layer2m::teachdel2m(vector<signed char >& delta3m, int32_t& Quoter, vector<
 }
 
 
-void layer2m::teachdel2mam(vector<signed char >& delta3m, int32_t& Quoter, vector<vector<signed char>>& Weights3m, vector<vector<signed char>>& Weights2m, vector<vector<signed char>>& Outputs2m, vector<signed char >& delta2m, signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d)
+void layer2m::teachdel2mam(vector<signed char >& delta3m, int64_t& Quoter, vector<vector<signed char>>& Weights3m, vector<vector<signed char>>& Weights2m, vector<vector<signed char>>& Outputs2m, vector<signed char >& delta2m, signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d)
 
 {
 
@@ -302,24 +302,24 @@ void layer2m::teachdel2mam(vector<signed char >& delta3m, int32_t& Quoter, vecto
 
 	vector<signed char > Outputs;
 	vector<signed char> Weightsl;
-	//int32_t t0 = Weights3.size();
-	int32_t t0 = Outputs2m[Quoter].size();
+	//int64_t t0 = Weights3.size();
+	int64_t t0 = Outputs2m[Quoter].size();
 	vector<signed char > delta(t0);
 
 	Outputs = Outputs2m[Quoter];
 	Weightsl = Weights3m[0];
 
-	int32_t t1 = delta3m.size();
-	int32_t t2 = Outputs2m[Quoter].size();
+	int64_t t1 = delta3m.size();
+	int64_t t2 = Outputs2m[Quoter].size();
 
 	signed char alpha = 100;
 
-	int32_t t9 = Weights3m.size();
+	int64_t t9 = Weights3m.size();
 
-	for (int32_t i1 = 0; i1 < t2; i1++)
+	for (int64_t i1 = 0; i1 < t2; i1++)
 	{
 		vector<signed char> Weightsll(t9);
-		for (int32_t i0 = 0; i0 < t9; i0++)
+		for (int64_t i0 = 0; i0 < t9; i0++)
 		{
 			Weightsll[i0] = Weights3m[i0][i1];
 
@@ -335,19 +335,19 @@ void layer2m::teachdel2mam(vector<signed char >& delta3m, int32_t& Quoter, vecto
 
 
 
-void layer2m::teach2m(int32_t& Quoter, vector<vector<signed char>>& Outputs2m, signed char alpha, vector<vector<signed char>>& Weights2m, vector<signed char >& delta2m)
+void layer2m::teach2m(int64_t& Quoter, vector<vector<signed char>>& Outputs2m, signed char alpha, vector<vector<signed char>>& Weights2m, vector<signed char >& delta2m)
 
 {
 	Neyron obj2;
 	
 	//альфа*значение низ * дельта
-	int32_t t0 = Outputs2m[Quoter].size();
+	int64_t t0 = Outputs2m[Quoter].size();
 	vector<signed char > Outputs(t0);
 	Outputs = Outputs2m[Quoter];
-	int32_t t1 = Weights2m[0].size();
+	int64_t t1 = Weights2m[0].size();
 
 
-	for (int32_t i = 0; i < t0; i++)
+	for (int64_t i = 0; i < t0; i++)
 	{
 		/*
 		signed char Output = Outputs[i];
@@ -362,7 +362,7 @@ void layer2m::teach2m(int32_t& Quoter, vector<vector<signed char>>& Outputs2m, s
 
 
 
-void layer2m::teach2mam(int32_t& Quoter, vector<vector<signed char>>& Outputs2m, signed char alpham, vector<vector<signed char>>& Weights2m, vector<signed char >& delta2m, signed char*& vec_d, signed char*& vec_a)
+void layer2m::teach2mam(int64_t& Quoter, vector<vector<signed char>>& Outputs2m, signed char alpham, vector<vector<signed char>>& Weights2m, vector<signed char >& delta2m, signed char*& vec_d, signed char*& vec_a)
 
 {
 	nvidiac obj2;
@@ -370,13 +370,13 @@ void layer2m::teach2mam(int32_t& Quoter, vector<vector<signed char>>& Outputs2m,
 
 
 	//альфа*значение низ * дельта
-	int32_t t0 = Outputs2m[Quoter].size();
+	int64_t t0 = Outputs2m[Quoter].size();
 	vector<signed char > Outputs(t0);
 	Outputs = Outputs2m[Quoter];
-	int32_t t1 = Weights2m[0].size();
+	int64_t t1 = Weights2m[0].size();
 
 
-	for (int32_t i = 0; i < t0; i++)
+	for (int64_t i = 0; i < t0; i++)
 	{
 		/*
 		signed char Output = Outputs[i];
@@ -385,8 +385,8 @@ void layer2m::teach2mam(int32_t& Quoter, vector<vector<signed char>>& Outputs2m,
 		*/
 		signed char t55 = delta2m[i];
 		signed char t11 = obj1.multtt(Outputs[i], delta2m[i]);
-		signed char t21 = obj1.multtt(t1, alpham);
+		signed char t21 = obj1.multtt(t11, alpham);
 		signed char* Weightsl = Weights2m[i].data();
-		obj2.MiddleTeachM(Weightsl, t1, t21, vec_d, vec_a);
+		obj2.MiddleTeachM(Weightsl, t11, t1, vec_d, vec_a);
 	}
 }

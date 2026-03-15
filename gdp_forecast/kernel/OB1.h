@@ -14,7 +14,7 @@ public:
 	signed char plusss(signed char ap, signed char bp);
 	signed char minusss(signed char am, signed char bm);
 	signed char multtt(signed char amul, signed char bmul);
-	int32_t maxWeight(const vector<signed char>& neyronout);
+	int64_t maxWeight(const vector<signed char>& neyronout);
 
 };
 

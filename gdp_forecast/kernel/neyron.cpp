@@ -26,7 +26,7 @@ using namespace std;
 	
 	vector<signed char> vzveshney = {};
 
-	int32_t i = 0;
+	int64_t i = 0;
 		if (weight.size() > neyronin.size()) i = neyronin.size() - 1;
 		else i = weight.size() - 1;
 	
@@ -72,11 +72,11 @@ using namespace std;
 
 	 
 
-	 int32_t i1 = 0;
+	 int64_t i1 = 0;
 	 if (weight.size() > neyronin.size()) i1 = neyronin.size() - 1;
 	 else i1 = weight.size() - 1;
 
-	 for (int32_t i = 0; i <= i1; i++)
+	 for (int64_t i = 0; i <= i1; i++)
 	 {
 
 		 signed char t3 = neyronin[i];
@@ -93,7 +93,7 @@ using namespace std;
 
  }
 
- vector <signed char> Neyron::teacherOneTwo(vector <signed char> weight1, signed char input, int32_t ig, int32_t ip)
+ vector <signed char> Neyron::teacherOneTwo(vector <signed char> weight1, signed char input, int64_t ig, int64_t ip)
  {
 	 
 	 Signch obj;
@@ -127,7 +127,7 @@ using namespace std;
 
 	 vector<signed char> vzveshney = {};
 
-	 int32_t i = 0;
+	 int64_t i = 0;
 	 if (weight.size() > neyronin.size()) i = neyronin.size() - 1;
 	 else i = weight.size() - 1;
 
@@ -176,7 +176,7 @@ using namespace std;
 
 	 vector<signed char> vzveshney = {};
 
-	 int32_t i = 0;
+	 int64_t i = 0;
 	 if (weight.size() > neyronin.size()) i = neyronin.size() - 1;
 	 else i = weight.size() - 1;
 
@@ -230,11 +230,11 @@ using namespace std;
 
 
 
-	 int32_t i1 = 0;
+	 int64_t i1 = 0;
 	 if (weight.size() > neyronin.size()) i1 = neyronin.size() - 1;
 	 else i1 = weight.size() - 1;
 
-	 for (int32_t i = 0; i <= i1; i++)
+	 for (int64_t i = 0; i <= i1; i++)
 	 {
 
 		 signed char t3 = neyronin[i];
@@ -268,11 +268,11 @@ using namespace std;
 
 
 
-	 int32_t i1 = 0;
+	 int64_t i1 = 0;
 	 if (weight.size() > neyronin.size()) i1 = neyronin.size() - 1;
 	 else i1 = weight.size() - 1;
 
-	 for (int32_t i = 0; i <= i1; i++)
+	 for (int64_t i = 0; i <= i1; i++)
 	 {
 
 		 signed char t3 = neyronin[i];
@@ -297,7 +297,7 @@ using namespace std;
  {
 	 Signch obj;
 
-	 int32_t t0 = delta.size();
+	 int64_t t0 = delta.size();
 
 	 while (t0 > 0)
 
@@ -314,17 +314,17 @@ using namespace std;
  }
 
 
- void Neyron::dellayerlast(vector<vector<signed char>>& Weights3, int32_t Quoter, vector<vector<signed char>>& Outputs2, const signed char& delta)
+ void Neyron::dellayerlast(vector<vector<signed char>>& Weights3, int64_t Quoter, vector<vector<signed char>>& Outputs2, const signed char& delta)
 
  {
 	 Signch obj;
 
-	 int32_t t1 = Outputs2[Quoter].size();
-	 int32_t t10 = Outputs2.size();
+	 int64_t t1 = Outputs2[Quoter].size();
+	 int64_t t10 = Outputs2.size();
 
 	 signed char alpha3 = 100;
 
-	 for (int32_t i = 0; i < t1; i++)
+	 for (int64_t i = 0; i < t1; i++)
 	 {
 		 signed char t2 = obj.multtt(Outputs2[Quoter][i], delta);
 		 signed char t3 = obj.multtt(t2, alpha3);
@@ -336,7 +336,7 @@ using namespace std;
  }
 
 
- signed char Neyron::deltaMiddle(int32_t Weightslsize, vector<signed char >& Weights, vector<signed char >& delta, signed char& alpha, signed char& Outputs)
+ signed char Neyron::deltaMiddle(int64_t Weightslsize, vector<signed char >& Weights, vector<signed char >& delta, signed char& alpha, signed char& Outputs)
  {
 	 Relu obj;
 	 Signch obj1;
@@ -345,7 +345,7 @@ using namespace std;
 	 else
 	 {
 		 
-		 for (int32_t i6 = 0; i6 < Weightslsize; i6++)
+		 for (int64_t i6 = 0; i6 < Weightslsize; i6++)
 		 {
 			 
 			 signed char sdeltaraw = obj1.multtt(Weights[i6], delta[i6]);
@@ -361,7 +361,7 @@ using namespace std;
  }
 
 
- signed char Neyron::deltafin(int32_t Weightslsize, signed char & Weight, signed char& delta, signed char& alpha, signed char& Outputs)
+ signed char Neyron::deltafin(int64_t Weightslsize, signed char & Weight, signed char& delta, signed char& alpha, signed char& Outputs)
  {
 	 Relu obj;
 	 Signch obj1;
@@ -386,7 +386,7 @@ using namespace std;
 
 
 
- signed char Neyron::deltaMiddlem(int32_t Weightslsize, vector<signed char >& Weights, vector<signed char >& delta, signed char& alpha, signed char& Outputs)
+ signed char Neyron::deltaMiddlem(int64_t Weightslsize, vector<signed char >& Weights, vector<signed char >& delta, signed char& alpha, signed char& Outputs)
  {
 	 Relu obj;
 	 Signch obj1;
@@ -395,7 +395,7 @@ using namespace std;
 	 else
 	 {
 
-		 for (int32_t i6 = 0; i6 < Weightslsize; i6++)
+		 for (int64_t i6 = 0; i6 < Weightslsize; i6++)
 		 {
 
 			 signed char sdeltaraw = obj1.multtt(Weights[i6], delta[i6]);
@@ -408,7 +408,7 @@ using namespace std;
 	 }
  }
 
- signed char Neyron::deltafinm(int32_t Weightslsize, signed char& Weight, signed char& delta, signed char& alpha, signed char& Outputs)
+ signed char Neyron::deltafinm(int64_t Weightslsize, signed char& Weight, signed char& delta, signed char& alpha, signed char& Outputs)
  {
 	 Relu obj;
 	 Signch obj1;
@@ -432,12 +432,12 @@ using namespace std;
  }
 
 
- vector<signed char > Neyron::MiddleTeach(vector<signed char >& Weights, signed char& Output, signed char& delta, int32_t& size, signed char& alpha)
+ vector<signed char > Neyron::MiddleTeach(vector<signed char >& Weights, signed char& Output, signed char& delta, int64_t& size, signed char& alpha)
  {
 	 Relu obj;
 	 Signch obj1;
 
-	 for (int32_t i1 = 0; i1 < size; i1++)
+	 for (int64_t i1 = 0; i1 < size; i1++)
 	 {
 		
 		 signed char t1 = obj1.multtt(Output, delta);

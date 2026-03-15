@@ -24,7 +24,7 @@ void teachdel3(const signed char& neyrontest, const signed char& neyrontestres, 
 
 
 
-void teachlayer3(vector<vector<signed char>>& Weights5, int32_t Quoter,  vector<vector<signed char>>& Outputs4, vector<signed char >& delta5)
+void teachlayer3(vector<vector<signed char>>& Weights5, int64_t Quoter,  vector<vector<signed char>>& Outputs4, vector<signed char >& delta5)
 
 {
 	Neyron obj;
@@ -39,7 +39,7 @@ void teachlayer3(vector<vector<signed char>>& Weights5, int32_t Quoter,  vector<
 
 void printerrr(signed char& result)
 {
-	int32_t in1 = int32_t(result);
+	int64_t in1 = int64_t(result);
 	in1 = in1 * 2; // нивелируем шаг
 	double in2 = in1;
 	in2 = in2 / 10; // корректно отображаем десятые процента
@@ -49,9 +49,9 @@ void printerrr(signed char& result)
 }
 
 
-void weightsaddl12(vector<vector<signed char>>& Weights5, int32_t t01)
+void weightsaddl12(vector<vector<signed char>>& Weights5, int64_t t01)
 {
-	int32_t t02 = Weights5[0].size()-1;
+	int64_t t02 = Weights5[0].size()-1;
 	signed char a = 10;
 
 	while (t02 < t01)
@@ -65,15 +65,15 @@ void weightsaddl12(vector<vector<signed char>>& Weights5, int32_t t01)
 
 }
 
-signed char weightsumm(vector<vector<signed char>>& Weights5, vector<vector<signed char>>& Outputs4, int32_t Quoter)
+signed char weightsumm(vector<vector<signed char>>& Weights5, vector<vector<signed char>>& Outputs4, int64_t Quoter)
 {
 
 	Neyron obj1;
 
 
-	int32_t t01 = Outputs4[0].size(); // нейроны
+	int64_t t01 = Outputs4[0].size(); // нейроны
 
-	int32_t tt02 = Weights5.size();
+	int64_t tt02 = Weights5.size();
 	if (Weights5.size() == 0)
 	{
 		vector<signed char > W (1, 10 );
@@ -81,7 +81,7 @@ signed char weightsumm(vector<vector<signed char>>& Weights5, vector<vector<sign
 
 	}
 
-	int32_t t02 = Weights5[0].size();
+	int64_t t02 = Weights5[0].size();
 	if (t01 > t02) { weightsaddl12(Weights5, t01); }
 
 	vector<signed char > Weights50 = Weights5[0];

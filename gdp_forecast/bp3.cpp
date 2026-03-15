@@ -26,7 +26,7 @@
 using namespace std;
 
 
-bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<signed char>& TheoWeights, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<signed char> Weights1, vector<int32_t>& Count, vector<vector<signed char>>& Outputs1, vector<vector<signed char>>& Weights2, vector<vector<signed char>>& Outputs2, int32_t& Quoter, vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Outputs3, vector<vector<signed char>>& Weights4, vector<vector<signed char>>& Outputs4, vector<vector<signed char>>& Weights5, signed char& result1, signed char& result2, signed char& result,
+bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<signed char>& TheoWeights, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<signed char> Weights1, vector<int64_t>& Count, vector<vector<signed char>>& Outputs1, vector<vector<signed char>>& Weights2, vector<vector<signed char>>& Outputs2, int64_t& Quoter, vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Outputs3, vector<vector<signed char>>& Weights4, vector<vector<signed char>>& Outputs4, vector<vector<signed char>>& Weights5, signed char& result1, signed char& result2, signed char& result,
 	vector<signed char>& Weights1m,
 	vector<vector<signed char>>& Weights2m,
 	vector<vector<signed char>>& Weights3m,
@@ -74,7 +74,7 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 	};
 
 
-	int32_t q0 = quoteraw[0];
+	int64_t q0 = quoteraw[0];
 
 	char q5 = 52;
 	char q6 = 49;
@@ -82,23 +82,23 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 	
 	if (q0 > q5 || q0 < 49) { std::cout << "Неверно введен квартал года " << quoteraw << endl << "Пример - 4.1999 " << endl; getline(cin, err);  return false ; }
 	string q1 = quoteraw.substr(2, 4);
-	int32_t q2 = stoi(q1);
+	int64_t q2 = stoi(q1);
 	if (q0 == q6 && q2 == 1990) { std::cout << "Данные рассчитываются за период не ранее 3-го квартала 1990 года" << endl; getline(cin, err);  return false; }
 	if (q0 == q66 && q2 == 1990) { std::cout << "Данные рассчитываются за период не ранее 3-го квартала 1990 года" << endl; getline(cin, err);  return false; }
 	if (q2 < 1990) { std::cout << "Неверно введен год " << quoteraw << endl << "Пример - 4.1999 " << endl; getline(cin, err);  return false; } 
-	int32_t qy = q2 - 1990;
+	int64_t qy = q2 - 1990;
 	qy = qy * 4;
 	qy -= 1;
-	int32_t q10 = 0;
+	int64_t q10 = 0;
 	if (q0 == 49) { q10 = 1; }
 	if (q0 == 50) { q10 = 2; }
 	if (q0 == 51) { q10 = 3; }
 	if (q0 == 52) { q10 = 4; }
 	qy += q10;
 	Quoter = qy;
-	int32_t qy2 = qy - 1;//используются данные за предыдущий квартал
-	int32_t qy1 = qy; ///+ 1;
-	int32_t te1 = indicatDate[0].size();
+	int64_t qy2 = qy - 1;//используются данные за предыдущий квартал
+	int64_t qy1 = qy; ///+ 1;
+	int64_t te1 = indicatDate[0].size();
 	if (qy2 > te1) { cout << "К сожалению данные за предыдущий квартал отсутствуют и рассчет не может быть осуществлен. Введите данные и повторите снова." << endl; return false; }
 	
 	// "Прирост данных:" 
@@ -160,7 +160,7 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 	result2 = weightsumm(Weights5m, Outputs4m, qy2);
 	
 
-	if (std::abs(static_cast<int32_t>(result1)) > std::abs(static_cast<int32_t>(result2))) result = result1;
+	if (std::abs(static_cast<int64_t>(result1)) > std::abs(static_cast<int64_t>(result2))) result = result1;
 	else result = result2;
 
 
@@ -172,7 +172,7 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 
 
 
-void teachquoter(int32_t& Quoter1, signed char& result1, signed char& result2, signed char& result, vector<vector<signed char>>& Weights5, vector<vector<signed char>>& Weights4, vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Weights2, vector<signed char>& Weights1, vector<vector<signed char>>& Outputs4, vector<vector<signed char>>& Outputs3, vector<vector<signed char>>& Outputs2, vector<vector<signed char>>& Outputs1, signed char alpha, string dateraw,
+void teachquoter(int64_t& Quoter1, signed char& result1, signed char& result2, signed char& result, vector<vector<signed char>>& Weights5, vector<vector<signed char>>& Weights4, vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Weights2, vector<signed char>& Weights1, vector<vector<signed char>>& Outputs4, vector<vector<signed char>>& Outputs3, vector<vector<signed char>>& Outputs2, vector<vector<signed char>>& Outputs1, signed char alpha, string dateraw,
 	vector<signed char>& Weights1m,
 	vector<vector<signed char>>& Weights2m,
 	vector<vector<signed char>>& Weights3m,
@@ -211,7 +211,7 @@ void teachquoter(int32_t& Quoter1, signed char& result1, signed char& result2, s
 	//	string dateraw;
 	bool check;
 	string err;
-	int32_t Quoter = Quoter1 - 1;
+	int64_t Quoter = Quoter1 - 1;
 
 
 
@@ -220,7 +220,7 @@ void teachquoter(int32_t& Quoter1, signed char& result1, signed char& result2, s
 	char t0 = dateraw.back();
 
 	char t5 = ';';
-	int32_t a = 4;
+	int64_t a = 4;
 	double d0 = 0.0;
 	if (t0 != t5) { std::cout << "Некорректно введены данные " << dateraw << endl; getline(cin, err); return; }
 	else
@@ -233,7 +233,7 @@ void teachquoter(int32_t& Quoter1, signed char& result1, signed char& result2, s
 	double incr2 = d0 * 5; //x*100*10/2 - 100-Р 
 
 
-	int32_t incr3 = int32_t(incr2);
+	int64_t incr3 = int64_t(incr2);
 	//std::cout << "incr3 = " << int(incr2) << endl;
 
 	while (incr3 > 100)
@@ -251,26 +251,81 @@ void teachquoter(int32_t& Quoter1, signed char& result1, signed char& result2, s
 
 
 	teachdel3(result1, incr4, delta5);
+#ifdef _DEBUG
+
+	cout << " после рассчета int(delta5[i]):" << endl;
+
+	int t00123 = delta5.size();
+	for (int i = 0; i < t00123; i++)
+	{
+		cout << int(delta5[i]) << endl;
+	}
+#endif
 	
 	teachdel3(result2, incr4, delta5m);
 	
 	obj7.teachdel4(delta5, Quoter, Weights5, Weights4, Outputs4, delta4);
+#ifdef _DEBUG
+	cout << " после рассчета int(delta4[i]):" << endl;
+
+	int t001 = delta4.size();
+	for (int i = 0; i < t001; i++)
+	{
+		cout << int(delta4[i]) << endl;
+	}
+#endif
 
 	obj71.teachdel4m(delta5m, Quoter, Weights5m, Weights4m, Outputs4m, delta4m);
 
 	obj6.teachdel3(delta4, Quoter, Weights4, Weights3, Outputs3, delta3);
+#ifdef _DEBUG
+	cout << " после рассчета int(delta3[i]):" << endl;
+
+	int t0013 = delta3.size();
+	for (int i = 0; i < t0013; i++)
+	{
+		cout << int(delta3[i]) << endl;
+	}
+#endif
 
 	obj61.teachdel3m(delta4m, Quoter, Weights4m, Weights3m, Outputs3m, delta3m);
 
 	obj4.teachdel2(delta3, Quoter, Weights3, Weights2, Outputs2, delta2);
+#ifdef _DEBUG
+	cout << " после рассчета int(delta2[i]):" << endl;
+
+	int t0012 = delta2.size();
+	for (int i = 0; i < t0012; i++)
+	{
+		cout << int(delta2[i]) << endl;
+	}
+#endif
 
 	obj41.teachdel2m(delta3m, Quoter, Weights3m, Weights2m, Outputs2m, delta2m);
 
 	obj5.teachdel1(delta2, Quoter, Weights2, Weights1, Outputs1, delta1);
+#ifdef _DEBUG
+	cout << " после рассчета int(delta1[i]):" << endl;
+
+	int t0011 = delta1.size();
+	for (int i = 0; i < t0011; i++)
+	{
+		cout << int(delta1[i]) << endl;
+	}
+#endif
 
 	obj51.teachdel1m(delta2m, Quoter, Weights2m, Weights1m, Outputs1m, delta1m);
 
 	teachlayer3(Weights5, Quoter, Outputs4, delta5);
+#ifdef _DEBUG
+	cout << " после рассчета Weights5[0]:" << endl;
+
+	int t00111 = Weights5[0].size();
+	for (int i = 0; i < t00111; i++)
+	{
+		cout << int(Weights5[0][i]) << endl;
+	}
+#endif
 
 	teachlayer3(Weights5m, Quoter, Outputs4m, delta5m);
 
@@ -310,6 +365,6 @@ void teachquoter(int32_t& Quoter1, signed char& result1, signed char& result2, s
 
 	cout << "\033[32m ----- Рассчет завершен -----\033[0m" << endl;
 
-
+	getline(cin, err);
 	
 }
