@@ -9,7 +9,6 @@
 #include <map>
 #include <cstdint>
 #include <thread>
-//#include <x86intrin.h>
 #include "kernel/other.h"
 #include "kernel/nvidia/cuda/nvidiac.h"
 #include "bp3.cpp"
@@ -19,7 +18,7 @@
 
 using namespace std;
 
-void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<signed char>& TheoWeights, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<signed char> Weights1, vector<int64_t>& Count, vector<vector<signed char>>& Outputs1, vector<vector<signed char>>& Weights2, vector<vector<signed char>>& Outputs2,  vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Outputs3, vector<vector<signed char>>& Weights4, vector<vector<signed char>>& Outputs4, vector<vector<signed char>>& Weights5, signed char& result1, signed char& result2, signed char& result,
+void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<signed char>& TheoWeights, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<signed char>& Weights1, vector<int64_t>& Count, vector<vector<signed char>>& Outputs1, vector<vector<signed char>>& Weights2, vector<vector<signed char>>& Outputs2,  vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Outputs3, vector<vector<signed char>>& Weights4, vector<vector<signed char>>& Outputs4, vector<vector<signed char>>& Weights5, signed char& result1, signed char& result2, signed char& result,
 	vector<signed char>& Weights1m,
 	vector<vector<signed char>>& Weights2m,
 	vector<vector<signed char>>& Weights3m,
@@ -103,7 +102,8 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 			qy += q0; // индекс в векторе
 			qy--;
 			int64_t te1 = indicatDate[0].size();
-			if (qy > te1) { cout << "К сожалению данные за предыдущий квартал отсутствуют и рассчет не может быть осуществлен. Введите данные и повторите снова." << endl; }
+			if (qy > te1) { cout << "К сожалению данные за предыдущий квартал отсутствуют и рассчет не может быть осуществлен. Введите данные и повторите снова." << endl; getline(cin, err); return;
+			}
 			dateraw = "";
 
 			check = obj3.checkcin();

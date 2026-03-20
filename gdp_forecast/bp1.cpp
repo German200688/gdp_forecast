@@ -9,13 +9,17 @@
 #include <regex>
 #include <map>
 #include <cstdint>
+#include <thread>
 #include "increase.cpp"
 #include "bp2.cpp"
 #include "bp3.cpp"
 #include "bp4.cpp"
 #include "bp5.cpp"
+#include "bp6.cpp"
 #include "neys/ney1s.h"
 #include "kernel/other.h"
+
+
 
 
 
@@ -25,7 +29,8 @@
 using namespace std;
 
 
-void uploadparamd(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<int64_t>& Count, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1 ) // Пример - uploadparamd param: 4.1999 28,5; 2.1998 28; Нажимаем enter"
+
+void uploadparamd(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<int64_t>& Count, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<unsigned char>& vecdate ) // Пример - uploadparamd param: 4.1999 28,5; 2.1998 28; Нажимаем enter"
 
 {
 	Other obj3;
@@ -191,11 +196,12 @@ void uploadparamd(vector<string>& indicators, vector<vector<double>>& indicatDat
 			
 			
 			indicatDate[t9][dq1] = dates[dq1];
+			obj3.additionvectordate(vecdate, dq1);
 
 			dq1 += 1;
 			if (Count.size() == 0) Count.push_back(dq1);
 			else { Count[0] = dq1; }
-
+			
 
 
 
@@ -203,9 +209,13 @@ void uploadparamd(vector<string>& indicators, vector<vector<double>>& indicatDat
 		else {
 			
 			indicatDate[t9][dq1] = dates[dq1];
+			obj3.additionvectordate(vecdate, dq1);
+			
+
 		}
 
 	}
+	
 	getline(cin, err);
 	std::cout << "Значения успешно записаны. Для вывода по всем значениям показателя, воспользуйтесь командой paramdatelist" << endl;
 
@@ -229,7 +239,9 @@ void info()
 		<< "   \033[34m calcgdp \033[35m Команда рассчитывает прогноз прироста ВВП в определенном квартале. \033[0m Пример - calcgdp 3.2010" << endl
 		<< "   \033[34m teachonline \033[35m Команда осуществляет обучение на основе нужного количества кварталов. \033[0m Пример - teachonline 4.1999 28,5; 2.1998 28; нажимаем enter" << endl
 		<< "   \033[34m info \033[35m Команда выводит текущую справку по командам. \033[0m Пример - info нажимаем enter" << endl
-		<< "   \033[34m end \033[35m Команда заверщает программу с сохранением всех данных. Если надо завершить программу без сохранения, нажмите крестик в текущем окне. \033[0m  Пример - end нажимаем enter" << endl;
+		<< "   \033[34m end \033[35m Команда заверщает программу с сохранением всех данных. Если надо завершить программу без сохранения, нажмите крестик в текущем окне. \033[0m  Пример - end нажимаем enter" << endl
+	    << "   \033[34m teachoffline \033[35m Команда осуществляет обучение в фоновом режиме на основе нужного количества кварталов. \033[0m Пример - teachoffline 4.1999 28,5; 2.1998 28; нажимаем enter" << endl
+	    << "   \033[34m offlinecheck \033[35m Команда проверяет наличие и статус процесса офлайн обучения. \033[0m Пример - offlinecheck нажимаем enter" << endl;
 	
 #ifdef _DEBUG 
 	std::cout
@@ -243,13 +255,13 @@ void info()
 
 
 
-void addparam(vector<string>& indicators, vector<signed char>& TheoWeights, vector<vector<double>>& indicatDate, int64_t count1, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<signed char>& Weights1, vector<signed char>& Weights1m, vector<int64_t>& Count)
+void addparam(vector<string>& indicators, vector<signed char>& TheoWeights, vector<vector<double>>& indicatDate, int64_t count1, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<signed char>& Weights1, vector<signed char>& Weights1m, vector<int64_t>& Count, unsigned char& indicс)
 {
 	
 	
 	layer1 Obj1;
 	layer1m Obj11;
-
+	Other Obj3;
 	string vvodparam;
 	string err;
 	getline(cin, vvodparam);
@@ -291,7 +303,7 @@ void addparam(vector<string>& indicators, vector<signed char>& TheoWeights, vect
 
 		Obj1.Weights1addition1(Weights1, b6, Count);
 		Obj11.Weights1addition1m(Weights1m, Weights1, Count);
-		
+		Obj3.additiondatedate(indicс);
 		std::cout << "Параметр " << vvodparam << " успешно добавлен." << endl;
 		
 	}
@@ -323,7 +335,7 @@ void paramlist(vector<string>& indicators)
 
 
 
-void uploadtheor(vector<string>& indicators, vector<signed char>& TheoWeights) // Пример2: uploadtheor param: -15 нажимаем enter.
+void uploadtheor(vector<string>& indicators, vector<signed char>& TheoWeights, unsigned char& theorс) // Пример2: uploadtheor param: -15 нажимаем enter.
 {
 
 	Other obj3;
@@ -385,6 +397,7 @@ void uploadtheor(vector<string>& indicators, vector<signed char>& TheoWeights) /
 	if (t5>100 && t5 < -100) { std::cout << t5 << " не явялется показателем от -100 до 100." << endl; getline(cin, err); return;}
 	signed char TheoWeight = static_cast<signed char>(t5);
 	TheoWeights[t9] = TheoWeight;
+	obj3.additiondatedate(theorс);
 	std::cout << "В параметр " << indicator << " добавили теоретичиский коэффициент равный " << int64_t(TheoWeight) << "%." << endl;
 	getline(cin, err);
 
@@ -622,7 +635,44 @@ void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vecto
 	}
 
 
+void offlinecheck (int64_t& percf, uint64_t& tact7)
 
+{
+	std::cout << " __________ Пройдено " << percf << "% __________" << endl;
+	
+	uint64_t tact8 = 0;
+	if (tact7 > 7200000)
+	{
+		tact8 = tact7 / 3600000;
+		std::cout << " __________ До завершения обучения осталось около " << tact8 << " часов __________" << endl;
+	}
+	else if (tact7 > 3600000 && tact7 <= 7200000)
+	{
+		//tact8 = tact7 / 3600000;
+		std::cout << " __________ До завершения обучения осталось около " << "1" << " часа __________" << endl;
+	}
+
+	else if (tact7 > 60000 && tact7 <= 3600000)
+	{
+		tact8 = tact7 / 60000;
+		std::cout << " __________ До завершения обучения осталось около " << tact8 << " минут __________" << endl;
+	}
+
+	else if (tact7 > 1000 && tact7 <= 60000)
+	{
+		tact8 = tact7 / 1000;
+		std::cout << " __________ До завершения обучения осталось около " << tact8 << " секунд __________" << endl;
+	}
+
+
+	else if (tact7 > 1 && tact7 <= 1000)
+		std::cout << " __________ Рассчет почти завешен __________" << endl;
+
+	else std::cout << " " << endl;
+	//tact8 = 0;
+
+
+}
 
 
 
@@ -653,9 +703,14 @@ void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vecto
 	)
 {
 	
+		vector<unsigned char> vecdate;
+		unsigned char* indicс = new unsigned char(0);
+		unsigned char* theorс = new unsigned char(0);
+		int64_t* percf = new int64_t(0);
+		uint64_t* tact71 = new uint64_t(0);
+	//	teach obj4;
 		Other obj3;
 		signed char result;
-
 		signed char result1;
 		signed char result2;
 		signed char a = 0;
@@ -679,6 +734,8 @@ void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vecto
 	string m10 = "info";
 	string m11 = "end";
 	string m12 = "calcgdpt";
+	string m13 = "teachoffline";
+	string m14 = "offlinecheck";
 
 	
 
@@ -705,17 +762,30 @@ void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vecto
 			if (vvod == "") { cout << endl << "Ваша команда не распознана. Скорректируйте команду или воспользуйтесь командой info для справок" << endl; getline(cin, err); }
 			else
 			*/
-			if (vvod == m11) a = 1;
+			if (vvod == m11) {
+				if (offlineUse) {
+					cout << "\033[31mЗапущено офлайн обучение, дождитесь его окончания." << endl << "Если вам надо срочно закрыть программу, воспользуйтесь кнопкой крестик консоли/экрана." << endl << "Для проверки статуса офлайн обучения воспользуйтесь командой offlinecheck \033[0m" << endl;
+					getline(cin, err);
+				}
+				else a = 1;
+			}
 			else if (vvod == m10) info();
-			else if (vvod == m0) uploadparamd(indicators, indicatDate, Count, indicatDateInc, Cash1);
-			else if (vvod == m1) addparam(indicators, TheoWeights, indicatDate, count, indicatDateInc, Cash1, Weights1, Weights1m, Count);
+			else if (vvod == m0) uploadparamd(indicators, indicatDate, Count, indicatDateInc, Cash1, vecdate);
+			else if (vvod == m1) addparam(indicators, TheoWeights, indicatDate, count, indicatDateInc, Cash1, Weights1, Weights1m, Count, *indicс);
 			else if (vvod == m2) paramlist(indicators);
 			else if (vvod == m3) paramdatelist(indicators, indicatDate);
 			else if (vvod == m4) quoterlist(indicators, indicatDate);
 			else if (vvod == m5) incr(indicators, indicatDate, indicatDateInc);
 			else if (vvod == m6) theorlist(indicators, TheoWeights);
-			else if (vvod == m7) uploadtheor(indicators, TheoWeights);
-			else if (vvod == m8) {
+			else if (vvod == m7) uploadtheor(indicators, TheoWeights, *theorс);
+			else if (vvod == m14) if (!offlineUse) {
+				cout << "\033[31m Офлайн процесс обучения еще не начат. \033[0m" << endl; getline(cin, err);
+			}
+			else {
+				offlinecheck(*percf, *tact71);
+				getline(cin, err);
+			}
+			else if (vvod == m8) { 
 				bool a11 = calcgdp(indicators, indicatDate, TheoWeights, indicatDateInc, Cash1, Weights1, Count, Outputs1, Weights2, Outputs2, Quoter, Weights3, Outputs3, Weights4, Outputs4, Weights5, result1, result2, result,
 					Weights1m,
 					Weights2m,
@@ -731,19 +801,43 @@ void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vecto
 				else b2 = 0;
 				getline(cin, err);
 			}
-			else if (vvod == m9) teachonline(indicators, indicatDate, TheoWeights, indicatDateInc, Cash1, Weights1, Count, Outputs1, Weights2, Outputs2, Weights3, Outputs3, Weights4, Outputs4, Weights5, result1, result2, result,
-				Weights1m,
-				Weights2m,
-				Weights3m,
-				Weights4m,
-				Weights5m,
-				Outputs1m,
-				Outputs2m,
-				Outputs3m,
-				Outputs4m,
-				alpha,
-				iterationney,
-				iteration);
+			else if (vvod == m9) {
+				if (offlineUse) {
+					cout << "\033[31m Уже запущено обучение в офлайн потоке, дождитесь его окончания прежде чем запускать обучение в онлайн потоке." << endl << "Подробнее о статусе обучения в офлайн потоке вы можете узнать командой offlinecheck \033[0m" << endl; getline(cin, err);
+				}
+				else {
+					teachonline(indicators, indicatDate, TheoWeights, indicatDateInc, Cash1, Weights1, Count, Outputs1, Weights2, Outputs2, Weights3, Outputs3, Weights4, Outputs4, Weights5, result1, result2, result,
+						Weights1m,
+						Weights2m,
+						Weights3m,
+						Weights4m,
+						Weights5m,
+						Outputs1m,
+						Outputs2m,
+						Outputs3m,
+						Outputs4m,
+						alpha,
+						iterationney,
+						iteration);
+				};
+			}
+			else if (vvod == m13) {
+				offlineUse.store(true); teachofflineprep(indicators, indicatDate, TheoWeights, indicatDateInc, Cash1, Weights1, Count, Outputs1, Weights2, Outputs2, Weights3, Outputs3, Weights4, Outputs4, Weights5, result1, result2, result,
+					Weights1m,
+					Weights2m,
+					Weights3m,
+					Weights4m,
+					Weights5m,
+					Outputs1m,
+					Outputs2m,
+					Outputs3m,
+					Outputs4m,
+					alpha,
+					iterationney,
+					iteration, vecdate, *indicс, *theorс, *percf,
+					*tact71);
+			}
+			
 			
 #ifdef _DEBUG 
 			else if (vvod == m12) { calcgdpt(indicators, indicatDate, TheoWeights, indicatDateInc, Cash1, Weights1, Count, Outputs1, Weights2, Outputs2, Quoter, Weights3, Outputs3, Weights4, Outputs4, Weights5, result1, result2, result,
@@ -816,5 +910,18 @@ void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vecto
 		
 
 	}
+
+	delete indicс;            
+	indicс = nullptr;
+
+	delete theorс;             
+	theorс = nullptr;
+
+	delete percf;
+	percf = nullptr;
+
+	delete tact71;
+	tact71 = nullptr;
+	
 
 }

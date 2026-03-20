@@ -29,10 +29,9 @@ int main()
 	system("chcp 65001");
 	SetConsoleOutputCP(CP_UTF8);
 	SetConsoleCP(CP_UTF8);
-	
 	Config obj1;
 	nvidia obj4;
-
+	mutex offlinethread;
 	vector<string> indicators = {}; //параметры
 	vector<signed char> TheoWeights = {}; //весы индикаторов
 	vector<vector<double>> indicatDate = {}; //данные индикатора
@@ -48,7 +47,6 @@ int main()
 	vector<vector<signed char>> Outputs2; // исходы
 	vector<vector<signed char>> Outputs3; // исходы
 	vector<vector<signed char>> Outputs4; // исходы
-
 	vector<signed char> Weights1m; //слой
 	vector<vector<signed char>> Weights2m; //слой
 	vector<vector<signed char>> Weights3m; //слой
