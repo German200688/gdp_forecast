@@ -68,7 +68,7 @@ void Other::additionvectordate(vector<unsigned char>& vecdate, int64_t& Quoter)
 	int64_t t1 = vecdate.size();
 	if (Quoter > vecdate.size())
 	{
-		while (vecdate.size() == Quoter)
+		while (vecdate.size() <= Quoter)
 		{
 			vecdate.push_back(0);
 

@@ -885,26 +885,27 @@ void offlinecheck (int64_t& percf, uint64_t& tact7)
 		
 		
 		else  {
+			if (!offlineUse)
+			{
+				std::cout << "Введите, пожалуйста корректный прирост ВВП и нажмите ENTER ; Пример - 12,5; " << endl << ">>> ";
+				vvod = "";
+				//bool check = obj3.checkcin();
+				//if (check == true) { cin >> vvod; }
+				cin >> vvod;
+				teachquoter(Quoter, result1, result2, result, Weights5, Weights4, Weights3, Weights2, Weights1, Outputs4, Outputs3, Outputs2, Outputs1, alpha, vvod,
+					Weights1m,
+					Weights2m,
+					Weights3m,
+					Weights4m,
+					Weights5m,
+					Outputs1m,
+					Outputs2m,
+					Outputs3m,
+					Outputs4m
+				);
 
-			std::cout << "Введите, пожалуйста корректный прирост ВВП и нажмите ENTER ; Пример - 12,5; " << endl << ">>> ";
-			vvod = "";
-			//bool check = obj3.checkcin();
-			//if (check == true) { cin >> vvod; }
-			cin >> vvod;
-			teachquoter(Quoter, result1, result2, result, Weights5, Weights4, Weights3, Weights2, Weights1, Outputs4, Outputs3, Outputs2, Outputs1, alpha, vvod,
-				Weights1m,
-				Weights2m,
-				Weights3m,
-				Weights4m,
-				Weights5m,
-				Outputs1m,
-				Outputs2m,
-				Outputs3m,
-				Outputs4m
-			);
-
-			b2 = 0;
-			
+				b2 = 0;
+			}
 		}
 
 		
