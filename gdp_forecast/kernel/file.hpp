@@ -66,8 +66,8 @@ vector<T> Filework<T>::myfileread(const string& filename, vector<T>& datumr, con
 		while (getline(file, line)) {
 
 			int64_t t0 = stoi(line);
-			if (t0 > 100) t0 = 100;
-			if (t0 < -100) t0 = -100;
+			if (t0 > 120) t0 = 120;
+			if (t0 < -120) t0 = -120;
 			signed char t1 = (signed char)t0;
 
 			datumr.push_back(t1);
@@ -81,8 +81,8 @@ vector<T> Filework<T>::myfileread(const string& filename, vector<T>& datumr, con
 			while (getline(file, line)) {
 
 				int64_t t0 = stoi(line);
-				if (t0 > 100) t0 = 100;
-				if (t0 < -100) t0 = -100;
+			//	if (t0 > 100) t0 = 100;
+				//if (t0 < -100) t0 = -100;
 
 				datumr.push_back(t0);
 
