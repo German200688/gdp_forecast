@@ -328,7 +328,11 @@ using namespace std;
 	 {
 		 signed char t2 = obj.multtt(Outputs2[Quoter][i], delta);
 		 signed char t3 = obj.multtt(t2, alpha3);
-		 Weights3[0][i] = obj.minusss(Weights3[0][i], t2);
+		 signed char t11 = obj.minusss(Weights3[0][i], t2);
+		 if (t11 == 0) {
+			 t11 = 1;
+		 }
+		 Weights3[0][i] = t11;
 
 	 }
 
@@ -442,6 +446,7 @@ using namespace std;
 		
 		 signed char t1 = obj1.multtt(Output, delta);
 		 signed char t2 = obj1.multtt(t1, alpha);
+		 if (t2 == 0) { t2 = 1; }
 		 Weights[i1] = obj1.minusss(Weights[i1], t1);
 		// Weights[i1] = obj1.multtt(Weights[i1], alpha);
 

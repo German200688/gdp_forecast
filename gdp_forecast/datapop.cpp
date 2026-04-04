@@ -433,7 +433,7 @@ string linkfile
 	int64_t countConvol1 = 0;
 
 	
-	
+	cout << "Идет загрузка 1-го слоя.." << endl;
 	int64_t size = Count.size();
 	//слой1
 	int64_t countWeight1 = 0;
@@ -465,7 +465,7 @@ string linkfile
 
 
 
-
+	cout << "Идет загрузка 2-го слоя...." << endl;
 	//слой2
 	
 	int64_t countWeight2 = 0;
@@ -495,7 +495,7 @@ string linkfile
 
 
 
-
+	cout << "Идет загрузка 3-го слоя......" << endl;
 	//слой3
 
 	int64_t countWeight3 = 0;
@@ -525,7 +525,7 @@ string linkfile
 
 
 
-
+	cout << "Идет загрузка 4-го слоя........" << endl;
 	//слой 4
 	int64_t countOutputs4 = 0;
 	if (size < 3);
@@ -552,7 +552,7 @@ string linkfile
 	beginmatrix5sc(countWeight4m, countWeight4m, Weights4m, fileWeights4m, linkfile);
 
 
-
+	cout << "Идет загрузка 5-го слоя.........." << endl;
 	//слой 5
 	int64_t countWeight5 = 0;
 	if (size < 3);
@@ -566,7 +566,7 @@ string linkfile
 	string fileWeights5m = "Weights5m";
 	beginmatrix5sc(countWeight5m, countWeight5m, Weights5m, fileWeights5m, linkfile);
 
-	
+	cout << "Загрузка завершена" << endl;
 
 
 }

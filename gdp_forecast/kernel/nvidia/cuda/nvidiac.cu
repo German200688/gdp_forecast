@@ -169,6 +169,7 @@ __global__ void minussspm(signed char* am, signed char bm, signed char* e2, int 
 		signed char e1 = am[th0] + bm1;
 		if (e1 >= 120) e2[th0] = 120;
 		else if (e1 <= -120) e2[th0] = -120;
+		else if (e1 == 0) e2[th0] = 1;
 		else e2[th0] = e1;
 
 

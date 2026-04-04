@@ -121,6 +121,7 @@ void Filework<T1>::myfilerewtite(const string& filename, vector<T1>& datumw, con
 	// //"C:\\Users\\Legion\\Documents\\testney\\";
 		string txt = ".txt";
 		filelinc = filelinc + filename + txt;
+	//	std::cout << filelinc << endl;
 
 		int64_t c0 = datumw.size();
 		std::string content;

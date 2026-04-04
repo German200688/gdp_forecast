@@ -161,9 +161,9 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 
 	int64_t Quoter = dates[0][0];
 
-	unsigned long long tact1 = __rdtsc();
+	volatile  unsigned long long tact1 = __rdtsc();
 	this_thread::sleep_for(std::chrono::seconds(1));
-	unsigned long long tact2 = __rdtsc();
+	volatile  unsigned long long tact2 = __rdtsc();
 	unsigned long long tactraw = (tact2 - tact1) /1000;
 	std::cout << tactraw << endl;
 
@@ -202,7 +202,7 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 			for (int64_t i2 = 0; i2 < iterationney; i2++)
 
 			{
-				unsigned long long tact3 = __rdtsc();
+				volatile  unsigned long long tact3 = __rdtsc();
 				calcgdpteach(indicators, indicatDate, TheoWeights, indicatDateInc, Cash1, Weights1, Count, Outputs1, Weights2, Outputs2, quot, Weights3, Outputs3, Weights4, Outputs4, Weights5, result1, result2, result,
 					Weights1m,
 					Weights2m,
@@ -255,13 +255,15 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 			}
 			double percfd = percdr / double(percraw) * 100.0;
 				int percf = int(percfd);
-
+				if (percf == 0) { percf = 1; }
 				std::cout << " __________ Пройдено " << percf << "% __________" << endl;
+				
 				unsigned long long tact6 = tact5 * percdr / tactraw;
 				unsigned long long tact7 = tact6 / percf * (100 - percf);
 				unsigned long long tact8 = 0;
 				if (tact7 > 7200000)
 				{
+
 					tact8 = tact7 / 3600000;
 					std::cout << " __________ До завершения обучения осталось около " << tact8 << " часов __________" << endl;
 				}
@@ -280,7 +282,7 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 				else if (tact7 > 1000 && tact7 <= 60000)
 				{
 					tact8 = tact7 / 1000;
-					std::cout << " __________ До завершения обучения осталось около " << tact7 << " секунд __________" << endl;
+					std::cout << " __________ До завершения обучения осталось около " << tact8 << " секунд __________" << endl;
 				}
 
 				else

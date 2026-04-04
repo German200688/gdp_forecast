@@ -333,7 +333,21 @@ void layer1m::teach1m(int64_t& Quoter, vector<vector<signed char>>& Outputs1m, s
 		t2++;
 
 		Weightsn = obj2.MiddleTeach(Weightsn, Outputs[i], delta1m[i], t1, alpha);
+		if(Weightsn[0] == 0)
+		{
+			Weightsn[0] = 1;
+		}
 
+		if (Weightsn[1] == 0)
+		{
+			Weightsn[1] = 1;
+		}
+
+
+		if (Weightsn[2] == 0)
+		{
+			Weightsn[2] = 1;
+		}
 		Weights1m[t3] = Weightsn[0];
 		t3++;
 		Weights1m[t3] = Weightsn[1];
