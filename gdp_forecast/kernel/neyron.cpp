@@ -160,7 +160,7 @@ using namespace std;
 
 
 	 }
-
+	 i = vzveshney.size();
 	 int64_t  t21i = t2i / i;
 	 t2 = (signed char)t21i;
 
@@ -213,7 +213,7 @@ using namespace std;
 
 
 	 }
-
+	 i = weight.size();
 	 int64_t  t21i = t2i / i;
 	 t2 = (signed char)t21i;
 

@@ -91,7 +91,7 @@ int main()
 	obj4.nvidiadata();
 #endif
 
-	cout << "\033[31m      WELCOME TO" << endl;
+	cout << "\033[31m      WELCOME TO 1.2.0" << endl;
 	Other objh;
 	
 

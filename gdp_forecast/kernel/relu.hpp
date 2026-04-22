@@ -62,7 +62,7 @@ vector<signed char> Relu::reluvp(vector<signed char>& reluinv)
 signed char Relu::reludivp(const signed char& reludivin)
 {
 	if (reludivin > 0) return 100;
-	else return 5; //0
+	else return -5; //0
 
 
 }
@@ -75,7 +75,7 @@ vector<signed char> Relu::reluvp(vector<signed char> reludivinv)
 	for (int64_t i = 0; i < t0; i++)
 
 	{
-		if (reludivinv[i] < 0) reludivinv[i] = 5; //0;
+		if (reludivinv[i] < 0) reludivinv[i] = -5; //0;
 
 	}
 
@@ -105,7 +105,7 @@ vector <signed char> Relu::reluvm(vector <signed char>& reluinv)
 	for (int64_t i = 0; i < t0; i++)
 
 	{
-		if (reluinv[i] >= 0) reluinv[i] = -5;//0;
+		if (reluinv[i] >= 0) reluinv[i] = 5;//0;
 
 	}
 
@@ -117,8 +117,8 @@ vector <signed char> Relu::reluvm(vector <signed char>& reluinv)
 
 signed char Relu::reludivm(const signed char& reludivin)
 {
-	if (reludivin < 0) return 1;
-	else return 0; //0
+	if (reludivin < 0) return 100;
+	else return 5; //0
 
 
 }
@@ -131,7 +131,7 @@ vector <signed char> Relu::reluvm(vector <signed char> reludivinv)
 	for (int64_t i = 0; i < t0; i++)
 
 	{
-		if (reludivinv[i] >= 0) reludivinv[i] = -5; //0;
+		if (reludivinv[i] >= 0) reludivinv[i] = 5; //0;
 
 	}
 
