@@ -79,7 +79,7 @@ void layer2m::weightsaddl12m(vector<vector<signed char>>& Weights2m, int64_t ney
 
 
 	
-	signed char t1 = 0;
+	signed char t1 = 1;
 	int64_t t4 = ney1 - t0;
 
 	
@@ -98,7 +98,7 @@ void layer2m::weightsaddl12m(vector<vector<signed char>>& Weights2m, int64_t ney
 			
 		
 			if (t1 >= 5 && a == 0) {
-				Weights2m[i].push_back(t1); t1 = 0; a = 1;
+				Weights2m[i].push_back(t1); t1 = 1; a = 1;
 			}
 
 			

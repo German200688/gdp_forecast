@@ -81,7 +81,7 @@ void layer4m::weightsaddl34m(vector<vector<signed char>>& Weights4m, int64_t ney
 
 
 
-	signed char t1 = 0;
+	signed char t1 = 1;
 	int64_t t4 = ney1 - t0;
 
 
@@ -100,7 +100,7 @@ void layer4m::weightsaddl34m(vector<vector<signed char>>& Weights4m, int64_t ney
 
 
 			if (t1 >= 5 && a == 0) {
-				Weights4m[i].push_back(t1); t1 = 0; a = 1;
+				Weights4m[i].push_back(t1); t1 = 1; a = 1;
 			}
 
 
