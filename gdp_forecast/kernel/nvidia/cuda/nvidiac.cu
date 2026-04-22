@@ -32,7 +32,7 @@ __constant__ signed char n1 = -10;
 
 
 
-__global__ void finplussdelm(signed char ab, signed char* dvec_a4, signed char* dvec_b4, int size, signed char* dvec_c4)
+__global__ void finplussdelm(signed char ab, signed char* dvec_a4, signed char* dvec_b4, int size, signed char* dvec_c4, signed char alpha)
 
 {
 
@@ -44,7 +44,7 @@ __global__ void finplussdelm(signed char ab, signed char* dvec_a4, signed char* 
 	else {
 		int m1 = ab;
 		int m2 = dvec_b4[th0];
-		int m3 = m1 * m2;
+		int m3 = m1 * m2 * alpha;
 		m3 = m3 / 100;
 		if (m3 > 120) m3 = 120;
 		if (m3 < -120) m3 = -120;
@@ -54,7 +54,7 @@ __global__ void finplussdelm(signed char ab, signed char* dvec_a4, signed char* 
 }
 
 
-__global__ void finplussdel(signed char ab, signed char* dvec_a4, signed char* dvec_b4, int size, signed char* dvec_c4)
+__global__ void finplussdel(signed char ab, signed char* dvec_a4, signed char* dvec_b4, int size, signed char* dvec_c4, signed char alpha)
 
 {
 
@@ -64,11 +64,11 @@ __global__ void finplussdel(signed char ab, signed char* dvec_a4, signed char* d
 
 	if (th0 > size - 1) return;
 
-	if (size <= 0) { dvec_c4[th0] = 0; return; }
+	if (size <= 0) { dvec_c4[th0] = -5; return; }
 	else {
 	int m1 = ab;
 	int m2 = dvec_b4[th0];
-	int m3 = m1 * m2;
+	int m3 = m1 * m2 * alpha;
 	m3 = m3 / 100;
 	if (m3 > 120) m3 = 120;
 	if (m3 < -120) m3 = -120;
@@ -181,16 +181,16 @@ __global__ void minussspm(signed char* am, signed char bm, signed char* e2, int 
 
 
 
-__global__ void multttmrelp(signed char amul, signed char* bmul, signed char* rel, signed char* m4, int N)
+__global__ void multttmrelp(signed char amul, signed char* bmul, signed char* rel, signed char* m4, int N, signed char alpha)
 {
 	
 	int th0 = blockIdx.x * blockDim.x + threadIdx.x;
 	if (th0 > N - 1) return;
-	if (rel <= 0) { m4[th0] = 0;  return;}
+	if (rel <= 0) { m4[th0] = -5;  return;}
 	else {
 		int m1 = amul;
 		int m2 = bmul[th0];
-		int m3 = m1 * m2;
+		int m3 = m1 * m2 * alpha;
 		m3 = m3 / 100;
 		if (m3 > 120) m3 = 120;
 		if (m3 < -120) m3 = -120;
@@ -205,7 +205,7 @@ __global__ void multttmrelm1(signed char amul, signed char* bmul, signed char* r
 
 	int th0 = blockIdx.x * blockDim.x + threadIdx.x;
 	if (th0 > N - 1) return;
-	if (rel[th0] <= 0) m4[th0] = 0;
+	if (rel[th0] <= 0) m4[th0] = -5;
 	else {
 		int m1 = amul;
 		int m2 = bmul[th0];
@@ -333,6 +333,7 @@ void nvidiac::deltaMiddlema(int64_t& Weightslsize, signed char*& Weightsl, signe
 {
 	int64_t t_block = 1;
 	int64_t t_thread = 512;
+	signed char alpha1 = 7;
 	// определяю блоки Weightslsize - не более 1 500 000 
 	if (Weightslsize < 512) { t_block = 1;}
 	else
@@ -351,7 +352,7 @@ void nvidiac::deltaMiddlema(int64_t& Weightslsize, signed char*& Weightsl, signe
 	cudaMemcpy(dvec_a1, Weightsl, Weightslsize * sizeof(signed char), cudaMemcpyHostToDevice);
 	cudaMemcpy(dvec_b1, Outputs, Weightslsize * sizeof(signed char), cudaMemcpyHostToDevice);
 
-	multttmrelp << < t_block, t_thread >> > (deltal, dvec_a1, dvec_b1, dvec_c1, Weightslsize);
+	multttmrelp << < t_block, t_thread >> > (deltal, dvec_a1, dvec_b1, dvec_c1, Weightslsize, alpha1);
 
 	cudaMemcpy(delta, dvec_c1, Weightslsize * sizeof(signed char), cudaMemcpyDeviceToHost);
 
@@ -430,6 +431,7 @@ void nvidiac::deltafimanma4(signed char*& delta, signed char& delta1, int64_t& s
 	
 	int64_t t_block = 1;
 	int64_t t_thread = 512;
+	signed char alpha3 = 7;
 	// определяю блоки size - не более 1 500 000 
 	if (size < 512) { t_block = 1; }
 	else
@@ -446,7 +448,7 @@ void nvidiac::deltafimanma4(signed char*& delta, signed char& delta1, int64_t& s
 	cudaMemcpy(dvec_a4, Outputs, size * sizeof(signed char), cudaMemcpyHostToDevice);
 	//cudaMemcpy(ab, &delta1, sizeof(signed char), cudaMemcpyHostToDevice);
 
-	finplussdel << < 1, 512 >> > (delta1, dvec_a4, dvec_b4, size, dvec_c4);
+	finplussdel << < 1, 512 >> > (delta1, dvec_a4, dvec_b4, size, dvec_c4, alpha3);
 
 
 	cudaMemcpy(delta, dvec_c4, size * sizeof(signed char), cudaMemcpyDeviceToHost);
@@ -463,6 +465,7 @@ void nvidiac::deltafimanmam4(signed char*& delta, signed char& delta1, int64_t& 
 	
 	int64_t t_block = 1;
 	int64_t t_thread = 512;
+	signed char alpha3 = 7;
 	// определяю блоки size - не более 1 500 000 
 	if (size < 512) { t_block = 1; }
 	else
@@ -479,7 +482,7 @@ void nvidiac::deltafimanmam4(signed char*& delta, signed char& delta1, int64_t& 
 	cudaMemcpy(dvec_a4, Outputs, size * sizeof(signed char), cudaMemcpyHostToDevice);
 	//cudaMemcpy(ab, &delta1, sizeof(signed char), cudaMemcpyHostToDevice);
 
-	finplussdelm << < t_block, t_thread >> > (delta1, dvec_a4, dvec_b4, size, dvec_c4);
+	finplussdelm << < t_block, t_thread >> > (delta1, dvec_a4, dvec_b4, size, dvec_c4, alpha3);
 
 
 	cudaMemcpy(delta, dvec_c4, size * sizeof(signed char), cudaMemcpyDeviceToHost);

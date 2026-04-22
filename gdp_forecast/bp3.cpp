@@ -124,7 +124,7 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 	
 	//"Расчет весов для 2-го отрицательного слоя:"
 	obj41.summneyquoter2m(Count, Outputs1m, Weights2m, Outputs2m, qy2);
-
+/*
 	// "Данные идущие на вход 3-го положительного слоя:"
 
 	obj4.summneyquoter2(Count, Outputs1, Weights2, Outputs2, qy2);
@@ -132,7 +132,7 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 	// "Данные идущие на вход 3-го отрицательного слоя:"
 
 	obj41.summneyquoter2m(Count, Outputs1m, Weights2m, Outputs2m, qy2);
-
+*/
 	// "Расчет весов 3-го положительного слоя:"
 	obj5.summneyquoter3(Count, Outputs2, Weights3, Outputs3, qy2);
 

@@ -100,7 +100,7 @@ using namespace std;
 
 	 signed char igres;
 	 signed char ipres;
-	 signed char alpha = 100;
+	 signed char alpha = 7;
 
 	 igres = weight1[ig];
 	 ipres = weight1[ip];
@@ -145,7 +145,7 @@ using namespace std;
 
 	 }
 	 signed char t2 = 0;
-
+	 int64_t t2i = 0;
 	 i = vzveshney.size() - 1;
 
 
@@ -154,11 +154,15 @@ using namespace std;
 
 		 signed char t5 = neyronin[i];
 		 signed char t6 = weight[i];
-		 t2 = obj.plusss(t2, vzveshney[i]);
+		 t2i = t2i + int64_t(vzveshney[i]);
+		 //t2 = obj.plusss(t2, vzveshney[i]);
 		 i--;
 
 
 	 }
+
+	 int64_t  t21i = t2i / i;
+	 t2 = (signed char)t21i;
 
 	 return (t2);
 
@@ -194,7 +198,7 @@ using namespace std;
 
 	 }
 	 signed char t2 = 0;
-
+	 int64_t t2i = 0;
 	 i = vzveshney.size() - 1;
 
 
@@ -203,11 +207,15 @@ using namespace std;
 
 		 signed char t5 = neyronin[i];
 		 signed char t6 = weight[i];
-		 t2 = obj.plusss(t2, vzveshney[i]);
+		 t2i = t2i + int64_t(vzveshney[i]);
+		// t2 = obj.plusss(t2, vzveshney[i]);
 		 i--;
 
 
 	 }
+
+	 int64_t  t21i = t2i / i;
+	 t2 = (signed char)t21i;
 
 	 return (t2);
 
@@ -322,13 +330,13 @@ using namespace std;
 	 int64_t t1 = Outputs2[Quoter].size();
 	 int64_t t10 = Outputs2.size();
 
-	 signed char alpha3 = 100;
+	 signed char alpha3 = 7;
 
 	 for (int64_t i = 0; i < t1; i++)
 	 {
 		 signed char t2 = obj.multtt(Outputs2[Quoter][i], delta);
 		 signed char t3 = obj.multtt(t2, alpha3);
-		 signed char t11 = obj.minusss(Weights3[0][i], t2);
+		 signed char t11 = obj.minusss(Weights3[0][i], t3);
 		 if (t11 == 0) {
 			 t11 = 1;
 		 }
@@ -345,6 +353,9 @@ using namespace std;
 	 Relu obj;
 	 Signch obj1;
 	 signed char deltaraw = 0;
+	 signed char deltaraw1 = 0;
+	 signed char alpha3 = 7;
+
 	 if (obj.reludivp(Outputs) == 0) { return 0; }
 	 else
 	 {
@@ -436,10 +447,11 @@ using namespace std;
  }
 
 
- vector<signed char > Neyron::MiddleTeach(vector<signed char >& Weights, signed char& Output, signed char& delta, int64_t& size, signed char& alpha)
+ vector<signed char > Neyron::MiddleTeach(vector<signed char >& Weights, signed char& Output, signed char& delta, int64_t& size, signed char& alpha1)
  {
 	 Relu obj;
 	 Signch obj1;
+	 signed char alpha = 7;
 
 	 for (int64_t i1 = 0; i1 < size; i1++)
 	 {
@@ -447,8 +459,9 @@ using namespace std;
 		 signed char t1 = obj1.multtt(Output, delta);
 		 signed char t2 = obj1.multtt(t1, alpha);
 		 if (t2 == 0) { t2 = 1; }
-		 Weights[i1] = obj1.minusss(Weights[i1], t1);
-		// Weights[i1] = obj1.multtt(Weights[i1], alpha);
+		 signed char t20 = obj1.minusss(Weights[i1], t2);
+		 if (t20 == 0) { Weights[i1] = 1; }
+		 else Weights[i1] = t20;
 
 			
 

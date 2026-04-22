@@ -261,7 +261,7 @@ void layer1::teachdel1(vector<signed char >& delta2, int64_t& Quoter, vector<vec
 	int64_t t2 = Outputs1[Quoter].size();
 	int64_t t1 = delta2.size();
 
-	signed char alpha = 100;
+	signed char alpha = 7;
 	int64_t t9 = Weights2.size();
 
 	for (int64_t i1 = 0; i1 < t2; i1++)
@@ -300,7 +300,7 @@ void layer1::teachdel1ma(vector<signed char >& delta2, int64_t& Quoter, vector<v
 
 	int64_t t1 = delta2.size();
 
-	signed char alpha = 100;
+	signed char alpha = 7;
 
 
 

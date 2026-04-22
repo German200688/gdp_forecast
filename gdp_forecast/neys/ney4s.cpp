@@ -277,7 +277,7 @@ void layer4::teachdel4(vector<signed char >& delta5, int64_t& Quoter, vector<vec
 	int64_t t1 = delta5.size();
 	int64_t t2 = Outputs4[Quoter].size();
 	signed char delta1 = delta5[0];
-	signed char alpha = 100;
+	signed char alpha = 7;
 
 	for (int64_t i1 = 0; i1 < t2; i1++)
 	{
@@ -312,7 +312,7 @@ void layer4::teachdel4ma(vector<signed char >& delta5, int64_t& Quoter, vector<v
 	int64_t t1 = delta5.size();
 	int64_t t2 = Outputs4[Quoter].size();
 	signed char delta1 = delta5[0];
-	signed char alpha = 100;
+	signed char alpha = 7;
 
 	obj2.deltafimanma4(delta, delta1, t0, Outputs, Weightsl, dvec_a4, dvec_b4, dvec_c4, ab);
 
