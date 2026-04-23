@@ -64,7 +64,7 @@ __global__ void finplussdel(signed char ab, signed char* dvec_a4, signed char* d
 
 	if (th0 > size - 1) return;
 
-	if (size <= 0) { dvec_c4[th0] = -5; return; }
+	if (size <= 0) { dvec_c4[th0] = 5; return; }
 	else {
 	int m1 = ab;
 	int m2 = dvec_b4[th0];
@@ -186,7 +186,7 @@ __global__ void multttmrelp(signed char amul, signed char* bmul, signed char* re
 	
 	int th0 = blockIdx.x * blockDim.x + threadIdx.x;
 	if (th0 > N - 1) return;
-	if (rel <= 0) { m4[th0] = -5;  return;}
+	if (rel <= 0) { m4[th0] = 5;  return;}
 	else {
 		int m1 = amul;
 		int m2 = bmul[th0];
@@ -205,7 +205,7 @@ __global__ void multttmrelm1(signed char amul, signed char* bmul, signed char* r
 
 	int th0 = blockIdx.x * blockDim.x + threadIdx.x;
 	if (th0 > N - 1) return;
-	if (rel[th0] <= 0) m4[th0] = -5;
+	if (rel[th0] <= 0) m4[th0] = 5;
 	else {
 		int m1 = amul;
 		int m2 = bmul[th0];

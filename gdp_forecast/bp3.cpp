@@ -114,7 +114,7 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 	
 	// "Данные идущие на вход второго отрицательного слоя:" 
 
-	obj21.summneyquoter1m(Count, Cash1, Weights1m, Outputs1m, qy2, indicators);
+	//obj21.summneyquoter1m(Count, Cash1, Weights1m, Outputs1m, qy2, indicators);
 
 	
 
@@ -123,7 +123,7 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 
 	
 	//"Расчет весов для 2-го отрицательного слоя:"
-	obj41.summneyquoter2m(Count, Outputs1m, Weights2m, Outputs2m, qy2);
+	//obj41.summneyquoter2m(Count, Outputs1m, Weights2m, Outputs2m, qy2);
 /*
 	// "Данные идущие на вход 3-го положительного слоя:"
 
@@ -137,7 +137,7 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 	obj5.summneyquoter3(Count, Outputs2, Weights3, Outputs3, qy2);
 
 	// "Расчет весов 3-го отрицательного слоя:"
-	obj51.summneyquoter3m(Count, Outputs2m, Weights3m, Outputs3m, qy2);
+	//obj51.summneyquoter3m(Count, Outputs2m, Weights3m, Outputs3m, qy2);
 
 	
 
@@ -148,7 +148,7 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 	
 
 	//"Рассчет весов 4-го отрицателльного слоя:"
-	obj441.summneyquoter4m(Count, Outputs3m, Weights4m, Outputs4m, qy2);
+	//obj441.summneyquoter4m(Count, Outputs3m, Weights4m, Outputs4m, qy2);
 
 
 
@@ -157,11 +157,12 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 	cout << int(result1) << endl;
 
 	//рассчет результата 5го слоя отрицительного
-	result2 = weightsumm(Weights5m, Outputs4m, qy2);
-	cout << int(result2) << endl;
+	//result2 = weightsumm(Weights5m, Outputs4m, qy2);
+	//cout << int(result2) << endl;
 
-	if (std::abs(static_cast<int64_t>(result1)) > std::abs(static_cast<int64_t>(result2))) result = result1;
-	else result = result2;
+	//if (std::abs(static_cast<int64_t>(result1)) > std::abs(static_cast<int64_t>(result2))) result = result1;
+	//else 
+		result = result1;
 	
 
 	printerrr(result);

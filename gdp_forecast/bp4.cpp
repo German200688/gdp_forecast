@@ -103,7 +103,7 @@ void teachquoterm(int64_t& Quoter1, signed char& result1, signed char& result2, 
 	}
 #endif
 
-	teachdel3(result2, incr4, delta5m);
+	//teachdel3(result2, incr4, delta5m);
 	
 
 	obj7.teachdel4ma(delta5, Quoter, Weights5, Weights4, Outputs4, delta4, dvec_a4, dvec_b4, dvec_c4, ab);
@@ -119,7 +119,7 @@ void teachquoterm(int64_t& Quoter1, signed char& result1, signed char& result2, 
 	}
 #endif
 
-	obj71.teachdel4mam(delta5m, Quoter, Weights5m, Weights4m, Outputs4m, delta4m, dvec_a4, dvec_b4, dvec_c4, ab);
+	//obj71.teachdel4mam(delta5m, Quoter, Weights5m, Weights4m, Outputs4m, delta4m, dvec_a4, dvec_b4, dvec_c4, ab);
 
 
 	obj6.teachdel3(delta4, Quoter, Weights4, Weights3, Outputs3, delta3);
@@ -134,7 +134,7 @@ void teachquoterm(int64_t& Quoter1, signed char& result1, signed char& result2, 
 	}
 #endif
 
-	obj61.teachdel3m(delta4m, Quoter, Weights4m, Weights3m, Outputs3m, delta3m);
+	//obj61.teachdel3m(delta4m, Quoter, Weights4m, Weights3m, Outputs3m, delta3m);
 
 	obj4.teachdel2(delta3, Quoter, Weights3, Weights2, Outputs2, delta2);
 
@@ -148,7 +148,7 @@ void teachquoterm(int64_t& Quoter1, signed char& result1, signed char& result2, 
 	}
 #endif
 
-	obj41.teachdel2m(delta3m, Quoter, Weights3m, Weights2m, Outputs2m, delta2m);
+	//obj41.teachdel2m(delta3m, Quoter, Weights3m, Weights2m, Outputs2m, delta2m);
 
 	obj5.teachdel1(delta2, Quoter, Weights2, Weights1, Outputs1, delta1);
 
@@ -162,7 +162,7 @@ void teachquoterm(int64_t& Quoter1, signed char& result1, signed char& result2, 
 	}
 #endif
 
-	obj51.teachdel1m(delta2m, Quoter, Weights2m, Weights1m, Outputs1m, delta1m);
+	//obj51.teachdel1m(delta2m, Quoter, Weights2m, Weights1m, Outputs1m, delta1m);
 
 	//Считаем веса
 	teachlayer3(Weights5, Quoter, Outputs4, delta5);
@@ -176,7 +176,7 @@ void teachquoterm(int64_t& Quoter1, signed char& result1, signed char& result2, 
 	}
 #endif
 
-	teachlayer3(Weights5m, Quoter, Outputs4m, delta5m);
+	//teachlayer3(Weights5m, Quoter, Outputs4m, delta5m);
 	
 	/*
 	// "Рассчет данных 4-го положительного слоя:" 
@@ -193,7 +193,7 @@ void teachquoterm(int64_t& Quoter1, signed char& result1, signed char& result2, 
 	
 	// "Рассчет данных 4-го отрицательного слоя:" 
 
-	obj71.teach4mam(Quoter, Outputs4m, alpha, Weights4m, delta4m, vec_a4, vec_b4);
+	//obj71.teach4mam(Quoter, Outputs4m, alpha, Weights4m, delta4m, vec_a4, vec_b4);
 	
 	
 	// "РАссчет весов 3-го положительного слоя:"
@@ -202,7 +202,7 @@ void teachquoterm(int64_t& Quoter1, signed char& result1, signed char& result2, 
 
 	// "Рассчет весов 3-го отрицательного слоя:" << endl;
 
-	obj61.teach3mam(Quoter, Outputs3m, alpha, Weights3m, delta3m, vec_a23, vec_b23);
+	//obj61.teach3mam(Quoter, Outputs3m, alpha, Weights3m, delta3m, vec_a23, vec_b23);
 	
 	/*
 
@@ -224,7 +224,7 @@ void teachquoterm(int64_t& Quoter1, signed char& result1, signed char& result2, 
 
 	// "Веса 2-го отрицательного слоя:" << endl;
 
-	obj41.teach2mam(Quoter, Outputs2m, alpha, Weights2m, delta2m, vec_a23, vec_b23);
+	//obj41.teach2mam(Quoter, Outputs2m, alpha, Weights2m, delta2m, vec_a23, vec_b23);
 	
 	/*
 	// "Веса 2-го положительного слоя:" << endl;
@@ -243,7 +243,7 @@ void teachquoterm(int64_t& Quoter1, signed char& result1, signed char& result2, 
 
 	// "Веса первого отрицательного слоя:" 
 
-	obj51.teach1m(Quoter, Outputs1m, alpha, Weights1m, delta1m);
+	//obj51.teach1m(Quoter, Outputs1m, alpha, Weights1m, delta1m);
 	
 
 
