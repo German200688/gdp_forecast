@@ -19,12 +19,13 @@ using namespace std;
 int main()
 {
 	SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS);
-	/*
+	
 	HANDLE Thread0 = GetCurrentThread();
 	DWORD_PTR MyThread0 = 0x02;
 	DWORD_PTR previousMask = SetThreadAffinityMask(Thread0, MyThread0);
-	*/
+	
 	//setlocale(LC_ALL, "RU");
+	
 	locale::global(locale("ru_RU.UTF-8"));
 	system("chcp 65001");
 	SetConsoleOutputCP(CP_UTF8);
@@ -33,32 +34,32 @@ int main()
 	nvidia obj4;
 	mutex offlinethread;
 	vector<string> indicators = {}; //параметры
-	vector<signed char> TheoWeights = {}; //весы индикаторов
+	vector<double> TheoWeights = {}; //весы индикаторов
 	vector<vector<double>> indicatDate = {}; //данные индикатора
-	vector<vector<signed char>> indicatDateInc = {}; //прирост за квартал
+	vector<vector<double>> indicatDateInc = {}; //прирост за квартал
 	vector<int64_t> Count = {}; //служебный
-	vector<vector<signed char>> Cash1; //драфтовые параметры
-	vector<signed char> Weights1; //слой
-	vector<vector<signed char>> Weights2; //слой
-	vector<vector<signed char>> Weights3; //слой
-	vector<vector<signed char>> Weights4; //слой
-	vector<vector<signed char>> Weights5; //слой
-	vector<vector<signed char>> Outputs1; // исходы
-	vector<vector<signed char>> Outputs2; // исходы
-	vector<vector<signed char>> Outputs3; // исходы
-	vector<vector<signed char>> Outputs4; // исходы
-	vector<signed char> Weights1m; //слой
-	vector<vector<signed char>> Weights2m; //слой
-	vector<vector<signed char>> Weights3m; //слой
-	vector<vector<signed char>> Weights4m; //слой
-	vector<vector<signed char>> Weights5m; //слой
-	vector<vector<signed char>> Outputs1m; // исходы
-	vector<vector<signed char>> Outputs2m; // исходы
-	vector<vector<signed char>> Outputs3m; // исходы
-	vector<vector<signed char>> Outputs4m; // исходы
+	vector<vector<double>> Cash1; //драфтовые параметры
+	vector<double> Weights1; //слой
+	vector<vector<double>> Weights2; //слой
+	vector<vector<double>> Weights3; //слой
+	vector<vector<double>> Weights4; //слой
+	vector<vector<double>> Weights5; //слой
+	vector<vector<double>> Outputs1; // исходы
+	vector<vector<double>> Outputs2; // исходы
+	vector<vector<double>> Outputs3; // исходы
+	vector<vector<double>> Outputs4; // исходы
+	vector<double> Weights1m; //слой
+	vector<vector<double>> Weights2m; //слой
+	vector<vector<double>> Weights3m; //слой
+	vector<vector<double>> Weights4m; //слой
+	vector<vector<double>> Weights5m; //слой
+	vector<vector<double>> Outputs1m; // исходы
+	vector<vector<double>> Outputs2m; // исходы
+	vector<vector<double>> Outputs3m; // исходы
+	vector<vector<double>> Outputs4m; // исходы
 
 	string linkfile = "";
-	signed char alpha = 100;
+	double alpha = 100;
 	int64_t iterationney = 1;
 	int64_t iteration = 1;
 
@@ -68,11 +69,12 @@ int main()
 	linkfile = configf["linkfile:"];
 	string alphas = configf["alpha:"];
 	int64_t alphai = stoi(alphas);
-	alpha = static_cast<signed char>(alphai);
+	alpha = static_cast<double>(alphai);
 	string iterationneys = configf["iterationney:"];
 	iterationney = stoi(iterationneys);
 	string iterationst = configf["iteration:"];
 	iteration = stoi(iterationst);
+	
 
 	beginfile(indicators, TheoWeights, indicatDate, indicatDateInc, Cash1, Count, Weights1, Outputs1, Weights2, Outputs2, Outputs3, Outputs4, Weights3, Weights4, Weights5,
 		Weights1m,
@@ -86,6 +88,8 @@ int main()
 		Outputs4m,
 		linkfile
 		);
+		
+	
 #ifdef _DEBUG
 	
 	obj4.nvidiadata();
@@ -114,6 +118,7 @@ int main()
 		iteration
 		
 		);
+		
 	cout << "Идет процесс сохранения данных. Пожалуйста дождитесь окончания..." << endl;
 
 	endfile(indicators, TheoWeights, indicatDate, indicatDateInc, Cash1, Count, Weights1, Outputs1, Weights2, Outputs2, Outputs3, Weights3, Outputs4, Weights4, Weights5,

@@ -23,16 +23,16 @@
 
 using namespace std;
 #ifdef _DEBUG 
-void calcgdpt(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<signed char>& TheoWeights, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<signed char> Weights1, vector<int64_t>& Count, vector<vector<signed char>>& Outputs1, vector<vector<signed char>>& Weights2, vector<vector<signed char>>& Outputs2, int64_t& Quoter, vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Outputs3, vector<vector<signed char>>& Weights4, vector<vector<signed char>>& Outputs4, vector<vector<signed char>>& Weights5, signed char& result1, signed char& result2, signed char& result,
-	vector<signed char>& Weights1m,
-	vector<vector<signed char>>& Weights2m,
-	vector<vector<signed char>>& Weights3m,
-	vector<vector<signed char>>& Weights4m,
-	vector<vector<signed char>>& Weights5m,
-	vector<vector<signed char>>& Outputs1m,
-	vector<vector<signed char>>& Outputs2m,
-	vector<vector<signed char>>& Outputs3m,
-	vector<vector<signed char>>& Outputs4m
+void calcgdpt(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<double>& TheoWeights, vector<vector<double>>& indicatDateInc, vector<vector<double>>& Cash1, vector<double> Weights1, vector<int64_t>& Count, vector<vector<double>>& Outputs1, vector<vector<double>>& Weights2, vector<vector<double>>& Outputs2, int64_t& Quoter, vector<vector<double>>& Weights3, vector<vector<double>>& Outputs3, vector<vector<double>>& Weights4, vector<vector<double>>& Outputs4, vector<vector<double>>& Weights5, double& result1, double& result2, double& result,
+	vector<double>& Weights1m,
+	vector<vector<double>>& Weights2m,
+	vector<vector<double>>& Weights3m,
+	vector<vector<double>>& Weights4m,
+	vector<vector<double>>& Weights5m,
+	vector<vector<double>>& Outputs1m,
+	vector<vector<double>>& Outputs2m,
+	vector<vector<double>>& Outputs3m,
+	vector<vector<double>>& Outputs4m
 	)
 {
 	
@@ -116,7 +116,7 @@ void calcgdpt(vector<string>& indicators, vector<vector<double>>& indicatDate, v
 
 	for (int64_t i = 0; i < q3; i++)
 	{
-		signed char in0 = Cash1[i][qy];
+		double in0 = Cash1[i][qy];
 		int64_t in1 = int64_t(in0);
 		in1 = in1 * 2; //нивелируем шаг
 		double in2 = in1;
@@ -132,7 +132,7 @@ void calcgdpt(vector<string>& indicators, vector<vector<double>>& indicatDate, v
 
 	for (int64_t i = 0; i < t100; i++)
 	{
-		signed char in0 = Weights1[i];
+		double in0 = Weights1[i];
 		int64_t in1 = int64_t(in0);
 		std::cout << i << "    " << in1 << "%;" << endl;
 
@@ -145,7 +145,7 @@ void calcgdpt(vector<string>& indicators, vector<vector<double>>& indicatDate, v
 
 	for (int64_t i = 0; i < t1001; i++)
 	{
-		signed char in0 = Weights1m[i];
+		double in0 = Weights1m[i];
 		int64_t in1 = int64_t(in0);
 		std::cout << i << "    " << in1 << "%;" << endl;
 
@@ -198,7 +198,7 @@ void calcgdpt(vector<string>& indicators, vector<vector<double>>& indicatDate, v
 
 		for (int64_t i = 0; i < t102; i++)
 		{
-			signed char in0 = Weights2[i1][i];
+			double in0 = Weights2[i1][i];
 			int64_t in1 = int64_t(in0);
 			std::cout << i << "    " << in1 << "%;" << endl;
 
@@ -222,7 +222,7 @@ void calcgdpt(vector<string>& indicators, vector<vector<double>>& indicatDate, v
 
 		for (int64_t i = 0; i < t1021; i++)
 		{
-			signed char in0 = Weights2m[i1][i];
+			double in0 = Weights2m[i1][i];
 			int64_t in1 = int64_t(in0);
 			std::cout << i << "    " << in1 << "%;" << endl;
 
@@ -275,7 +275,7 @@ void calcgdpt(vector<string>& indicators, vector<vector<double>>& indicatDate, v
 
 		for (int64_t i = 0; i < t112; i++)
 		{
-			signed char in0 = Weights3[i1][i];
+			double in0 = Weights3[i1][i];
 			int64_t in1 = int64_t(in0);
 			std::cout << i << "    " << in1 << "%;" << endl;
 
@@ -298,7 +298,7 @@ void calcgdpt(vector<string>& indicators, vector<vector<double>>& indicatDate, v
 
 		for (int64_t i = 0; i < t1121; i++)
 		{
-			signed char in0 = Weights3m[i1][i];
+			double in0 = Weights3m[i1][i];
 			int64_t in1 = int64_t(in0);
 			std::cout << i << "    " << in1 << "%;" << endl;
 
@@ -349,7 +349,7 @@ void calcgdpt(vector<string>& indicators, vector<vector<double>>& indicatDate, v
 
 		for (int64_t i = 0; i < t125; i++)
 		{
-			signed char in0 = Weights4[i1][i];
+			double in0 = Weights4[i1][i];
 			int64_t in1 = int64_t(in0);
 			std::cout << i << "    " << in1 << "%;" << endl;
 
@@ -373,7 +373,7 @@ void calcgdpt(vector<string>& indicators, vector<vector<double>>& indicatDate, v
 
 		for (int64_t i = 0; i < t1251; i++)
 		{
-			signed char in0 = Weights4m[i1][i];
+			double in0 = Weights4m[i1][i];
 			int64_t in1 = int64_t(in0);
 			std::cout << i << "    " << in1 << "%;" << endl;
 
@@ -420,7 +420,7 @@ void calcgdpt(vector<string>& indicators, vector<vector<double>>& indicatDate, v
 	result2 = weightsumm(Weights5m, Outputs4m, Quoter);
 	cout << "Результат 5-го отрицательного слоя: " << int64_t(result2) << endl;
 
-	//signed char r = result1 + result2;
+	//double r = result1 + result2;
 
 	if (std::abs(static_cast<int64_t>(result1)) > std::abs(static_cast<int64_t>(result2))) result = result1;
 	else result = result2;
@@ -433,16 +433,16 @@ void calcgdpt(vector<string>& indicators, vector<vector<double>>& indicatDate, v
 
 
 #ifdef _DEBUG 
-void teacher(int64_t& Quoter, signed char& result1, signed char& result2, signed char& result, vector<vector<signed char>>& Weights5, vector<vector<signed char>>& Weights4, vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Weights2, vector<signed char>& Weights1, vector<vector<signed char>>& Outputs4, vector<vector<signed char>>& Outputs3, vector<vector<signed char>>& Outputs2, vector<vector<signed char>>& Outputs1, signed char alpha, string dateraw,
-	vector<signed char>& Weights1m,
-	vector<vector<signed char>>& Weights2m,
-	vector<vector<signed char>>& Weights3m,
-	vector<vector<signed char>>& Weights4m,
-	vector<vector<signed char>>& Weights5m,
-	vector<vector<signed char>>& Outputs1m,
-	vector<vector<signed char>>& Outputs2m,
-	vector<vector<signed char>>& Outputs3m,
-	vector<vector<signed char>>& Outputs4m
+void teacher(int64_t& Quoter, double& result1, double& result2, double& result, vector<vector<double>>& Weights5, vector<vector<double>>& Weights4, vector<vector<double>>& Weights3, vector<vector<double>>& Weights2, vector<double>& Weights1, vector<vector<double>>& Outputs4, vector<vector<double>>& Outputs3, vector<vector<double>>& Outputs2, vector<vector<double>>& Outputs1, double alpha, string dateraw,
+	vector<double>& Weights1m,
+	vector<vector<double>>& Weights2m,
+	vector<vector<double>>& Weights3m,
+	vector<vector<double>>& Weights4m,
+	vector<vector<double>>& Weights5m,
+	vector<vector<double>>& Outputs1m,
+	vector<vector<double>>& Outputs2m,
+	vector<vector<double>>& Outputs3m,
+	vector<vector<double>>& Outputs4m
 	)
 {
 	Other obj3;
@@ -456,16 +456,16 @@ void teacher(int64_t& Quoter, signed char& result1, signed char& result2, signed
 	layer2m obj41;
 	layer1m obj51;
 
-	vector<signed char > delta5;
-	vector<signed char > delta4;
-	vector<signed char > delta3;
-	vector<signed char > delta2;
-	vector<signed char > delta1;
-	vector<signed char > delta5m;
-	vector<signed char > delta4m;
-	vector<signed char > delta3m;
-	vector<signed char > delta2m;
-	vector<signed char > delta1m;
+	vector<double > delta5;
+	vector<double > delta4;
+	vector<double > delta3;
+	vector<double > delta2;
+	vector<double > delta1;
+	vector<double > delta5m;
+	vector<double > delta4m;
+	vector<double > delta3m;
+	vector<double > delta2m;
+	vector<double > delta1m;
 	
 	
 	
@@ -507,7 +507,7 @@ void teacher(int64_t& Quoter, signed char& result1, signed char& result2, signed
 		incr3 = -100;
 	}
 
-	signed char incr4 = static_cast<signed char>(incr3);
+	double incr4 = static_cast<double>(incr3);
 	std::cout << "incr3 = " << incr3 << endl;
 	std::cout << "incr4 = " << incr4 << endl;
 	std::cout << "Данные после обработки = " << int64_t(incr4) << endl;
@@ -678,7 +678,7 @@ void teacher(int64_t& Quoter, signed char& result1, signed char& result2, signed
 
 		for (int64_t i = 0; i < t1031; i++)
 		{
-			signed char in0 = Weights4[i1][i];
+			double in0 = Weights4[i1][i];
 			int64_t in1 = int64_t(in0);
 			std::cout << i << "    " << in1 << "%;" << endl;
 
@@ -707,7 +707,7 @@ void teacher(int64_t& Quoter, signed char& result1, signed char& result2, signed
 
 		for (int64_t i = 0; i < t10311; i++)
 		{
-			signed char in0 = Weights4m[i1][i];
+			double in0 = Weights4m[i1][i];
 			int64_t in1 = int64_t(in0);
 			std::cout << i << "    " << in1 << "%;" << endl;
 
@@ -734,7 +734,7 @@ void teacher(int64_t& Quoter, signed char& result1, signed char& result2, signed
 
 		for (int64_t i = 0; i < t102; i++)
 		{
-			signed char in0 = Weights3[i1][i];
+			double in0 = Weights3[i1][i];
 			int64_t in1 = int64_t(in0);
 			std::cout << i << "    " << in1 << "%;" << endl;
 
@@ -762,7 +762,7 @@ void teacher(int64_t& Quoter, signed char& result1, signed char& result2, signed
 
 		for (int64_t i = 0; i < t102111; i++)
 		{
-			signed char in0 = Weights3m[i1][i];
+			double in0 = Weights3m[i1][i];
 			int64_t in1 = int64_t(in0);
 			std::cout << i << "    " << in1 << "%;" << endl;
 
@@ -790,7 +790,7 @@ void teacher(int64_t& Quoter, signed char& result1, signed char& result2, signed
 
 		for (int64_t i = 0; i < t122; i++)
 		{
-			signed char in0 = Weights2[i1][i];
+			double in0 = Weights2[i1][i];
 			int64_t in1 = int64_t(in0);
 			std::cout << i << "    " << in1 << "%;" << endl;
 
@@ -816,7 +816,7 @@ void teacher(int64_t& Quoter, signed char& result1, signed char& result2, signed
 
 		for (int64_t i = 0; i < t1221; i++)
 		{
-			signed char in0 = Weights2m[i1][i];
+			double in0 = Weights2m[i1][i];
 			int64_t in1 = int64_t(in0);
 			std::cout << i << "    " << in1 << "%;" << endl;
 
@@ -833,7 +833,7 @@ void teacher(int64_t& Quoter, signed char& result1, signed char& result2, signed
 
 	for (int64_t i = 0; i < t100; i++)
 	{
-		signed char in0 = Weights1[i];
+		double in0 = Weights1[i];
 		int64_t in1 = int64_t(in0);
 		std::cout << i << "    " << in1 << "%;" << endl;
 
@@ -848,7 +848,7 @@ void teacher(int64_t& Quoter, signed char& result1, signed char& result2, signed
 
 	for (int64_t i = 0; i < t1001; i++)
 	{
-		signed char in0 = Weights1m[i];
+		double in0 = Weights1m[i];
 		int64_t in1 = int64_t(in0);
 		std::cout << i << "    " << in1 << "%;" << endl;
 

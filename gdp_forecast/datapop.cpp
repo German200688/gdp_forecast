@@ -7,15 +7,15 @@
 
 
 
-void beginmatrix1sc(int64_t count1, int64_t vectcount1, vector<vector<signed char>>& date1, string& filename, const string& linkfile) //размер основного вектора, размер вложенного вектора, матрица 2мерная, корень файла
+void beginmatrix1sc(int64_t count1, int64_t vectcount1, vector<vector<double>>& date1, string& filename, const string& linkfile) //размер основного вектора, размер вложенного вектора, матрица 2мерная, корень файла
 {
 	
-	Filework<signed char> obj2;
+	Filework<double> obj2;
 	Filework<string> obj1;
 
 	for (int64_t i = 0; i < count1; i++)
 	{
-		vector<signed char> indicatDate1{};
+		vector<double> indicatDate1{};
 		
 		string i1 = to_string(i);
 		i1 = filename + i1;
@@ -28,7 +28,7 @@ void beginmatrix1sc(int64_t count1, int64_t vectcount1, vector<vector<signed cha
 			int64_t i3 = 0;
 			for (int64_t i3 = 0; i3 < vectcount1; i3++)
 			{
-				signed char a = 0;
+				double a = 0;
 				indicatDate1.push_back(a);
 
 			}
@@ -48,7 +48,7 @@ void beginmatrix1sc(int64_t count1, int64_t vectcount1, vector<vector<signed cha
 
 				while (i4 < vectcount1)
 				{
-					signed char a = 0;
+					double a = 0;
 					indicatDate1.push_back(a);
 					i4++;
 				}
@@ -70,12 +70,12 @@ void beginmatrix1sc(int64_t count1, int64_t vectcount1, vector<vector<signed cha
 
 }
 
-void beginmatrix2sc(vector<vector<signed char>>& WWW, string& filename, int64_t& count, const string& linkfile)
+void beginmatrix2sc(vector<vector<double>>& WWW, string& filename, int64_t& count, const string& linkfile)
 
 {
-	Filework<signed char> obj2;
+	Filework<double> obj2;
 
-	vector<signed char> W;
+	vector<double> W;
 	W = obj2.myfileread(filename, W, linkfile);
 	int64_t count12 = 0;
 	if (W.size() == 0) {}
@@ -87,7 +87,7 @@ void beginmatrix2sc(vector<vector<signed char>>& WWW, string& filename, int64_t&
 		for (int64_t i2 = 0; i2 < count; i2++)
 		{
 			int64_t i3 = i1 + i2;
-			signed char a = W[i3];
+			double a = W[i3];
 			WWW[i0].push_back(a);
 
 		}
@@ -104,14 +104,14 @@ void beginmatrix2sc(vector<vector<signed char>>& WWW, string& filename, int64_t&
 		while (i4 < count15)
 		{
 			i3 = i3 + i4;
-			signed char a = W[i3];
+			double a = W[i3];
 			WWW[i0].push_back(a);
 			i4++;
 		}
 
 		while (i4 < count)
 		{
-			signed char a1 = 0;
+			double a1 = 0;
 			WWW[i0].push_back(a1);
 			i4++;
 		}
@@ -188,16 +188,16 @@ void beginmatrix3sc(int64_t count1, int64_t vectcount1, vector<vector<double>>& 
 
 }
 
-void beginmatrix4sc(int64_t count1, int64_t vectcount1, vector<vector<signed char>>& date1, string& filename, const string& linkfile) //размер основного вектора, размер вложенного вектора, матрица 2мерная, корень файла
+void beginmatrix4sc(int64_t count1, int64_t vectcount1, vector<vector<double>>& date1, string& filename, const string& linkfile) //размер основного вектора, размер вложенного вектора, матрица 2мерная, корень файла
 {
 
 
 	Filework<string> obj1;
-	Filework<signed char> obj3;
+	Filework<double> obj3;
 
 	for (int64_t i = 0; i < count1; i++)
 	{
-		vector<signed char> Date1{};
+		vector<double> Date1{};
 
 		string i1 = to_string(i);
 		i1 = filename + i1;
@@ -210,7 +210,7 @@ void beginmatrix4sc(int64_t count1, int64_t vectcount1, vector<vector<signed cha
 			int64_t i3 = 0;
 			for (int64_t i3 = 0; i3 < vectcount1; i3++)
 			{
-				signed char a = 0;
+				double a = 0;
 				Date1.push_back(a);
 
 			}
@@ -230,7 +230,7 @@ void beginmatrix4sc(int64_t count1, int64_t vectcount1, vector<vector<signed cha
 
 				while (i4 < vectcount1)
 				{
-					signed char a = 0;
+					double a = 0;
 					Date1.push_back(a);
 					i4++;
 				}
@@ -255,16 +255,16 @@ void beginmatrix4sc(int64_t count1, int64_t vectcount1, vector<vector<signed cha
 
 
 
-void beginmatrix5sc(int64_t count1, int64_t vectcount1, vector<vector<signed char>>& date1, string& filename, const string& linkfile) //размер основного вектора, размер вложенного вектора, матрица 2мерная, корень файла
+void beginmatrix5sc(int64_t count1, int64_t vectcount1, vector<vector<double>>& date1, string& filename, const string& linkfile) //размер основного вектора, размер вложенного вектора, матрица 2мерная, корень файла
 {
 
 
 	Filework<string> obj1;
-	Filework<signed char> obj3;
+	Filework<double> obj3;
 
 	for (int64_t i = 0; i < count1; i++)
 	{
-		vector<signed char> Date1{};
+		vector<double> Date1{};
 
 		string i1 = to_string(i);
 		i1 = filename + i1;
@@ -277,7 +277,7 @@ void beginmatrix5sc(int64_t count1, int64_t vectcount1, vector<vector<signed cha
 			int64_t i3 = 0;
 			for (int64_t i3 = 0; i3 < vectcount1; i3++)
 			{
-				signed char a = 0;
+				double a = 0;
 				Date1.push_back(a);
 
 			}
@@ -297,7 +297,7 @@ void beginmatrix5sc(int64_t count1, int64_t vectcount1, vector<vector<signed cha
 
 				while (i4 < vectcount1)
 				{
-					signed char a = 0;
+					double a = 0;
 					Date1.push_back(a);
 					i4++;
 				}
@@ -320,9 +320,9 @@ void beginmatrix5sc(int64_t count1, int64_t vectcount1, vector<vector<signed cha
 }
 
 
-void endmatrix1sc(vector<vector<signed char>>& date1, string& filename, const string& linkfile) //2мерная матрица, корень файла
+void endmatrix1sc(vector<vector<double>>& date1, string& filename, const string& linkfile) //2мерная матрица, корень файла
 {
-	Filework<signed char> obj2;
+	Filework<double> obj2;
 	int64_t i5 = date1.size();
 	int64_t i6 = 0;
 
@@ -332,7 +332,7 @@ void endmatrix1sc(vector<vector<signed char>>& date1, string& filename, const st
 		string i7 = to_string(i6);
 		i7 = filename + i7;
 
-		vector<signed char> weightdw{};
+		vector<double> weightdw{};
 		weightdw = date1[i6];
 		obj2.myfilerewtite(i7, weightdw, linkfile);
 		i6++;
@@ -364,31 +364,31 @@ void endmatrix2sc(vector<vector<double>>& date1, string& filename, const string&
 
 
 
-void beginfile(vector<string>& indicators, vector<signed char>& TheoWeights, vector<vector<double>>& indicatDate, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<int64_t>& Count,
-	vector<signed char>& Weights1,
-	vector<vector<signed char>>& Outputs1,
-vector<vector<signed char>>& Weights2,
-vector<vector<signed char>>& Outputs2,
-vector<vector<signed char>>& Outputs3,
-vector<vector<signed char>>& Outputs4,
-vector<vector<signed char>>& Weights3,
-vector<vector<signed char>>& Weights4,
-vector<vector<signed char>>& Weights5,
-vector<signed char>& Weights1m,
-vector<vector<signed char>>& Weights2m,
-vector<vector<signed char>>& Weights3m,
-vector<vector<signed char>>& Weights4m,
-vector<vector<signed char>>& Weights5m,
-vector<vector<signed char>>& Outputs1m,
-vector<vector<signed char>>& Outputs2m,
-vector<vector<signed char>>& Outputs3m,
-vector<vector<signed char>>& Outputs4m,
+void beginfile(vector<string>& indicators, vector<double>& TheoWeights, vector<vector<double>>& indicatDate, vector<vector<double>>& indicatDateInc, vector<vector<double>>& Cash1, vector<int64_t>& Count,
+	vector<double>& Weights1,
+	vector<vector<double>>& Outputs1,
+vector<vector<double>>& Weights2,
+vector<vector<double>>& Outputs2,
+vector<vector<double>>& Outputs3,
+vector<vector<double>>& Outputs4,
+vector<vector<double>>& Weights3,
+vector<vector<double>>& Weights4,
+vector<vector<double>>& Weights5,
+vector<double>& Weights1m,
+vector<vector<double>>& Weights2m,
+vector<vector<double>>& Weights3m,
+vector<vector<double>>& Weights4m,
+vector<vector<double>>& Weights5m,
+vector<vector<double>>& Outputs1m,
+vector<vector<double>>& Outputs2m,
+vector<vector<double>>& Outputs3m,
+vector<vector<double>>& Outputs4m,
 string linkfile
 
 )
 {
 	Filework<string> obj1;
-	Filework<signed char> obj2;
+	Filework<double> obj2;
 	Filework<int64_t> obj3;
 
 	
@@ -409,7 +409,7 @@ string linkfile
 
 		while (vectcountT < vectcounti)
 		{
-			signed char a = 0;
+			double a = 0;
 			TheoWeights.push_back(a);
 			vectcountT++;
 		}
@@ -572,32 +572,32 @@ string linkfile
 }
 
 
-void endfile(vector<string>& indicators, vector<signed char>& TheoWeights, vector<vector<double>>& indicatDate, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<int64_t>& Count,
-	vector<signed char>& Weights1,
-	vector<vector<signed char>>& Outputs1,
-	vector < vector<signed char>>& Weights2,
-	vector<vector<signed char>>& Outputs2,
-	vector<vector<signed char>>& Outputs3,
-	vector < vector<signed char>>& Weights3,
-	vector<vector<signed char>>& Outputs4,
-	vector < vector<signed char>>& Weights4,
-	vector < vector<signed char>>& Weights5,
-	vector<signed char>& Weights1m,
-	vector<vector<signed char>>& Weights2m,
-	vector<vector<signed char>>& Weights3m,
-	vector<vector<signed char>>& Weights4m,
-	vector<vector<signed char>>& Weights5m,
-	vector<vector<signed char>>& Outputs1m,
-	vector<vector<signed char>>& Outputs2m,
-	vector<vector<signed char>>& Outputs3m,
-	vector<vector<signed char>>& Outputs4m,
+void endfile(vector<string>& indicators, vector<double>& TheoWeights, vector<vector<double>>& indicatDate, vector<vector<double>>& indicatDateInc, vector<vector<double>>& Cash1, vector<int64_t>& Count,
+	vector<double>& Weights1,
+	vector<vector<double>>& Outputs1,
+	vector < vector<double>>& Weights2,
+	vector<vector<double>>& Outputs2,
+	vector<vector<double>>& Outputs3,
+	vector < vector<double>>& Weights3,
+	vector<vector<double>>& Outputs4,
+	vector < vector<double>>& Weights4,
+	vector < vector<double>>& Weights5,
+	vector<double>& Weights1m,
+	vector<vector<double>>& Weights2m,
+	vector<vector<double>>& Weights3m,
+	vector<vector<double>>& Weights4m,
+	vector<vector<double>>& Weights5m,
+	vector<vector<double>>& Outputs1m,
+	vector<vector<double>>& Outputs2m,
+	vector<vector<double>>& Outputs3m,
+	vector<vector<double>>& Outputs4m,
 	string linkfile
 	
 
 )
 {
 Filework<string> obj1;
-Filework<signed char> obj2;
+Filework<double> obj2;
 Filework<int64_t> obj3;
 
 cout << "Идет сохранение обновленных данных..." << endl;

@@ -5,12 +5,12 @@
 class nvidiac
 {
 public:
-	void addobj(signed char*& dvec_a1, signed char*& dvec_b1, signed char*& dvec_c1, signed char*& vec_a23, signed char*& vec_b23, signed char*& dvec_a4, signed char*& dvec_b4, signed char*& dvec_c4, signed char*& vec_a4, signed char*& vec_b4, int N1, int N23, int N4, int N44, signed char*& ab);
-	void delobj(signed char*& dvec_a1, signed char*& dvec_b1, signed char*& dvec_c1, signed char*& vec_a23, signed char*& vec_b23, signed char*& dvec_a4, signed char*& dvec_b4, signed char*& dvec_c4, signed char*& vec_a4, signed char*& vec_b4, signed char*& ab);
-	void deltaMiddlema(int64_t& Weightslsize, signed char*& Weightsl, signed char*& delta, signed char& deltal, signed char& alpha, signed char*& Outputs, signed char*& dvec_a1, signed char*& dvec_b1, signed char*& dvec_c1);
-	void deltaMiddlemam(int64_t& Weightslsize, signed char*& Weightsl, signed char*& delta, signed char& deltal, signed char& alpha, signed char*& Outputs, signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d);	
-	void MiddleTeachM(signed char*& Weightsl, signed char& rawdata, int64_t& size, signed char*& vec_d, signed char*& vec_a);
-	void deltafimanma4(signed char*& delta, signed char& delta1, int64_t& size, signed char*& Outputs, signed char*& Weightsl, signed char*& dvec_a4, signed char*& dvec_b4, signed char*& dvec_c4, signed char*& ab);
-	void deltafimanmam4(signed char*& delta, signed char& delta1, int64_t& size, signed char*& Outputs, signed char*& Weightsl, signed char*& dvec_a4, signed char*& dvec_b4, signed char*& dvec_c4, signed char*& ab);
+	void addobj(double*& dvec_a1, double*& dvec_b1, double*& dvec_c1, double*& vec_a23, double*& vec_b23, double*& dvec_a4, double*& dvec_b4, double*& dvec_c4, double*& vec_a4, double*& vec_b4, int N1, int N23, int N4, int N44, double*& ab);
+	void delobj(double*& dvec_a1, double*& dvec_b1, double*& dvec_c1, double*& vec_a23, double*& vec_b23, double*& dvec_a4, double*& dvec_b4, double*& dvec_c4, double*& vec_a4, double*& vec_b4, double*& ab);
+	void deltaMiddlema(int64_t& Weightslsize, double*& Weightsl, double*& delta, double& deltal, double& alpha, double*& Outputs, double*& dvec_a1, double*& dvec_b1, double*& dvec_c1);
+	void deltaMiddlemam(int64_t& Weightslsize, double*& Weightsl, double*& delta, double& deltal, double& alpha, double*& Outputs, double*& vec_a, double*& vec_b, double*& vec_c, double*& vec_d);	
+	void MiddleTeachM(double*& Weightsl, double& rawdata, int64_t& size, double*& vec_d, double*& vec_a);
+	void deltafimanma4(double*& delta, double& delta1, int64_t& size, double*& Outputs, double*& Weightsl, double*& dvec_a4, double*& dvec_b4, double*& dvec_c4, double*& ab);
+	void deltafimanmam4(double*& delta, double& delta1, int64_t& size, double*& Outputs, double*& Weightsl, double*& dvec_a4, double*& dvec_b4, double*& dvec_c4, double*& ab);
 
 };

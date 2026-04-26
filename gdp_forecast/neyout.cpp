@@ -3,18 +3,18 @@
 #include <chrono>
 #include <cstdint>
 #include "kernel/neyron.h"
-#include "kernel/OB1.h"
+//#include "kernel/OB1.h"
 
 #pragma once
 
 using namespace std;
 
-void teachdel3(const signed char& neyrontest, const signed char& neyrontestres, vector<signed char >& delta5)
+void teachdel3(const double& neyrontest, const double& neyrontestres, vector<double >& delta5)
 
 {
 	Neyron obj;
 	
-	//vector<signed char > delta3 = {};
+	//vector<double > delta3 = {};
 	
 	delta5 = obj.deltaout(delta5, neyrontest, neyrontestres);
 
@@ -24,12 +24,12 @@ void teachdel3(const signed char& neyrontest, const signed char& neyrontestres, 
 
 
 
-void teachlayer3(vector<vector<signed char>>& Weights5, int64_t Quoter,  vector<vector<signed char>>& Outputs4, vector<signed char >& delta5)
+void teachlayer3(vector<vector<double>>& Weights5, int64_t Quoter,  vector<vector<double>>& Outputs4, vector<double >& delta5)
 
 {
 	Neyron obj;
 
-	signed char t0 = delta5[0];
+	double t0 = delta5[0];
 
 	obj.dellayerlast(Weights5, Quoter, Outputs4, t0);
 
@@ -37,22 +37,22 @@ void teachlayer3(vector<vector<signed char>>& Weights5, int64_t Quoter,  vector<
 
 
 
-void printerrr(signed char& result)
+void printerrr(double& result)
 {
-	int64_t in1 = int64_t(result);
-	in1 = in1 * 2; // нивелируем шаг
+	double in1 = result;
+	in1 = in1; // нивелируем шаг
 	double in2 = in1;
-	in2 = in2 / 10; // корректно отображаем десятые процента
+	in2 = in2; // корректно отображаем десятые процента
 	
 	cout << "В указанном квартале ожидается прирост ВВП в размере " << in2 << "%" << endl;
 
 }
 
 
-void weightsaddl12(vector<vector<signed char>>& Weights5, int64_t t01)
+void weightsaddl12(vector<vector<double>>& Weights5, int64_t t01)
 {
 	int64_t t02 = Weights5[0].size()-1;
-	signed char a = 10;
+	double a = 10;
 
 	while (t02 < t01)
 	{
@@ -65,7 +65,7 @@ void weightsaddl12(vector<vector<signed char>>& Weights5, int64_t t01)
 
 }
 
-signed char weightsumm(vector<vector<signed char>>& Weights5, vector<vector<signed char>>& Outputs4, int64_t Quoter)
+double weightsumm(vector<vector<double>>& Weights5, vector<vector<double>>& Outputs4, int64_t Quoter)
 {
 
 	Neyron obj1;
@@ -76,7 +76,7 @@ signed char weightsumm(vector<vector<signed char>>& Weights5, vector<vector<sign
 	int64_t tt02 = Weights5.size();
 	if (Weights5.size() == 0)
 	{
-		vector<signed char > W (1, 10 );
+		vector<double > W (1, 10 );
 		Weights5.push_back(W);
 
 	}
@@ -84,10 +84,10 @@ signed char weightsumm(vector<vector<signed char>>& Weights5, vector<vector<sign
 	int64_t t02 = Weights5[0].size();
 	if (t01 > t02) { weightsaddl12(Weights5, t01); }
 
-	vector<signed char > Weights50 = Weights5[0];
-	vector<signed char > Outputs40 = Outputs4[Quoter];
+	vector<double > Weights50 = Weights5[0];
+	vector<double > Outputs40 = Outputs4[Quoter];
 
-	signed char neyrontest = obj1.valueneyTwoOner(Outputs40, Weights50);
+	double neyrontest = obj1.valueneyTwoOner(Outputs40, Weights50);
 
 	return neyrontest;
 

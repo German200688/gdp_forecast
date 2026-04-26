@@ -9,20 +9,20 @@ using namespace std;
 class layer2
 {
 protected:
-	void neyronoutindadd2(vector<vector<signed char>>& Outputs2, vector<int64_t >& Count, int64_t & CountOutputs1);
-	void neyronoutqadd2(vector<vector<signed char>>& Outputs2, int64_t Quoter);
-	void weightsaddl12(vector<vector<signed char>>& Weights2, int64_t ney1);
-	void weightsaddl22(vector<vector<signed char>>& Weights2, int64_t CountWeights2);
+	void neyronoutindadd2(vector<vector<double>>& Outputs2, vector<int64_t >& Count, int64_t & CountOutputs1);
+	void neyronoutqadd2(vector<vector<double>>& Outputs2, int64_t Quoter);
+	void weightsaddl12(vector<vector<double>>& Weights2, int64_t ney1);
+	void weightsaddl22(vector<vector<double>>& Weights2, int64_t CountWeights2);
 	
 
 
 
 public:
-	void summneyquoter2(vector<int64_t >& Count, vector<vector<signed char>>& Outputs1, vector<vector<signed char>>& Weights2, vector<vector<signed char>>& Outputs2, int64_t Quoter);
-	void summneyall2(vector<int64_t >& Count, vector<vector<signed char>>& Outputs1, vector<vector<signed char>>& Weights2, vector<vector<signed char>>& Outputs2);
-	void teachdel2(vector<signed char >& delta3, int64_t & Quoter, vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Weights2, vector<vector<signed char>>& Outputs2, vector<signed char >& delta2);
-	void teach2(int64_t & Quoter, vector<vector<signed char>>& Outputs2, signed char alpha, vector<vector<signed char>>& Weights2, vector<signed char >& delta2);
-	void teachdel2ma(vector<signed char >& delta3, int64_t& Quoter, vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Weights2, vector<vector<signed char>>& Outputs2, vector<signed char >& delta2, signed char*& vec_a, signed char*& vec_b, signed char*& vec_c, signed char*& vec_d);
-	void teach2ma(int64_t& Quoter, vector<vector<signed char>>& Outputs2, signed char alpha, vector<vector<signed char>>& Weights2, vector<signed char >& delta2, signed char*& vec_d, signed char*& vec_a);
+	void summneyquoter2(vector<int64_t >& Count, vector<vector<double>>& Outputs1, vector<vector<double>>& Weights2, vector<vector<double>>& Outputs2, int64_t Quoter);
+	void summneyall2(vector<int64_t >& Count, vector<vector<double>>& Outputs1, vector<vector<double>>& Weights2, vector<vector<double>>& Outputs2);
+	void teachdel2(vector<double >& delta3, int64_t & Quoter, vector<vector<double>>& Weights3, vector<vector<double>>& Weights2, vector<vector<double>>& Outputs2, vector<double >& delta2);
+	void teach2(int64_t & Quoter, vector<vector<double>>& Outputs2, double alpha, vector<vector<double>>& Weights2, vector<double >& delta2);
+	void teachdel2ma(vector<double >& delta3, int64_t& Quoter, vector<vector<double>>& Weights3, vector<vector<double>>& Weights2, vector<vector<double>>& Outputs2, vector<double >& delta2, double*& vec_a, double*& vec_b, double*& vec_c, double*& vec_d);
+	void teach2ma(int64_t& Quoter, vector<vector<double>>& Outputs2, double alpha, vector<vector<double>>& Weights2, vector<double >& delta2, double*& vec_d, double*& vec_a);
 
 };

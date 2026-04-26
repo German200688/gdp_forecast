@@ -26,16 +26,16 @@
 using namespace std;
 
 
-bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<signed char>& TheoWeights, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<signed char> Weights1, vector<int64_t>& Count, vector<vector<signed char>>& Outputs1, vector<vector<signed char>>& Weights2, vector<vector<signed char>>& Outputs2, int64_t& Quoter, vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Outputs3, vector<vector<signed char>>& Weights4, vector<vector<signed char>>& Outputs4, vector<vector<signed char>>& Weights5, signed char& result1, signed char& result2, signed char& result,
-	vector<signed char>& Weights1m,
-	vector<vector<signed char>>& Weights2m,
-	vector<vector<signed char>>& Weights3m,
-	vector<vector<signed char>>& Weights4m,
-	vector<vector<signed char>>& Weights5m,
-	vector<vector<signed char>>& Outputs1m,
-	vector<vector<signed char>>& Outputs2m,
-	vector<vector<signed char>>& Outputs3m,
-	vector<vector<signed char>>& Outputs4m
+bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<double>& TheoWeights, vector<vector<double>>& indicatDateInc, vector<vector<double>>& Cash1, vector<double>& Weights1, vector<int64_t>& Count, vector<vector<double>>& Outputs1, vector<vector<double>>& Weights2, vector<vector<double>>& Outputs2, int64_t& Quoter, vector<vector<double>>& Weights3, vector<vector<double>>& Outputs3, vector<vector<double>>& Weights4, vector<vector<double>>& Outputs4, vector<vector<double>>& Weights5, double& result1, double& result2, double& result,
+	vector<double>& Weights1m,
+	vector<vector<double>>& Weights2m,
+	vector<vector<double>>& Weights3m,
+	vector<vector<double>>& Weights4m,
+	vector<vector<double>>& Weights5m,
+	vector<vector<double>>& Outputs1m,
+	vector<vector<double>>& Outputs2m,
+	vector<vector<double>>& Outputs3m,
+	vector<vector<double>>& Outputs4m
 )
 {
 
@@ -110,7 +110,8 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 	// "Данные идущие на вход второго положительного слоя:" 
 
 	obj2.summneyquoter1(Count, Cash1, Weights1, Outputs1, qy2, indicators);
-
+	double tttt1 = Weights1[2];
+	cout << tttt1 << endl;
 	
 	// "Данные идущие на вход второго отрицательного слоя:" 
 
@@ -120,7 +121,8 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 
 	// "Расчет весов для 2-го положительного слоя:" 
 	obj4.summneyquoter2(Count, Outputs1, Weights2, Outputs2, qy2);
-
+	double tttt2 = Weights2[2][2];
+	cout << tttt2 << endl;
 	
 	//"Расчет весов для 2-го отрицательного слоя:"
 	//obj41.summneyquoter2m(Count, Outputs1m, Weights2m, Outputs2m, qy2);
@@ -135,7 +137,8 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 */
 	// "Расчет весов 3-го положительного слоя:"
 	obj5.summneyquoter3(Count, Outputs2, Weights3, Outputs3, qy2);
-
+	double tttt3 = Weights3[3][2];
+	cout << tttt3 << endl;
 	// "Расчет весов 3-го отрицательного слоя:"
 	//obj51.summneyquoter3m(Count, Outputs2m, Weights3m, Outputs3m, qy2);
 
@@ -144,7 +147,8 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 
 	// "Рассчет весов 4-го положительно слоя:"
 	obj44.summneyquoter4(Count, Outputs3, Weights4, Outputs4, qy2);
-
+	double tttt4 = Weights4[3][2];
+	cout << tttt4 << endl;
 	
 
 	//"Рассчет весов 4-го отрицателльного слоя:"
@@ -154,7 +158,7 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 
 	//рассчет результата 5го слоя положительного
 	result1 = weightsumm(Weights5, Outputs4, qy2);
-	cout << int(result1) << endl;
+	cout << result1 << endl;
 
 	//рассчет результата 5го слоя отрицительного
 	//result2 = weightsumm(Weights5m, Outputs4m, qy2);
@@ -173,16 +177,16 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 
 
 
-void teachquoter(int64_t& Quoter1, signed char& result1, signed char& result2, signed char& result, vector<vector<signed char>>& Weights5, vector<vector<signed char>>& Weights4, vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Weights2, vector<signed char>& Weights1, vector<vector<signed char>>& Outputs4, vector<vector<signed char>>& Outputs3, vector<vector<signed char>>& Outputs2, vector<vector<signed char>>& Outputs1, signed char alpha, string dateraw,
-	vector<signed char>& Weights1m,
-	vector<vector<signed char>>& Weights2m,
-	vector<vector<signed char>>& Weights3m,
-	vector<vector<signed char>>& Weights4m,
-	vector<vector<signed char>>& Weights5m,
-	vector<vector<signed char>>& Outputs1m,
-	vector<vector<signed char>>& Outputs2m,
-	vector<vector<signed char>>& Outputs3m,
-	vector<vector<signed char>>& Outputs4m
+void teachquoter(int64_t& Quoter1, double& result1, double& result2, double& result, vector<vector<double>>& Weights5, vector<vector<double>>& Weights4, vector<vector<double>>& Weights3, vector<vector<double>>& Weights2, vector<double>& Weights1, vector<vector<double>>& Outputs4, vector<vector<double>>& Outputs3, vector<vector<double>>& Outputs2, vector<vector<double>>& Outputs1, double alpha, string dateraw,
+	vector<double>& Weights1m,
+	vector<vector<double>>& Weights2m,
+	vector<vector<double>>& Weights3m,
+	vector<vector<double>>& Weights4m,
+	vector<vector<double>>& Weights5m,
+	vector<vector<double>>& Outputs1m,
+	vector<vector<double>>& Outputs2m,
+	vector<vector<double>>& Outputs3m,
+	vector<vector<double>>& Outputs4m
 )
 {
 	Other obj3;
@@ -196,21 +200,21 @@ void teachquoter(int64_t& Quoter1, signed char& result1, signed char& result2, s
 	layer2m obj41;
 	layer1m obj51;
 
-	vector<signed char > delta5;
-	vector<signed char > delta4;
-	vector<signed char > delta3;
-	vector<signed char > delta2;
-	vector<signed char > delta1;
-	vector<signed char > delta5m;
-	vector<signed char > delta4m;
-	vector<signed char > delta3m;
-	vector<signed char > delta2m;
-	vector<signed char > delta1m;
+	vector<double > delta5;
+	vector<double > delta4;
+	vector<double > delta3;
+	vector<double > delta2;
+	vector<double > delta1;
+	vector<double > delta5m;
+	vector<double > delta4m;
+	vector<double > delta3m;
+	vector<double > delta2m;
+	vector<double > delta1m;
 
 
 
 	//	string dateraw;
-	bool check;
+	bool check = true;
 	string err;
 	int64_t Quoter = Quoter1 - 1;
 
@@ -231,12 +235,12 @@ void teachquoter(int64_t& Quoter1, signed char& result1, signed char& result2, s
 		std::cout << "Введены данные = " << d0 << endl;
 	}
 
-	double incr2 = d0 * 5; //x*100*10/2 - 100-Р 
+	double incr2 = d0; //x*100*10/2 - 100-Р 
 
 
-	int64_t incr3 = int64_t(incr2);
+	double incr3 = incr2;
 	//std::cout << "incr3 = " << int(incr2) << endl;
-
+/*
 	while (incr3 > 100)
 	{
 		incr3 = 100;
@@ -246,8 +250,8 @@ void teachquoter(int64_t& Quoter1, signed char& result1, signed char& result2, s
 	{
 		incr3 = -100;
 	}
-
-	signed char incr4 = static_cast<signed char>(incr3);
+*/
+	double incr4 = static_cast<double>(incr3);
 
 
 

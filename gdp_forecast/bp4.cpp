@@ -27,32 +27,32 @@ using namespace std;
 
 
 
-void teachquoterm(int64_t& Quoter1, signed char& result1, signed char& result2, signed char& result, vector<vector<signed char>>& Weights5, vector<vector<signed char>>& Weights4, vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Weights2, vector<signed char>& Weights1, vector<vector<signed char>>& Outputs4, vector<vector<signed char>>& Outputs3, vector<vector<signed char>>& Outputs2, vector<vector<signed char>>& Outputs1, signed char alpha, signed char incr4,
-	vector<signed char>& Weights1m,
-	vector<vector<signed char>>& Weights2m,
-	vector<vector<signed char>>& Weights3m,
-	vector<vector<signed char>>& Weights4m,
-	vector<vector<signed char>>& Weights5m,
-	vector<vector<signed char>>& Outputs1m,
-	vector<vector<signed char>>& Outputs2m,
-	vector<vector<signed char>>& Outputs3m,
-	vector<vector<signed char>>& Outputs4m,
-	signed char*& dvec_a1, 
-	signed char*& dvec_b1, 
-	signed char*& dvec_c1, 
-	//signed char*& vec_a1, 
-	//signed char*& vec_b1, 
-	//signed char*& vec_c1, 
-	signed char*& vec_a23, 
-	signed char*& vec_b23, 
-	//signed char*& vec_c23, 
-	signed char*& dvec_a4, 
-	signed char*& dvec_b4, 
-	signed char*& dvec_c4, 
-	signed char*& vec_a4, 
-	signed char*& vec_b4, 
-	//signed char*& vec_c4, 
-	signed char*& ab
+void teachquoterm(int64_t& Quoter1, double& result1, double& result2, double& result, vector<vector<double>>& Weights5, vector<vector<double>>& Weights4, vector<vector<double>>& Weights3, vector<vector<double>>& Weights2, vector<double>& Weights1, vector<vector<double>>& Outputs4, vector<vector<double>>& Outputs3, vector<vector<double>>& Outputs2, vector<vector<double>>& Outputs1, double alpha, double incr4,
+	vector<double>& Weights1m,
+	vector<vector<double>>& Weights2m,
+	vector<vector<double>>& Weights3m,
+	vector<vector<double>>& Weights4m,
+	vector<vector<double>>& Weights5m,
+	vector<vector<double>>& Outputs1m,
+	vector<vector<double>>& Outputs2m,
+	vector<vector<double>>& Outputs3m,
+	vector<vector<double>>& Outputs4m,
+	double*& dvec_a1, 
+	double*& dvec_b1, 
+	double*& dvec_c1, 
+	//double*& vec_a1, 
+	//double*& vec_b1, 
+	//double*& vec_c1, 
+	double*& vec_a23, 
+	double*& vec_b23, 
+	//double*& vec_c23, 
+	double*& dvec_a4, 
+	double*& dvec_b4, 
+	double*& dvec_c4, 
+	double*& vec_a4, 
+	double*& vec_b4, 
+	//double*& vec_c4, 
+	double*& ab
 )
 {
 	Other obj3;
@@ -66,16 +66,16 @@ void teachquoterm(int64_t& Quoter1, signed char& result1, signed char& result2, 
 	layer2m obj41;
 	layer1m obj51;
 
-	vector<signed char > delta5;
-	vector<signed char > delta4;
-	vector<signed char > delta3;
-	vector<signed char > delta2;
-	vector<signed char > delta1;
-	vector<signed char > delta5m;
-	vector<signed char > delta4m;
-	vector<signed char > delta3m;
-	vector<signed char > delta2m;
-	vector<signed char > delta1m;
+	vector<double > delta5;
+	vector<double > delta4;
+	vector<double > delta3;
+	vector<double > delta2;
+	vector<double > delta1;
+	vector<double > delta5m;
+	vector<double > delta4m;
+	vector<double > delta3m;
+	vector<double > delta2m;
+	vector<double > delta1m;
 
 
 
@@ -176,6 +176,8 @@ void teachquoterm(int64_t& Quoter1, signed char& result1, signed char& result2, 
 	}
 #endif
 
+	
+
 	//teachlayer3(Weights5m, Quoter, Outputs4m, delta5m);
 	
 	/*
@@ -189,8 +191,11 @@ void teachquoterm(int64_t& Quoter1, signed char& result1, signed char& result2, 
 	*/
 	// "Рассчет данных 4-го положительного слоя:" 
 	
-	obj7.teach4ma(Quoter, Outputs4, alpha, Weights4, delta4, vec_a4, vec_b4);
+	obj7.teach4ma(Quoter, Outputs3, alpha, Weights4, delta4, vec_a4, vec_b4);
 	
+	double tttt4 = Weights4[3][2];
+	cout << tttt4 << endl;
+
 	// "Рассчет данных 4-го отрицательного слоя:" 
 
 	//obj71.teach4mam(Quoter, Outputs4m, alpha, Weights4m, delta4m, vec_a4, vec_b4);
@@ -198,7 +203,10 @@ void teachquoterm(int64_t& Quoter1, signed char& result1, signed char& result2, 
 	
 	// "РАссчет весов 3-го положительного слоя:"
 
-	obj6.teach3ma(Quoter, Outputs3, alpha, Weights3, delta3, vec_a23, vec_b23);
+	obj6.teach3ma(Quoter, Outputs2, alpha, Weights3, delta3, vec_a23, vec_b23);
+
+	double tttt3 = Weights3[3][2];
+	cout << tttt3 << endl;
 
 	// "Рассчет весов 3-го отрицательного слоя:" << endl;
 
@@ -218,9 +226,10 @@ void teachquoterm(int64_t& Quoter1, signed char& result1, signed char& result2, 
 	
 	// "Веса 2-го положительного слоя:" << endl;
 
-	obj4.teach2ma(Quoter, Outputs2, alpha, Weights2, delta2, vec_a23, vec_b23);
+	obj4.teach2ma(Quoter, Outputs1, alpha, Weights2, delta2, vec_a23, vec_b23);
 
-
+	double tttt2 = Weights2[3][2];
+	cout << tttt2 << endl;
 
 	// "Веса 2-го отрицательного слоя:" << endl;
 
@@ -241,6 +250,9 @@ void teachquoterm(int64_t& Quoter1, signed char& result1, signed char& result2, 
 
 	obj5.teach1(Quoter, Outputs1, alpha, Weights1, delta1);
 
+	double tttt1 = Weights1[2];
+	cout << tttt1 << endl;
+
 	// "Веса первого отрицательного слоя:" 
 
 	//obj51.teach1m(Quoter, Outputs1m, alpha, Weights1m, delta1m);
@@ -255,16 +267,16 @@ void teachquoterm(int64_t& Quoter1, signed char& result1, signed char& result2, 
 
 
 
-void calcgdpteach(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<signed char>& TheoWeights, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<signed char> Weights1, vector<int64_t>& Count, vector<vector<signed char>>& Outputs1, vector<vector<signed char>>& Weights2, vector<vector<signed char>>& Outputs2, int64_t& Quoter, vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Outputs3, vector<vector<signed char>>& Weights4, vector<vector<signed char>>& Outputs4, vector<vector<signed char>>& Weights5, signed char& result1, signed char& result2, signed char& result,
-	vector<signed char>& Weights1m,
-	vector<vector<signed char>>& Weights2m,
-	vector<vector<signed char>>& Weights3m,
-	vector<vector<signed char>>& Weights4m,
-	vector<vector<signed char>>& Weights5m,
-	vector<vector<signed char>>& Outputs1m,
-	vector<vector<signed char>>& Outputs2m,
-	vector<vector<signed char>>& Outputs3m,
-	vector<vector<signed char>>& Outputs4m
+void calcgdpteach(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<double>& TheoWeights, vector<vector<double>>& indicatDateInc, vector<vector<double>>& Cash1, vector<double> Weights1, vector<int64_t>& Count, vector<vector<double>>& Outputs1, vector<vector<double>>& Weights2, vector<vector<double>>& Outputs2, int64_t& Quoter, vector<vector<double>>& Weights3, vector<vector<double>>& Outputs3, vector<vector<double>>& Weights4, vector<vector<double>>& Outputs4, vector<vector<double>>& Weights5, double& result1, double& result2, double& result,
+	vector<double>& Weights1m,
+	vector<vector<double>>& Weights2m,
+	vector<vector<double>>& Weights3m,
+	vector<vector<double>>& Weights4m,
+	vector<vector<double>>& Weights5m,
+	vector<vector<double>>& Outputs1m,
+	vector<vector<double>>& Outputs2m,
+	vector<vector<double>>& Outputs3m,
+	vector<vector<double>>& Outputs4m
 )
 {
 
@@ -296,7 +308,7 @@ void calcgdpteach(vector<string>& indicators, vector<vector<double>>& indicatDat
 
 	// "Данные идущие на вход второго отрицательного слоя:" 
 
-	obj21.summneyquoter1m(Count, Cash1, Weights1m, Outputs1m, qy2, indicators);
+//	obj21.summneyquoter1m(Count, Cash1, Weights1m, Outputs1m, qy2, indicators);
 
 
 
@@ -305,7 +317,7 @@ void calcgdpteach(vector<string>& indicators, vector<vector<double>>& indicatDat
 
 
 	//"Расчет весов для 2-го отрицательного слоя:"
-	obj41.summneyquoter2m(Count, Outputs1m, Weights2m, Outputs2m, qy2);
+//	obj41.summneyquoter2m(Count, Outputs1m, Weights2m, Outputs2m, qy2);
 
 	// "Данные идущие на вход 3-го положительного слоя:"
 
@@ -313,13 +325,13 @@ void calcgdpteach(vector<string>& indicators, vector<vector<double>>& indicatDat
 
 	// "Данные идущие на вход 3-го отрицательного слоя:"
 
-	obj41.summneyquoter2m(Count, Outputs1m, Weights2m, Outputs2m, qy2);
+//	obj41.summneyquoter2m(Count, Outputs1m, Weights2m, Outputs2m, qy2);
 
 	// "Расчет весов 3-го положительного слоя:"
 	obj5.summneyquoter3(Count, Outputs2, Weights3, Outputs3, qy2);
 
 	// "Расчет весов 3-го отрицательного слоя:"
-	obj51.summneyquoter3m(Count, Outputs2m, Weights3m, Outputs3m, qy2);
+//	obj51.summneyquoter3m(Count, Outputs2m, Weights3m, Outputs3m, qy2);
 
 
 
@@ -330,7 +342,7 @@ void calcgdpteach(vector<string>& indicators, vector<vector<double>>& indicatDat
 
 
 	//"Рассчет весов 4-го отрицателльного слоя:"
-	obj441.summneyquoter4m(Count, Outputs3m, Weights4m, Outputs4m, qy2);
+//	obj441.summneyquoter4m(Count, Outputs3m, Weights4m, Outputs4m, qy2);
 
 
 
@@ -339,11 +351,12 @@ void calcgdpteach(vector<string>& indicators, vector<vector<double>>& indicatDat
 
 
 	//рассчет результата 5го слоя отрицительного
-	result2 = weightsumm(Weights5m, Outputs4m, qy2);
+//	result2 = weightsumm(Weights5m, Outputs4m, qy2);
 
 
-	if (std::abs(static_cast<int64_t>(result1)) > std::abs(static_cast<int64_t>(result2))) result = result1;
-	else result = result2;
+	//if (std::abs(static_cast<int64_t>(result1)) > std::abs(static_cast<int64_t>(result2))) result = result1;
+	//else 
+		result = result1;
 
 
 //	printerrr(result);

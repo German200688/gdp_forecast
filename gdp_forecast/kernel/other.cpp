@@ -63,28 +63,30 @@ void Other::start()
 	   }
 
 
-void Other::additionvectordate(vector<unsigned char>& vecdate, int64_t& Quoter)
+void Other::additionvectordate(vector<double>& vecdate, int64_t& Quoter)
 {
+/*
 	int64_t t1 = vecdate.size();
 	if (Quoter > vecdate.size())
 	{
 		while (vecdate.size() <= Quoter)
 		{
-			vecdate.push_back(0);
+			vecdate.push_back(0.0);
 
 		}
 	}
 
 		vecdate[Quoter] = vecdate[Quoter] + 1;
+		*/
 	}
 
-void Other::additiondatedate(unsigned char& datedate)
+void Other::additiondatedate(double& datedate)
 {
 	datedate = datedate+1;
 
 }
 
-bool Other::checkdate(vector<unsigned char>& vecdate, int64_t& Quoter, unsigned char& datedate1, unsigned char& datedate2)
+bool Other::checkdate(vector<double>& vecdate, int64_t& Quoter, double& datedate1, double& datedate2)
 {
 	if (datedate1 > 0) { return true; }
 	else if (datedate2 > 0) { return true; }
@@ -94,7 +96,7 @@ bool Other::checkdate(vector<unsigned char>& vecdate, int64_t& Quoter, unsigned 
 }
 
 
-void Other::zerodate(vector<unsigned char>& vecdate, unsigned char& datedate1, unsigned char& datedate2)
+void Other::zerodate(vector<double>& vecdate, double& datedate1, double& datedate2)
 {
 	fill(vecdate.begin(), vecdate.end(), 0);
 	datedate1 = 0;

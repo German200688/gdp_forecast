@@ -37,7 +37,7 @@ vector<T> Filework<T>::myfileread(const string& filename, vector<T>& datumr, con
 	
 	setlocale(LC_ALL, "Russian");
 	
-	static_assert(is_same_v<T, signed char> || is_same_v<T, string> || is_same_v<T, double> || is_same_v<T, int64_t>);
+	static_assert(is_same_v<T, double> || is_same_v<T, string> || is_same_v<T, double> || is_same_v<T, int64_t>);
 
 	string filelinc = filelink; /////"C:\\Users\\Legion\\Documents\\testney\\";
 	string txt = ".txt";
@@ -61,21 +61,22 @@ vector<T> Filework<T>::myfileread(const string& filename, vector<T>& datumr, con
 
 		};
 	}
-	if constexpr (is_same_v<T, signed char>)
+	/*
+	if constexpr (is_same_v<T, double>)
 	{
 		while (getline(file, line)) {
 
-			int64_t t0 = stoi(line);
-			if (t0 > 120) t0 = 120;
-			if (t0 < -120) t0 = -120;
-			signed char t1 = (signed char)t0;
+			double t0 = stoi(line);
+			//if (t0 > 120) t0 = 120;
+			//if (t0 < -120) t0 = -120;
+			double t1 = t0;
 
 			datumr.push_back(t1);
 
 
 		};
 	}
-
+	*/
 		if constexpr (is_same_v<T, int64_t>)
 		{
 			while (getline(file, line)) {
@@ -113,7 +114,7 @@ void Filework<T1>::myfilerewtite(const string& filename, vector<T1>& datumw, con
 {
 	setlocale(LC_ALL, "Russian");
 	
-	static_assert(is_same_v<T1, signed char> || is_same_v<T1, string> || is_same_v<T1, double> || is_same_v<T1, int64_t>);
+	static_assert(is_same_v<T1, double> || is_same_v<T1, string> || is_same_v<T1, double> || is_same_v<T1, int64_t>);
 
 	if (datumw.size() > 0)
 	{
@@ -134,11 +135,11 @@ void Filework<T1>::myfilerewtite(const string& filename, vector<T1>& datumw, con
 			if constexpr (is_same_v<T1, string>) c1 = datumw[i];
 			if constexpr (is_same_v<T1, double>) { c3 = datumw[i]; c1 = to_string(c3); }
 			if constexpr (is_same_v<T1, int64_t>) { c3 = datumw[i]; c1 = to_string(c3); }
-			if constexpr (is_same_v<T1, signed char>) {
-signed char t0 = datumw[i];
+			if constexpr (is_same_v<T1, double>) {
+				double t0 = datumw[i];
 
-int64_t t1 = int64_t(t0);
-c1 = to_string(t1);
+			//	double t1 = double(t0);
+//c1 = to_string(t1);
 
 
 			}

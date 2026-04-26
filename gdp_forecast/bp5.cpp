@@ -12,23 +12,24 @@
 #include "kernel/other.h"
 #include "kernel/nvidia/cuda/nvidiac.h"
 #include "bp3.cpp"
+#include "bp4.cpp"
 
 
 #pragma once
 
 using namespace std;
 
-void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<signed char>& TheoWeights, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<signed char>& Weights1, vector<int64_t>& Count, vector<vector<signed char>>& Outputs1, vector<vector<signed char>>& Weights2, vector<vector<signed char>>& Outputs2,  vector<vector<signed char>>& Weights3, vector<vector<signed char>>& Outputs3, vector<vector<signed char>>& Weights4, vector<vector<signed char>>& Outputs4, vector<vector<signed char>>& Weights5, signed char& result1, signed char& result2, signed char& result,
-	vector<signed char>& Weights1m,
-	vector<vector<signed char>>& Weights2m,
-	vector<vector<signed char>>& Weights3m,
-	vector<vector<signed char>>& Weights4m,
-	vector<vector<signed char>>& Weights5m,
-	vector<vector<signed char>>& Outputs1m,
-	vector<vector<signed char>>& Outputs2m,
-	vector<vector<signed char>>& Outputs3m,
-	vector<vector<signed char>>& Outputs4m,
-	const signed char& alpha,
+void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<double>& TheoWeights, vector<vector<double>>& indicatDateInc, vector<vector<double>>& Cash1, vector<double>& Weights1, vector<int64_t>& Count, vector<vector<double>>& Outputs1, vector<vector<double>>& Weights2, vector<vector<double>>& Outputs2,  vector<vector<double>>& Weights3, vector<vector<double>>& Outputs3, vector<vector<double>>& Weights4, vector<vector<double>>& Outputs4, vector<vector<double>>& Weights5, double& result1, double& result2, double& result,
+	vector<double>& Weights1m,
+	vector<vector<double>>& Weights2m,
+	vector<vector<double>>& Weights3m,
+	vector<vector<double>>& Weights4m,
+	vector<vector<double>>& Weights5m,
+	vector<vector<double>>& Outputs1m,
+	vector<vector<double>>& Outputs2m,
+	vector<vector<double>>& Outputs3m,
+	vector<vector<double>>& Outputs4m,
+	const double& alpha,
 	const int64_t& iterationney,
 	const int64_t& iteration)
 {
@@ -43,7 +44,7 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 	//string vvodindic;
 	//char t1 = ':';
 	//int64_t t2 = 0;
-	vector <vector <int64_t>> dates;
+	vector <vector <double>> dates;
 	double d0 = 0.0;
 	vector<int64_t> index;
 
@@ -120,12 +121,12 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 				dateraw.pop_back();
 				d0 = stod(dateraw); //значение в векторе
 
-				double incr2 = d0 * 5; //x*100*10/2 - 100-Р 
+				double incr2 = d0; //x*100*10/2 - 100-Р 
 
 
-				int64_t incr3 = int64_t(incr2);
+				double incr3 = incr2;
 				//std::cout << "incr3 = " << int(incr2) << endl;
-
+				/*
 				while (incr3 > 100)
 				{
 					incr3 = 100;
@@ -135,12 +136,12 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 				{
 					incr3 = -100;
 				}
+				*/
+				double incr4 = incr3;
+				double incrf = incr4;
 
-				signed char incr4 = static_cast<signed char>(incr3);
-				int64_t incrf = int(incr4);
-
-				vector <int64_t > dates12(2);
-				dates12[0] = qy;
+				vector <double > dates12(2);
+				dates12[0] = double(qy);
 				dates12[1] = incrf;
 				dates.push_back(dates12);
 
@@ -156,10 +157,10 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 	getline(cin, err);
 	std::cout << "Значения приняты. Начинаем рассчет" << endl;
 
-	signed char* dvec_a1, * dvec_b1, * dvec_c1, *vec_a23, *vec_b23, *dvec_a4, *dvec_b4, *dvec_c4, *vec_a4, *vec_b4, * ab;
-		//int N1, int N23, int N4, int N44, signed char*& ab
+	double* dvec_a1, * dvec_b1, * dvec_c1, *vec_a23, *vec_b23, *dvec_a4, *dvec_b4, *dvec_c4, *vec_a4, *vec_b4, * ab;
+		//int N1, int N23, int N4, int N44, double*& ab
 
-	int64_t Quoter = dates[0][0];
+	int64_t Quoter = int64_t(dates[0][0]);
 
 	volatile  unsigned long long tact1 = __rdtsc();
 	this_thread::sleep_for(std::chrono::seconds(1));
@@ -185,8 +186,8 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 
 
 	obj1.addobj(dvec_a1, dvec_b1, dvec_c1, vec_a23, vec_b23, dvec_a4, dvec_b4, dvec_c4, vec_a4, vec_b4, N1, N23, N4, N44, ab);
-	int t12 = dates.size();
-	int percraw = iterationney * t12 * iteration;
+	int64_t t12 = dates.size();
+	int64_t percraw = iterationney * t12 * iteration;
 	double percdr = 0;
 	int t666 = 1;
 	unsigned long long tact5 = 0;
@@ -194,10 +195,10 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 	{
 		for (int64_t i1 = 0; i1 < t12; i1++)
 		{
-			int64_t quot = dates[i1][0];
-			int64_t resi = dates[i1][1];
+			int64_t quot = int64_t(dates[i1][0]);
+			double resi = dates[i1][1];
 			//cout << resi << endl;
-			signed char res = static_cast<signed char>(resi);
+			double res = resi;
 
 			for (int64_t i2 = 0; i2 < iterationney; i2++)
 
@@ -230,18 +231,18 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 					dvec_a1,
 					dvec_b1,
 					dvec_c1,
-					//signed char*& vec_a1, 
-					//signed char*& vec_b1, 
-					//signed char*& vec_c1, 
+					//double*& vec_a1, 
+					//double*& vec_b1, 
+					//double*& vec_c1, 
 					vec_a23,
 					vec_b23,
-					//signed char*& vec_c23, 
+					//double*& vec_c23, 
 					dvec_a4,
 					dvec_b4,
 					dvec_c4,
 					vec_a4,
 					vec_b4,
-					//signed char*& vec_c4, 
+					//double*& vec_c4, 
 					ab
 					
 				);
@@ -257,7 +258,7 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 				int percf = int(percfd);
 				if (percf == 0) { percf = 1; }
 				std::cout << " __________ Пройдено " << percf << "% __________" << endl;
-				
+			
 				unsigned long long tact6 = tact5 * percdr / tactraw;
 				unsigned long long tact7 = tact6 / percf * (100 - percf);
 				unsigned long long tact8 = 0;
@@ -288,6 +289,7 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 				else
 					std::cout << " __________ Рассчет почти завешен __________" << endl; 
 				tact8 = 0;
+				
 		}
 
 

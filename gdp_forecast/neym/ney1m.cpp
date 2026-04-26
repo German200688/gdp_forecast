@@ -8,7 +8,7 @@
 
 using namespace std;
 
-void layer1m::Weights1addition1m(vector<signed char>& Weights1m, vector<signed char>& Weights1, vector<int64_t>& Count) //количество весов в векторе всего, при добавлении одного показателя работает. countbefore c 1
+void layer1m::Weights1addition1m(vector<double>& Weights1m, vector<double>& Weights1, vector<int64_t>& Count) //количество весов в векторе всего, при добавлении одного показателя работает. countbefore c 1
 {
 
 	int64_t c8 = (Weights1.size() - Weights1m.size()) / 3;
@@ -17,9 +17,9 @@ void layer1m::Weights1addition1m(vector<signed char>& Weights1m, vector<signed c
 
 	for (int64_t i = 0; i < c8; i++)
 	{
-		Weights1m.push_back(-5);
-		Weights1m.push_back(-10);
-		Weights1m.push_back(-20);
+		Weights1m.push_back(-0.01);
+		Weights1m.push_back(-0.02);
+		Weights1m.push_back(-0.05);
 		//int64_t i11 = 3;
 		//Count[1] += i11;
 
@@ -29,7 +29,7 @@ void layer1m::Weights1addition1m(vector<signed char>& Weights1m, vector<signed c
 
 }
 
-void layer1m::neurons_count_ney1m(vector<vector<signed char>>& Outputs1m, vector<int64_t>& Count, int64_t& neurons_count)
+void layer1m::neurons_count_ney1m(vector<vector<double>>& Outputs1m, vector<int64_t>& Count, int64_t& neurons_count)
 
 {
 	
@@ -48,17 +48,17 @@ void layer1m::neurons_count_ney1m(vector<vector<signed char>>& Outputs1m, vector
 	}
 }
 
-void layer1m::neurons_count_quoter1m(vector<vector<signed char>>& Outputs1m, int64_t Quoter)
+void layer1m::neurons_count_quoter1m(vector<vector<double>>& Outputs1m, int64_t Quoter)
 
 {
 	
-	if (Outputs1m.size() == 0) { vector<signed char> t0 = { 0 }; Outputs1m.push_back(t0); }
+	if (Outputs1m.size() == 0) { vector<double> t0 = { 0 }; Outputs1m.push_back(t0); }
 	int64_t t0 = Outputs1m.size();
 	t0 -= 1;
 	int64_t t1 = Outputs1m[0].size();
 
 
-	vector<signed char> t3 = {};
+	vector<double> t3 = {};
 	for (int64_t i = 0; i < t1; i++)
 	{
 		t3.push_back(0);
@@ -77,7 +77,7 @@ void layer1m::neurons_count_quoter1m(vector<vector<signed char>>& Outputs1m, int
 }
 
 
-void layer1m::summneyquoter1m(vector<int64_t>& Count, vector<vector<signed char>>& Cash1, vector<signed char>& Weights1m, vector<vector<signed char>>& Outputs1m, int64_t Quoter, vector<string>& indicators) //квартал идет от 0
+void layer1m::summneyquoter1m(vector<int64_t>& Count, vector<vector<double>>& Cash1, vector<double>& Weights1m, vector<vector<double>>& Outputs1m, int64_t Quoter, vector<string>& indicators) //квартал идет от 0
 {
 	
 	Neyron obj1;
@@ -139,15 +139,15 @@ void layer1m::summneyquoter1m(vector<int64_t>& Count, vector<vector<signed char>
 	Count[2] = neurons_count; // количество нейронов
 
 	//Рассчет
-	vector<signed char> neyronin1 = {0, 0, 0}; 
-	vector<signed char > OutputQ1 = {};
-	vector<signed char> weight1 = {0, 0, 0};
+	vector<double> neyronin1 = {0, 0, 0}; 
+	vector<double > OutputQ1 = {};
+	vector<double> weight1 = {0, 0, 0};
 
-	vector<signed char> cashq = {}; //данные квартала в одном векторе
-	vector<signed char> neyronin1all = {}; //все данные
-	signed char in0 = 0;
-	signed char in1 = 0;
-	signed char in2 = 0;
+	vector<double> cashq = {}; //данные квартала в одном векторе
+	vector<double> neyronin1all = {}; //все данные
+	double in0 = 0;
+	double in1 = 0;
+	double in2 = 0;
 	int64_t i1 = 0;
 	int64_t i2 = 0;
 	int64_t i3 = 0;
@@ -187,21 +187,21 @@ void layer1m::summneyquoter1m(vector<int64_t>& Count, vector<vector<signed char>
 	}
 
 	//по 3 передаем в функцию
-	int64_t s0 = 0;
-	signed char out1 = 0;
+	int64_t s0 = 0.01;
+	double out1 = 0;
 	for (int64_t i = 0; i < neurons_count; i++)
 	{
 		neyronin1[0] = neyronin1all[s0];
 		weight1[0] = Weights1m[s0];
-		s0++;
+		s0 += 0.01;
 
 		neyronin1[1] = neyronin1all[s0];
 		weight1[1] = Weights1m[s0];
-		s0++;
+		s0 += 0.01;
 
 		neyronin1[2] = neyronin1all[s0];
 		weight1[2] = Weights1m[s0];
-		s0++;
+		s0 += 0.01;
 
 		out1 = obj1.valueneyTwoOnerm(neyronin1, weight1);
 		OutputQ1.push_back(out1);
@@ -214,7 +214,7 @@ void layer1m::summneyquoter1m(vector<int64_t>& Count, vector<vector<signed char>
 
 }
 
-void layer1m::summneyall1m(vector<int64_t>& Count, vector<vector<signed char>>& Cash1, vector<signed char>& Weights1m, vector<vector<signed char>>& Outputs1m, vector<string>& indicators)
+void layer1m::summneyall1m(vector<int64_t>& Count, vector<vector<double>>& Cash1, vector<double>& Weights1m, vector<vector<double>>& Outputs1m, vector<string>& indicators)
 
 {
 	int64_t Quoter = 0;
@@ -230,28 +230,28 @@ void layer1m::summneyall1m(vector<int64_t>& Count, vector<vector<signed char>>& 
 
 
 
-void layer1m::teachdel1m(vector<signed char >& delta2m, int64_t& Quoter, vector<vector<signed char>>& Weights2m, vector<signed char>& Weights1m, vector<vector<signed char>>& Outputs1m, vector<signed char >& delta1m)
+void layer1m::teachdel1m(vector<double >& delta2m, int64_t& Quoter, vector<vector<double>>& Weights2m, vector<double>& Weights1m, vector<vector<double>>& Outputs1m, vector<double >& delta1m)
 
 {
 
 	Neyron obj2;
 
-	vector<signed char > Outputs;
-	vector<signed char> Weightsl;
+	vector<double > Outputs;
+	vector<double> Weightsl;
 	int64_t t0 = Weights2m.size();
-	vector<signed char > delta(t0);
+	vector<double > delta(t0);
 
 	Outputs = Outputs1m[Quoter];
 	Weightsl = Weights2m[0];
 	int64_t t2 = Outputs1m[Quoter].size();
 	int64_t t1 = delta2m.size();
 
-	signed char alpha = 7;
+	double alpha = 0.07;
 	int64_t t9 = Weights2m.size();
 
 	for (int64_t i1 = 0; i1 < t2; i1++)
 	{
-		vector<signed char> Weightsll(t9);
+		vector<double> Weightsll(t9);
 		for (int64_t i0 = 0; i0 < t9; i0++)
 		{
 			Weightsll[i0] = Weights2m[i0][i1];
@@ -270,7 +270,7 @@ void layer1m::teachdel1m(vector<signed char >& delta2m, int64_t& Quoter, vector<
 
 /*
 
-void layer1m::teachdel1mam(vector<signed char >& delta2m, int64_t& Quoter, vector<vector<signed char>>& Weights2m, vector<signed char>& Weights1m, vector<vector<signed char>>& Outputs1m, vector<signed char >& delta1m, signed char*& dvec_a1, signed char*& dvec_b1, signed char*& dvec_c1)
+void layer1m::teachdel1mam(vector<double >& delta2m, int64_t& Quoter, vector<vector<double>>& Weights2m, vector<double>& Weights1m, vector<vector<double>>& Outputs1m, vector<double >& delta1m, double*& dvec_a1, double*& dvec_b1, double*& dvec_c1)
 
 {
 
@@ -279,22 +279,22 @@ void layer1m::teachdel1mam(vector<signed char >& delta2m, int64_t& Quoter, vecto
 
 
 	int64_t t0 = Weights2m.size();
-	vector<signed char > delta(t0);
-	signed char* deltama = delta.data();
+	vector<double > delta(t0);
+	double* deltama = delta.data();
 
-	signed char* Outputs = Outputs1m[Quoter].data();
-	signed char* Weightsl = Weights2m[0].data();
+	double* Outputs = Outputs1m[Quoter].data();
+	double* Weightsl = Weights2m[0].data();
 
 	int64_t t1 = delta2m.size();
 
-	signed char alpha = 100;
+	double alpha = 100;
 
 
 
 
 	for (int64_t i1 = 0; i1 < t1; i1++)
 	{
-		signed char a = delta2m[i1];
+		double a = delta2m[i1];
 
 		obj2.deltaMiddlemam(t1, Weightsl, deltama, a, alpha, Outputs, dvec_a1, dvec_b1, dvec_c1);
 
@@ -305,14 +305,14 @@ void layer1m::teachdel1mam(vector<signed char >& delta2m, int64_t& Quoter, vecto
 }
 
 */
-void layer1m::teach1m(int64_t& Quoter, vector<vector<signed char>>& Outputs1m, signed char alpha, vector<signed char>& Weights1m, vector<signed char >& delta1m)
+void layer1m::teach1m(int64_t& Quoter, vector<vector<double>>& Outputs1m, double alpha, vector<double>& Weights1m, vector<double >& delta1m)
 
 {
 	Neyron obj2;
 
 	//альфа*значение низ * дельта
 	int64_t t0 = Outputs1m[Quoter].size();
-	vector<signed char > Outputs(t0);
+	vector<double > Outputs(t0);
 
 	Outputs = Outputs1m[Quoter];
 	int64_t t1 = 3;
@@ -324,7 +324,7 @@ void layer1m::teach1m(int64_t& Quoter, vector<vector<signed char>>& Outputs1m, s
 
 	for (int64_t i = 0; i < t0; i++)
 	{
-		vector<signed char > Weightsn(3);
+		vector<double > Weightsn(3);
 		Weightsn[0] = Weights1m[t2];
 		t2++;
 		Weightsn[1] = Weights1m[t2];

@@ -9,7 +9,7 @@
 #include <regex>
 #include <map>
 #include <cstdint>
-#include <thread>
+//#include <thread>
 #include "increase.cpp"
 #include "bp2.cpp"
 #include "bp3.cpp"
@@ -30,7 +30,7 @@ using namespace std;
 
 
 
-void uploadparamd(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<int64_t>& Count, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<unsigned char>& vecdate ) // Пример - uploadparamd param: 4.1999 28,5; 2.1998 28; Нажимаем enter"
+void uploadparamd(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<int64_t>& Count, vector<vector<double>>& indicatDateInc, vector<vector<double>>& Cash1, vector<double>& vecdate ) // Пример - uploadparamd param: 4.1999 28,5; 2.1998 28; Нажимаем enter"
 
 {
 	Other obj3;
@@ -174,7 +174,7 @@ void uploadparamd(vector<string>& indicators, vector<vector<double>>& indicatDat
 	
 		int64_t dq1 = index[i];
 		int64_t dq2 = indicatDate[t9].size()-1;
-		signed char dq3 = 0;
+		double dq3 = 0;
 		if (dq2 < dq1)
 		{
 			
@@ -255,7 +255,7 @@ void info()
 
 
 
-void addparam(vector<string>& indicators, vector<signed char>& TheoWeights, vector<vector<double>>& indicatDate, int64_t count1, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<signed char>& Weights1, vector<signed char>& Weights1m, vector<int64_t>& Count, unsigned char& indicс)
+void addparam(vector<string>& indicators, vector<double>& TheoWeights, vector<vector<double>>& indicatDate, int64_t count1, vector<vector<double>>& indicatDateInc, vector<vector<double>>& Cash1, vector<double>& Weights1, vector<double>& Weights1m, vector<int64_t>& Count, double& indicс)
 {
 	
 	
@@ -272,7 +272,7 @@ void addparam(vector<string>& indicators, vector<signed char>& TheoWeights, vect
 		vvodparam.erase(0, 1);
 	}
 	
-	signed char weight = 0;
+	double weight = 0;
 	auto b1 = find(indicators.begin(), indicators.end(), vvodparam);
 	std::regex patQ1{R"(\s*$)"};
 		if (vvodparam.empty()) { std::cout << "Параметр не введен." << endl; return; }
@@ -290,9 +290,9 @@ void addparam(vector<string>& indicators, vector<signed char>& TheoWeights, vect
 		TheoWeights.push_back(weight);
 
 		vector<double > dates = {};
-		vector<signed char > dates2 = {};
+		vector<double > dates2 = {};
 		double b2 = 0.0;
-		signed char b3 = 0;
+		double b3 = 0;
 		for (int64_t i = 0; i < count1; i++) {
 			int64_t i1 = i - 1; dates.push_back(b2); dates2.push_back(b3);
 		}
@@ -335,7 +335,7 @@ void paramlist(vector<string>& indicators)
 
 
 
-void uploadtheor(vector<string>& indicators, vector<signed char>& TheoWeights, unsigned char& theorс) // Пример2: uploadtheor param: -15 нажимаем enter.
+void uploadtheor(vector<string>& indicators, vector<double>& TheoWeights, double& theorс) // Пример2: uploadtheor param: -15 нажимаем enter.
 {
 
 	Other obj3;
@@ -395,7 +395,7 @@ void uploadtheor(vector<string>& indicators, vector<signed char>& TheoWeights, u
 	int64_t t6 = 0;
 	while (t6 < 1 && cin >> t5) { t6++;}
 	if (t5>100 && t5 < -100) { std::cout << t5 << " не явялется показателем от -100 до 100." << endl; getline(cin, err); return;}
-	signed char TheoWeight = static_cast<signed char>(t5);
+	double TheoWeight = static_cast<double>(t5);
 	TheoWeights[t9] = TheoWeight;
 	obj3.additiondatedate(theorс);
 	std::cout << "В параметр " << indicator << " добавили теоретичиский коэффициент равный " << int64_t(TheoWeight) << "%." << endl;
@@ -406,7 +406,7 @@ void uploadtheor(vector<string>& indicators, vector<signed char>& TheoWeights, u
 
 
 
-void theorlist(vector<string>& indicators, vector<signed char>& TheoWeights)
+void theorlist(vector<string>& indicators, vector<double>& TheoWeights)
 {
 	string err;
 	int64_t i1 = indicators.size();
@@ -573,7 +573,7 @@ void paramdatelist(vector<string>& indicators, vector<vector<double>>& indicatDa
 
 
 
-void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<vector<signed char>>& indicatDateInc)
+void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<vector<double>>& indicatDateInc)
 {
 	
 	Other obj3;
@@ -623,7 +623,7 @@ void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vecto
 
 		for (int64_t i = 0; i < q3; i++)
 		{
-			signed char in0 = indicatDateInc[i][qy];
+			double in0 = indicatDateInc[i][qy];
 			int64_t in1 = int64_t(in0);
 			in1 = in1 * 2; // нивелируем шаг
 			double in2 = in1;
@@ -677,46 +677,46 @@ void offlinecheck (int64_t& percf, uint64_t& tact7)
 
 
 
-	void bpv(vector<string>& indicators, vector<signed char>& TheoWeights, vector<vector<double>>& indicatDate, vector<vector<signed char>>& indicatDateInc, vector<vector<signed char>>& Cash1, vector<int64_t>& Count,
-		vector<signed char>& Weights1,
-		vector<vector<signed char>>& Outputs1, 
-		vector<vector<signed char>>& Weights2, 
-		vector<vector<signed char>>& Outputs2,
-		vector<vector<signed char>>& Weights3,
-		vector<vector<signed char>>& Outputs3, 
-		vector<vector<signed char>>& Weights4,
-		vector<vector<signed char>>& Outputs4,
-		vector<vector<signed char>>& Weights5,
-		vector<signed char>& Weights1m, 
-	vector<vector<signed char>>& Weights2m, 
-	vector<vector<signed char>>& Weights3m, 
-	vector<vector<signed char>>& Weights4m, 
-	vector<vector<signed char>>& Weights5m, 
-	vector<vector<signed char>>& Outputs1m,
-	vector<vector<signed char>>& Outputs2m, 
-	vector<vector<signed char>>& Outputs3m, 
-	vector<vector<signed char>>& Outputs4m, 
-		const signed char& alpha,
+	void bpv(vector<string>& indicators, vector<double>& TheoWeights, vector<vector<double>>& indicatDate, vector<vector<double>>& indicatDateInc, vector<vector<double>>& Cash1, vector<int64_t>& Count,
+		vector<double>& Weights1,
+		vector<vector<double>>& Outputs1,
+		vector<vector<double>>& Weights2,
+		vector<vector<double>>& Outputs2,
+		vector<vector<double>>& Weights3,
+		vector<vector<double>>& Outputs3,
+		vector<vector<double>>& Weights4,
+		vector<vector<double>>& Outputs4,
+		vector<vector<double>>& Weights5,
+		vector<double>& Weights1m,
+	vector<vector<double>>& Weights2m,
+	vector<vector<double>>& Weights3m,
+	vector<vector<double>>& Weights4m,
+	vector<vector<double>>& Weights5m,
+	vector<vector<double>>& Outputs1m,
+	vector<vector<double>>& Outputs2m,
+	vector<vector<double>>& Outputs3m,
+	vector<vector<double>>& Outputs4m,
+		const double& alpha,
 		const int64_t& iterationney,
 		const int64_t& iteration
 
 	)
 {
 	
-		vector<unsigned char> vecdate;
-		unsigned char* indicс = new unsigned char(0);
-		unsigned char* theorс = new unsigned char(0);
+		vector<double> vecdate;
+		double* indicс = new double(0.0);
+		double* theorс = new double(0.0);
 		int64_t* percf = new int64_t(0);
 		uint64_t* tact71 = new uint64_t(0);
 	//	teach obj4;
 		Other obj3;
-		signed char result;
-		signed char result1;
-		signed char result2;
-		signed char a = 0;
-		// signed char alpha = 15;
+		double result;
+		double result1;
+		double result2;
+		double a = 0;
+		// double alpha = 15;
 	string err;
-	signed char p0 = 0;
+	double p0 = 0;
 
 	int64_t Quoter;
 
@@ -741,7 +741,7 @@ void offlinecheck (int64_t& percf, uint64_t& tact7)
 
 
 
-	signed char b2 = 0;
+	double b2 = 0;
 	
 
 	while (a < 1)
