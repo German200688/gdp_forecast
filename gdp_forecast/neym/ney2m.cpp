@@ -6,6 +6,7 @@
 #include "ney1m.h"
 #include "ney2m.h"
 #include "../kernel/nvidia/cuda/nvidiac.h"
+#include "../kernel/activat.h"
 //#include "../kernel/OB1.h"
 
 using namespace std;
@@ -254,11 +255,13 @@ void layer2m::summneyall2m(vector<int64_t>& Count, vector<vector<double>>& Outpu
 }
 
 
-void layer2m::teachdel2m(vector<double >& delta3m, int64_t& Quoter, vector<vector<double>>& Weights3m, vector<vector<double>>& Weights2m, vector<vector<double>>& Outputs2m, vector<double >& delta2m)
+void layer2m::teachdel2m(vector<double >& delta3m, int64_t& Quoter, vector<vector<double>>& Weights3m, vector<vector<double>>& Weights2m, vector<vector<double>>& Outputs2m, vector<vector<double>>& Outputs1m, vector<double >& delta2m, double& alpha)
 
 {
 	
 	Neyron obj2;
+	Activat Activat;
+	Neyron obj1;
 
 	vector<double > Outputs;
 	vector<double> Weightsl;
@@ -272,9 +275,49 @@ void layer2m::teachdel2m(vector<double >& delta3m, int64_t& Quoter, vector<vecto
 	int64_t t1 = delta3m.size();
 	int64_t t2 = Outputs2m[Quoter].size();
 
-	double alpha = 0.07;
+	//double alpha = 0.07;
 
 	int64_t t9 = Weights3m.size();
+
+
+	/////////////////////////////////////////////////////////////////
+	int64_t t01 = Outputs2m[0].size();
+	vector<double> neyronin(t01, 0);
+
+	neyronin = Outputs1m[Quoter];
+	double OutputD2 = 0;
+	vector<double > OUT2(t2, 0);
+	for (int64_t i = 0; i < t2; i++)
+
+	{
+
+
+		vector<double> Weight2 = Weights2m[i];
+
+
+
+		OUT2[i] = obj1.valueneyTwoOnerD(neyronin, Weight2);
+
+	}
+
+
+
+
+
+	for (int64_t i = 0; i < t0; i++)
+	{
+		OutputD2 += OUT2[i];
+
+	}
+
+	double OutputD2f = 0;
+	//OutputD4f = Other.sigm(OutputD4);
+	//OutputD4f = Other.tanhd(OutputD4);
+	OutputD2f = Activat.ssignd(OutputD2);
+
+
+	//////////////////////////////////////////////////////////////////
+
 
 	for (int64_t i1 = 0; i1 < t2; i1++)
 	{
@@ -285,7 +328,7 @@ void layer2m::teachdel2m(vector<double >& delta3m, int64_t& Quoter, vector<vecto
 
 		}
 
-		delta[i1] = obj2.deltaMiddle(t1, Weightsll, delta3m, alpha, Outputs[i1]);
+		delta[i1] = obj2.deltaMiddle(t1, Weightsll, delta3m, alpha, Outputs[i1], OutputD2f);
 		//summ (Weights4[i]*delta4[i])
 
 	}
@@ -294,11 +337,13 @@ void layer2m::teachdel2m(vector<double >& delta3m, int64_t& Quoter, vector<vecto
 }
 
 
-void layer2m::teachdel2mam(vector<double >& delta3m, int64_t& Quoter, vector<vector<double>>& Weights3m, vector<vector<double>>& Weights2m, vector<vector<double>>& Outputs2m, vector<double >& delta2m, double*& vec_a, double*& vec_b, double*& vec_c, double*& vec_d)
+void layer2m::teachdel2mam(vector<double >& delta3m, int64_t& Quoter, vector<vector<double>>& Weights3m, vector<vector<double>>& Weights2m, vector<vector<double>>& Outputs2m, vector<vector<double>>& Outputs1m, vector<double >& delta2m, double*& vec_a, double*& vec_b, double*& vec_c, double*& vec_d, double& alpha)
 
 {
 
 	Neyron obj2;
+	Activat Activat;
+	Neyron obj1;
 
 	vector<double > Outputs;
 	vector<double> Weightsl;
@@ -312,9 +357,50 @@ void layer2m::teachdel2mam(vector<double >& delta3m, int64_t& Quoter, vector<vec
 	int64_t t1 = delta3m.size();
 	int64_t t2 = Outputs2m[Quoter].size();
 
-	double alpha = 0.07;
+	//double alpha = 0.07;
 
 	int64_t t9 = Weights3m.size();
+
+
+
+	/////////////////////////////////////////////////////////////////
+	int64_t t01 = Outputs2m[0].size();
+	vector<double> neyronin(t01, 0);
+
+	neyronin = Outputs1m[Quoter];
+	double OutputD2 = 0;
+	vector<double > OUT2(t2, 0);
+	for (int64_t i = 0; i < t2; i++)
+
+	{
+
+
+		vector<double> Weight2 = Weights2m[i];
+
+
+
+		OUT2[i] = obj1.valueneyTwoOnerD(neyronin, Weight2);
+
+	}
+
+
+
+
+
+	for (int64_t i = 0; i < t0; i++)
+	{
+		OutputD2 += OUT2[i];
+
+	}
+
+	double OutputD2f = 0;
+	//OutputD4f = Other.sigm(OutputD4);
+	//OutputD4f = Other.tanhd(OutputD4);
+	OutputD2f = Activat.ssignd(OutputD2);
+
+
+	//////////////////////////////////////////////////////////////////
+
 
 	for (int64_t i1 = 0; i1 < t2; i1++)
 	{
@@ -325,7 +411,7 @@ void layer2m::teachdel2mam(vector<double >& delta3m, int64_t& Quoter, vector<vec
 
 		}
 
-		delta[i1] = obj2.deltaMiddle(t1, Weightsll, delta3m, alpha, Outputs[i1]);
+		delta[i1] = obj2.deltaMiddle(t1, Weightsll, delta3m, alpha, Outputs[i1], OutputD2f);
 		//summ (Weights4[i]*delta4[i])
 
 	}
@@ -339,7 +425,23 @@ void layer2m::teach2m(int64_t& Quoter, vector<vector<double>>& Outputs2m, double
 
 {
 	Neyron obj2;
-	
+
+	int64_t t0 = delta2m.size();
+	int64_t t00 = Outputs2m[Quoter].size();
+	vector<double > Outputs(t00);
+	Outputs = Outputs2m[Quoter];
+	int64_t t1 = Weights2m[0].size();
+	for (int64_t i0 = 0; i0 < t0; i0++)
+	{
+		double t01 = delta2m[i0];
+		//double* Weightsl = Weights3[i0].data();
+		//Weightsl - Outputs * t01;
+		//obj2.MiddleTeachM(Weightsl, Outputs, t01, t1, vec_d, vec_a, vec_b);
+		obj2.MiddleTeach(Weights2m[i0], Outputs, t01, t1, alpha);
+	}
+
+
+/*
 	//альфа*значение низ * дельта
 	int64_t t0 = Outputs2m[Quoter].size();
 	vector<double > Outputs(t0);
@@ -354,21 +456,36 @@ void layer2m::teach2m(int64_t& Quoter, vector<vector<double>>& Outputs2m, double
 		double delta = delta2[i];
 		vector<double > Weights = Weights2[i];
 		*/
+	/*
 		double t55 = delta2m[i];
 		Weights2m[i] = obj2.MiddleTeach(Weights2m[i], Outputs[i], delta2m[i], t1, alpha);
 
 	}
+	*/
 }
 
 
 
-void layer2m::teach2mam(int64_t& Quoter, vector<vector<double>>& Outputs2m, double alpham, vector<vector<double>>& Weights2m, vector<double >& delta2m, double*& vec_d, double*& vec_a)
+void layer2m::teach2mam(int64_t& Quoter, vector<vector<double>>& Outputs2m, double alpham, vector<vector<double>>& Weights2m, vector<double >& delta2m, double*& vec_d, double*& vec_a, double*& vec_b)
 
 {
 	nvidiac obj2;
 	//Signch obj1;
 
+	int64_t t0 = delta2m.size();
+	//int64_t t00 = Outputs3[Quoter].size();
+	double* Outputs = Outputs2m[Quoter].data();
+	int64_t t1 = Weights2m[0].size();
+	for (int64_t i0 = 0; i0 < t0; i0++)
+	{
+		double t01 = delta2m[i0];
+		double* Weightsl = Weights2m[i0].data();
+		//Weightsl - Outputs * t01;
+		obj2.MiddleTeachM(Weightsl, Outputs, t01, t1, vec_d, vec_a, vec_b, alpham);
 
+	}
+
+/*
 	//альфа*значение низ * дельта
 	int64_t t0 = Outputs2m[Quoter].size();
 	vector<double > Outputs(t0);
@@ -383,6 +500,7 @@ void layer2m::teach2mam(int64_t& Quoter, vector<vector<double>>& Outputs2m, doub
 		double delta = delta2[i];
 		vector<double > Weights = Weights2[i];
 		*/
+	/*
 		double t55 = delta2m[i];
 		double t11 = Outputs[i] * delta2m[i];
 			
@@ -392,4 +510,5 @@ void layer2m::teach2mam(int64_t& Quoter, vector<vector<double>>& Outputs2m, doub
 		double* Weightsl = Weights2m[i].data();
 		obj2.MiddleTeachM(Weightsl, t11, t1, vec_d, vec_a);
 	}
+	*/
 }

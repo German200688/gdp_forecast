@@ -153,7 +153,8 @@ __global__ void minusssm(double* am, double* bm, double* e2, int N)
 }
 
 
-__global__ void minussspm(double* am, double bm, double* e2, int N)
+__global__ void minussspm(double* am, double bm, double* e2, int N, double* amm, double alpha)
+//minussspm << < t_block, t_thread >> > (vec_d, delt, vec_a, size, vec_b);
 {
 	int th0 = blockIdx.x * blockDim.x + threadIdx.x;
 	if (th0 > N - 1) return;
@@ -166,7 +167,9 @@ __global__ void minussspm(double* am, double bm, double* e2, int N)
 	//else if (am[th0] < -60 && bm1 < -60 || am[th0] < -50 && bm1 < -70 || am[th0] < -40 && bm1 < -80 || am[th0] < -30 && bm1 < -90 || am[th0] < -20 && bm1 < -100 || am[th0] < -10 && bm1 < -110 || am[th0] < -0 && bm1 < -120 || bm1 < -50 && am[th0] < -70 || bm1 < -40 && am[th0] < -80 || bm1 < -30 && am[th0] < -90 || bm1 < -20 && am[th0] < -100 || bm1 < -10 && am[th0] < -110 || bm < -0 && am[th0] < -120) e2[th0] = 120;
 	//else
 	{
-		double e1 = am[th0] + bm1;
+		
+		double e1 = am[th0] - amm[th0] * bm1 * alpha;
+		if (e1 == 0) { e1 = 0.01; }
 		//if (e1 >= 120) e2[th0] = 120;
 		//else if (e1 <= -120) e2[th0] = -120;
 		//else 
@@ -264,7 +267,7 @@ __global__ void multttmrelm(double* vec_d, double Output, double delta, int N, d
 }
 */
 
-void nvidiac::addobj(double*& dvec_a1, double*& dvec_b1, double*& dvec_c1, double*& vec_a23, double*& vec_b23, double*& dvec_a4, double*& dvec_b4, double*& dvec_c4, double*& vec_a4, double*& vec_b4, int N1, int N23, int N4, int N44, double*& ab)
+void nvidiac::addobj(double*& dvec_a1, double*& dvec_b1, double*& dvec_c1, double*& vec_a23, double*& vec_b23, double*& dvec_a4, double*& dvec_b4, double*& dvec_c4, double*& vec_a4, double*& vec_b4, int N1, int N23, int N4, int N44, double*& ab, double*& vec_c23)
 {
 
 
@@ -281,7 +284,7 @@ void nvidiac::addobj(double*& dvec_a1, double*& dvec_b1, double*& dvec_c1, doubl
 
 	cudaMalloc((void**)&vec_a23, N23 * sizeof(double)); //10 нейрона
 	cudaMalloc((void**)&vec_b23, N23 * sizeof(double)); //10 нейрона
-	//cudaMalloc((void**)&vec_c23, N23 * sizeof(double)); //10 нейрона
+	cudaMalloc((void**)&vec_c23, N23 * sizeof(double)); //10 нейрона
 	cudaMalloc((void**)&dvec_a4, N4 * sizeof(double)); //6 нейрона
 	cudaMalloc((void**)&dvec_b4, N4 * sizeof(double)); //6 нейрона
 	cudaMalloc((void**)&dvec_c4, N4 * sizeof(double)); //6 нейрона
@@ -335,7 +338,8 @@ void nvidiac::deltaMiddlema(int64_t& Weightslsize, double*& Weightsl, double*& d
 {
 	int64_t t_block = 1;
 	int64_t t_thread = 512;
-	double alpha1 = 0.07;
+	double alpha1 = alpha;
+	//double alpha1 = 0.21;
 	// определяю блоки Weightslsize - не более 1 500 000 
 	if (Weightslsize < 512) { t_block = 1;}
 	else
@@ -392,9 +396,11 @@ void nvidiac::deltaMiddlemam(int64_t& Weightslsize, double*& Weightsl, double*& 
 }
 
 
-void nvidiac::MiddleTeachM(double*& Weightsl, double& rawdata, int64_t& size, double*& vec_d, double*& vec_a)
+void nvidiac::MiddleTeachM(double*& Weightsl, double*& rawdata, double& delt, int64_t& size, double*& vec_d, double*& vec_a, double*& vec_b, double alpha)
+//// obj2.MiddleTeachM(Weightsl, Outputs, t01, t1, vec_d, vec_a, vec_b);
 {
 	
+	//double alpha = 0.21;
 	int64_t t_block = 1;
 	int64_t t_thread = 512;
 	// определяю блоки Weightslsize - не более 1 500 000 
@@ -411,8 +417,9 @@ void nvidiac::MiddleTeachM(double*& Weightsl, double& rawdata, int64_t& size, do
 	
 	
 	cudaMemcpy(vec_d, Weightsl, size * sizeof(double), cudaMemcpyHostToDevice);
+	cudaMemcpy(vec_b, rawdata, size * sizeof(double), cudaMemcpyHostToDevice);
 
-	minussspm << < t_block, t_thread >> > (vec_d, rawdata, vec_a, size);
+	minussspm << < t_block, t_thread >> > (vec_d, delt, vec_a, size, vec_b, alpha);
 	
 
 	cudaMemcpy(Weightsl, vec_a, size * sizeof(double), cudaMemcpyDeviceToHost);
@@ -426,14 +433,17 @@ void nvidiac::MiddleTeachM(double*& Weightsl, double& rawdata, int64_t& size, do
 
 
 
-void nvidiac::deltafimanma4(double*& delta, double& delta1, int64_t& size, double*& Outputs, double*& Weightsl, double*& dvec_a4, double*& dvec_b4, double*& dvec_c4, double*& ab)
+void nvidiac::deltafimanma4(double*& delta, double& delta1, int64_t& size, double*& Outputs, double*& Weightsl, double*& dvec_a4, double*& dvec_b4, double*& dvec_c4, double*& ab, double alpha3)
 {
 	
 	
 	
 	int64_t t_block = 1;
 	int64_t t_thread = 512;
-	double alpha3 = 0.07;
+	
+
+	//
+	// double alpha3 = 0.21;
 	// определяю блоки size - не более 1 500 000 
 	if (size < 512) { t_block = 1; }
 	else
@@ -461,13 +471,13 @@ void nvidiac::deltafimanma4(double*& delta, double& delta1, int64_t& size, doubl
 
 
 
-void nvidiac::deltafimanmam4(double*& delta, double& delta1, int64_t& size, double*& Outputs, double*& Weightsl, double*& dvec_a4, double*& dvec_b4, double*& dvec_c4, double*& ab)
+void nvidiac::deltafimanmam4(double*& delta, double& delta1, int64_t& size, double*& Outputs, double*& Weightsl, double*& dvec_a4, double*& dvec_b4, double*& dvec_c4, double*& ab, double alpha3)
 {
 
 	
 	int64_t t_block = 1;
 	int64_t t_thread = 512;
-	double alpha3 = 0.07;
+	//double alpha3 = 0.21;
 	// определяю блоки size - не более 1 500 000 
 	if (size < 512) { t_block = 1; }
 	else

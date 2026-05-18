@@ -11,7 +11,7 @@ using namespace std;
 void layer1m::Weights1addition1m(vector<double>& Weights1m, vector<double>& Weights1, vector<int64_t>& Count) //количество весов в векторе всего, при добавлении одного показателя работает. countbefore c 1
 {
 
-	int64_t c8 = (Weights1.size() - Weights1m.size()) / 3;
+	int64_t c8 = (Weights1.size() - Weights1m.size()) / 2;
 
 
 
@@ -19,7 +19,7 @@ void layer1m::Weights1addition1m(vector<double>& Weights1m, vector<double>& Weig
 	{
 		Weights1m.push_back(-0.01);
 		Weights1m.push_back(-0.02);
-		Weights1m.push_back(-0.05);
+		//Weights1m.push_back(-0.05);
 		//int64_t i11 = 3;
 		//Count[1] += i11;
 
@@ -86,7 +86,7 @@ void layer1m::summneyquoter1m(vector<int64_t>& Count, vector<vector<double>>& Ca
 	//проверяем данные
 	int64_t ind1 = indicators.size();
 	int64_t neurons_count = 0;
-	int64_t neurons_weights = 3;
+	int64_t neurons_weights = 2;
 	int64_t t0 = Count.size();
 	if (t0 <= 1) { Count.push_back(0); }
 	if (t0 <= 2) { Count.push_back(0); }
@@ -139,9 +139,9 @@ void layer1m::summneyquoter1m(vector<int64_t>& Count, vector<vector<double>>& Ca
 	Count[2] = neurons_count; // количество нейронов
 
 	//Рассчет
-	vector<double> neyronin1 = {0, 0, 0}; 
+	vector<double> neyronin1 = {0, 0}; 
 	vector<double > OutputQ1 = {};
-	vector<double> weight1 = {0, 0, 0};
+	vector<double> weight1 = {0, 0};
 
 	vector<double> cashq = {}; //данные квартала в одном векторе
 	vector<double> neyronin1all = {}; //все данные
@@ -169,14 +169,14 @@ void layer1m::summneyquoter1m(vector<int64_t>& Count, vector<vector<double>>& Ca
 		i2 = i1 +1;
 		while (i2 < c1)
 		{
-			i3 = i2+1;
-			while (i3 < c1)
-			{
+			//i3 = i2+1;
+			//while (i3 < c1)
+			//{
 				neyronin1all.push_back(cashq [i1]);
 				neyronin1all.push_back(cashq[i2]);
-				neyronin1all.push_back(cashq[i3]);
-				i3++;
-			}
+				//neyronin1all.push_back(cashq[i3]);
+				//i3++;
+			//}
 
 
 			i2++;
@@ -186,24 +186,22 @@ void layer1m::summneyquoter1m(vector<int64_t>& Count, vector<vector<double>>& Ca
 		i1++;
 	}
 
-	//по 3 передаем в функцию
-	int64_t s0 = 0.01;
+	//по 2 передаем в функцию
+	int64_t s0 = 0;
 	double out1 = 0;
 	for (int64_t i = 0; i < neurons_count; i++)
 	{
 		neyronin1[0] = neyronin1all[s0];
 		weight1[0] = Weights1m[s0];
-		s0 += 0.01;
+		s0++;
 
 		neyronin1[1] = neyronin1all[s0];
 		weight1[1] = Weights1m[s0];
-		s0 += 0.01;
+		s0++;
 
-		neyronin1[2] = neyronin1all[s0];
-		weight1[2] = Weights1m[s0];
-		s0 += 0.01;
+	
 
-		out1 = obj1.valueneyTwoOnerm(neyronin1, weight1);
+		out1 = obj1.valueneyTwoOner(neyronin1, weight1);
 		OutputQ1.push_back(out1);
 
 	}
@@ -230,7 +228,7 @@ void layer1m::summneyall1m(vector<int64_t>& Count, vector<vector<double>>& Cash1
 
 
 
-void layer1m::teachdel1m(vector<double >& delta2m, int64_t& Quoter, vector<vector<double>>& Weights2m, vector<double>& Weights1m, vector<vector<double>>& Outputs1m, vector<double >& delta1m)
+void layer1m::teachdel1m(vector<double >& delta2m, int64_t& Quoter, vector<vector<double>>& Weights2m, vector<double>& Weights1m, vector<vector<double>>& Outputs1m, vector<double >& delta1m, double alpha)
 
 {
 
@@ -246,7 +244,7 @@ void layer1m::teachdel1m(vector<double >& delta2m, int64_t& Quoter, vector<vecto
 	int64_t t2 = Outputs1m[Quoter].size();
 	int64_t t1 = delta2m.size();
 
-	double alpha = 0.07;
+	//double alpha = 0.07;
 	int64_t t9 = Weights2m.size();
 
 	for (int64_t i1 = 0; i1 < t2; i1++)
@@ -257,8 +255,8 @@ void layer1m::teachdel1m(vector<double >& delta2m, int64_t& Quoter, vector<vecto
 			Weightsll[i0] = Weights2m[i0][i1];
 
 		}
-
-		delta[i1] = obj2.deltaMiddle(t1, Weightsll, delta2m, alpha, Outputs[i1]);
+		double imvar = 1;
+		delta[i1] = obj2.deltaMiddle(t1, Weightsll, delta2m, alpha, Outputs[i1], imvar);
 		//summ (Weights4[i]*delta4[i])
 
 	}
@@ -270,7 +268,7 @@ void layer1m::teachdel1m(vector<double >& delta2m, int64_t& Quoter, vector<vecto
 
 /*
 
-void layer1m::teachdel1mam(vector<double >& delta2m, int64_t& Quoter, vector<vector<double>>& Weights2m, vector<double>& Weights1m, vector<vector<double>>& Outputs1m, vector<double >& delta1m, double*& dvec_a1, double*& dvec_b1, double*& dvec_c1)
+void layer1m::teachdel1mam(vector<double >& delta2m, int64_t& Quoter, vector<vector<double>>& Weights2m, vector<double>& Weights1m, vector<vector<double>>& Outputs1m, vector<double >& delta1m, double*& dvec_a1, double*& dvec_b1, double*& dvec_c1, , double alpha)
 
 {
 
@@ -287,7 +285,7 @@ void layer1m::teachdel1mam(vector<double >& delta2m, int64_t& Quoter, vector<vec
 
 	int64_t t1 = delta2m.size();
 
-	double alpha = 100;
+	//double alpha = 100;
 
 
 
@@ -305,55 +303,133 @@ void layer1m::teachdel1mam(vector<double >& delta2m, int64_t& Quoter, vector<vec
 }
 
 */
-void layer1m::teach1m(int64_t& Quoter, vector<vector<double>>& Outputs1m, double alpha, vector<double>& Weights1m, vector<double >& delta1m)
+void layer1m::teach1m(int64_t& Quoter, vector<vector<double>>& Cash1, double alpha, vector<double>& Weights1m, vector<double >& delta1m)
 
 {
+	
 	Neyron obj2;
 
-	//альфа*значение низ * дельта
-	int64_t t0 = Outputs1m[Quoter].size();
-	vector<double > Outputs(t0);
+	//Наполняем вектор входной данные
+	vector<double> neyronin1all;
+	vector<double> cashq = {}; //данные квартала в одном векторе
+	// наполняем вектор данными только квартала
+	int64_t t80 = Cash1.size();
 
-	Outputs = Outputs1m[Quoter];
-	int64_t t1 = 3;
-	int64_t t2 = 0;
-	int64_t t3 = 0;
-
-		///Weightsa1[0].size();
-
-
-	for (int64_t i = 0; i < t0; i++)
+	for (int64_t i = 0; i < t80; i++)
 	{
-		vector<double > Weightsn(3);
-		Weightsn[0] = Weights1m[t2];
-		t2++;
-		Weightsn[1] = Weights1m[t2];
-		t2++;
-		Weightsn[2] = Weights1m[t2];
-		t2++;
+		cashq.push_back(Cash1[i][Quoter]);
+	}
+	int64_t c10 = cashq.size();
 
-		Weightsn = obj2.MiddleTeach(Weightsn, Outputs[i], delta1m[i], t1, alpha);
-		if(Weightsn[0] == 0)
+	int64_t i10 = 0;
+	int64_t i20 = 0;
+	int64_t i30 = 0;
+
+	while (i10 < c10)
+	{
+		i20 = i10 + 1;
+		while (i20 < c10)
 		{
-			Weightsn[0] = 1;
+			//i30 = i20 + 1;
+			//while (i30 < c10)
+			//{
+				neyronin1all.push_back(cashq[i10]);
+				neyronin1all.push_back(cashq[i20]);
+				//neyronin1all.push_back(cashq[i30]);
+				//i30++;
+			//}
+
+
+			i20++;
 		}
 
-		if (Weightsn[1] == 0)
-		{
-			Weightsn[1] = 1;
-		}
+
+		i10++;
+	}
 
 
-		if (Weightsn[2] == 0)
+	//альфа*значение низ * дельта
+	int64_t t0 = neyronin1all.size();
+	vector<vector<double >> Outputs;
+	vector<vector<double >> Wheits;
+
+	int64_t i01 = 0;
+	int64_t i02 = 0;
+
+	while (i01 < t0)
+	{
+		vector<double > Output;
+		vector<double > Wheit;
+
+		while (i02 < 2)
 		{
-			Weightsn[2] = 1;
+			Output.push_back(neyronin1all[i01]);
+			Wheit.push_back(Weights1m[i01]);
+			i02++;
+			i01++;
+
 		}
-		Weights1m[t3] = Weightsn[0];
-		t3++;
-		Weights1m[t3] = Weightsn[1];
-		t3++;
-		Weights1m[t3] = Weightsn[2];
-		t3++;
+		Outputs.push_back(Output);
+		Wheits.push_back(Wheit);
+
+
+		i02 = 0;
 
 	}
+
+	int64_t t01 = Outputs.size();
+
+	for (int64_t i = 0; i < t01; i++)
+	{
+		double t0 = delta1m[i];
+		vector<double > Output2(2);
+		vector<double > Wheit2(2);
+		Output2 = Outputs[i];
+		Wheit2 = Wheits[i];
+		for (int64_t i1 = 0; i1 < 2; i1++)
+		{
+			{
+				vector<double > Output;
+				vector<double > Wheit;
+				Output.push_back(Output2[i1]);
+				Wheit.push_back(Wheit2[i1]);
+				for (int64_t i2 = 0; i2 < 1; i2++)
+				{
+					int64_t t155 = 1;
+					obj2.MiddleTeach(Wheit, Output, t0, t155, alpha);
+
+				}
+				Wheit2[i1] = Wheit[0];
+
+
+			}
+			Wheits[i] = Wheit2;
+
+		}
+
+		int64_t i001 = 0;
+		int64_t i002 = 0;
+		int64_t i003 = 0;
+
+
+		while (i001 < t0)
+		{
+
+			while (i002 < 2)
+			{
+
+				Weights1m[i001] = Wheits[i003][i002];
+				i002++;
+				i001++;
+
+			}
+
+			i003++;
+			i002 = 0;
+
+		}
+
+
+	}
+
 }

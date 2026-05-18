@@ -111,21 +111,23 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 
 	obj2.summneyquoter1(Count, Cash1, Weights1, Outputs1, qy2, indicators);
 	double tttt1 = Weights1[2];
-	cout << tttt1 << endl;
+	cout << "Weights1[2] " << tttt1 << endl;
+	cout << "Outputs1 " << std::fixed << std::setprecision(17) << Outputs1[qy2][3] << "%" << endl;
 	
 	// "Данные идущие на вход второго отрицательного слоя:" 
 
-	//obj21.summneyquoter1m(Count, Cash1, Weights1m, Outputs1m, qy2, indicators);
+	obj21.summneyquoter1m(Count, Cash1, Weights1m, Outputs1m, qy2, indicators);
 
 	
 
 	// "Расчет весов для 2-го положительного слоя:" 
 	obj4.summneyquoter2(Count, Outputs1, Weights2, Outputs2, qy2);
 	double tttt2 = Weights2[2][2];
-	cout << tttt2 << endl;
+	cout << "Weights2[2][2] " << tttt2 << endl;
+	cout << "Outputs2 " << std::fixed << std::setprecision(17) << Outputs2[qy2][3] << "%" << endl;
 	
 	//"Расчет весов для 2-го отрицательного слоя:"
-	//obj41.summneyquoter2m(Count, Outputs1m, Weights2m, Outputs2m, qy2);
+	obj41.summneyquoter2m(Count, Outputs1m, Weights2m, Outputs2m, qy2);
 /*
 	// "Данные идущие на вход 3-го положительного слоя:"
 
@@ -138,9 +140,11 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 	// "Расчет весов 3-го положительного слоя:"
 	obj5.summneyquoter3(Count, Outputs2, Weights3, Outputs3, qy2);
 	double tttt3 = Weights3[3][2];
-	cout << tttt3 << endl;
+	cout << "Weights3[3][2] " << tttt3 << endl;
+	cout << "Outputs3 " << std::fixed << std::setprecision(17) << Outputs3[qy2][3] << "%" << endl;
+
 	// "Расчет весов 3-го отрицательного слоя:"
-	//obj51.summneyquoter3m(Count, Outputs2m, Weights3m, Outputs3m, qy2);
+	obj51.summneyquoter3m(Count, Outputs2m, Weights3m, Outputs3m, qy2);
 
 	
 
@@ -148,24 +152,26 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 	// "Рассчет весов 4-го положительно слоя:"
 	obj44.summneyquoter4(Count, Outputs3, Weights4, Outputs4, qy2);
 	double tttt4 = Weights4[3][2];
-	cout << tttt4 << endl;
-	
+	cout << "Weights4[3][2] " << tttt4 << endl;
+	cout << "Outputs4 " << std::fixed << std::setprecision(17) << Outputs4[qy2][3] << "%" << endl;
 
 	//"Рассчет весов 4-го отрицателльного слоя:"
-	//obj441.summneyquoter4m(Count, Outputs3m, Weights4m, Outputs4m, qy2);
+	obj441.summneyquoter4m(Count, Outputs3m, Weights4m, Outputs4m, qy2);
 
 
 
 	//рассчет результата 5го слоя положительного
 	result1 = weightsumm(Weights5, Outputs4, qy2);
-	cout << result1 << endl;
+	//cout << "result1" << result1 << endl;
+	cout << "result1 " << std::fixed << std::setprecision(17) << result1 << "%" << endl;
+
 
 	//рассчет результата 5го слоя отрицительного
-	//result2 = weightsumm(Weights5m, Outputs4m, qy2);
-	//cout << int(result2) << endl;
+	result2 = weightsumm(Weights5m, Outputs4m, qy2);
+	cout << int(result2) << endl;
 
-	//if (std::abs(static_cast<int64_t>(result1)) > std::abs(static_cast<int64_t>(result2))) result = result1;
-	//else 
+	if (std::abs(static_cast<int64_t>(result1)) > std::abs(static_cast<int64_t>(result2))) result = result1;
+	else 
 		result = result1;
 	
 
@@ -269,7 +275,7 @@ void teachquoter(int64_t& Quoter1, double& result1, double& result2, double& res
 	
 	teachdel3(result2, incr4, delta5m);
 	
-	obj7.teachdel4(delta5, Quoter, Weights5, Weights4, Outputs4, delta4);
+	obj7.teachdel4(delta5, Quoter, Weights5, Weights4, Outputs4, Outputs3, delta4, alpha);
 #ifdef _DEBUG
 	cout << " после рассчета int(delta4[i]):" << endl;
 
@@ -280,9 +286,9 @@ void teachquoter(int64_t& Quoter1, double& result1, double& result2, double& res
 	}
 #endif
 
-	obj71.teachdel4m(delta5m, Quoter, Weights5m, Weights4m, Outputs4m, delta4m);
+	obj71.teachdel4m(delta5m, Quoter, Weights5m, Weights4m, Outputs4m, Outputs3m, delta4m, alpha);
 
-	obj6.teachdel3(delta4, Quoter, Weights4, Weights3, Outputs3, delta3);
+	obj6.teachdel3(delta4, Quoter, Weights4, Weights3, Outputs3, Outputs2, delta3, alpha);
 #ifdef _DEBUG
 	cout << " после рассчета int(delta3[i]):" << endl;
 
@@ -293,9 +299,9 @@ void teachquoter(int64_t& Quoter1, double& result1, double& result2, double& res
 	}
 #endif
 
-	obj61.teachdel3m(delta4m, Quoter, Weights4m, Weights3m, Outputs3m, delta3m);
+	obj61.teachdel3m(delta4m, Quoter, Weights4m, Weights3m, Outputs3m, Outputs2m, delta3m, alpha);
 
-	obj4.teachdel2(delta3, Quoter, Weights3, Weights2, Outputs2, delta2);
+	obj4.teachdel2(delta3, Quoter, Weights3, Weights2, Outputs2, Outputs1, delta2, alpha);
 #ifdef _DEBUG
 	cout << " после рассчета int(delta2[i]):" << endl;
 
@@ -306,9 +312,9 @@ void teachquoter(int64_t& Quoter1, double& result1, double& result2, double& res
 	}
 #endif
 
-	obj41.teachdel2m(delta3m, Quoter, Weights3m, Weights2m, Outputs2m, delta2m);
+	obj41.teachdel2m(delta3m, Quoter, Weights3m, Weights2m, Outputs2m, Outputs1m, delta2m, alpha);
 
-	obj5.teachdel1(delta2, Quoter, Weights2, Weights1, Outputs1, delta1);
+	obj5.teachdel1(delta2, Quoter, Weights2, Weights1, Outputs1, delta1, alpha);
 #ifdef _DEBUG
 	cout << " после рассчета int(delta1[i]):" << endl;
 
@@ -319,9 +325,9 @@ void teachquoter(int64_t& Quoter1, double& result1, double& result2, double& res
 	}
 #endif
 
-	obj51.teachdel1m(delta2m, Quoter, Weights2m, Weights1m, Outputs1m, delta1m);
+	obj51.teachdel1m(delta2m, Quoter, Weights2m, Weights1m, Outputs1m, delta1m, alpha);
 
-	teachlayer3(Weights5, Quoter, Outputs4, delta5);
+	teachlayer3(Weights5, Quoter, Outputs4, delta5, alpha);
 #ifdef _DEBUG
 	cout << " после рассчета Weights5[0]:" << endl;
 
@@ -332,7 +338,7 @@ void teachquoter(int64_t& Quoter1, double& result1, double& result2, double& res
 	}
 #endif
 
-	teachlayer3(Weights5m, Quoter, Outputs4m, delta5m);
+	teachlayer3(Weights5m, Quoter, Outputs4m, delta5m, alpha);
 
 
 

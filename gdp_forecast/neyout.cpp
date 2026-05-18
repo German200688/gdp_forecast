@@ -24,14 +24,14 @@ void teachdel3(const double& neyrontest, const double& neyrontestres, vector<dou
 
 
 
-void teachlayer3(vector<vector<double>>& Weights5, int64_t Quoter,  vector<vector<double>>& Outputs4, vector<double >& delta5)
+void teachlayer3(vector<vector<double>>& Weights5, int64_t Quoter,  vector<vector<double>>& Outputs4, vector<double >& delta5, double& alpha)
 
 {
 	Neyron obj;
 
 	double t0 = delta5[0];
 
-	obj.dellayerlast(Weights5, Quoter, Outputs4, t0);
+	obj.dellayerlast(Weights5, Quoter, Outputs4, t0, alpha);
 
 }
 
@@ -44,7 +44,7 @@ void printerrr(double& result)
 	double in2 = in1;
 	in2 = in2; // корректно отображаем десятые процента
 	
-	cout << "В указанном квартале ожидается прирост ВВП в размере " << in2 << "%" << endl;
+	cout << "В указанном квартале ожидается прирост ВВП в размере " << std::fixed << std::setprecision(17) << in2 << "%" << endl;
 
 }
 

@@ -3,6 +3,8 @@
 #include <iostream>
 #include <cctype>
 #include <chrono>
+#include <algorithm>
+#include <cmath>
 #include "other.h"
 
 #pragma once
@@ -10,6 +12,12 @@
 using namespace std;
 
 atomic<bool> offlineUse = false;
+// функция tanh
+
+
+
+
+
 
 string Other::readcincheck(string& errmes, string& data)
 {

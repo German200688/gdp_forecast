@@ -538,7 +538,7 @@ void teacher(int64_t& Quoter, double& result1, double& result2, double& result, 
 
 
 	
-	obj7.teachdel4(delta5, Quoter, Weights5, Weights4, Outputs4, delta4);
+	obj7.teachdel4(delta5, Quoter, Weights5, Weights4, Outputs4, Outputs3, delta4, alpha);
 	int64_t a0111 = delta4.size();
 	cout << "!!!!!teachdel4(delta5, Quoter, Weights5, Weights4, Outputs4, delta4) !" << endl;
 	for (int64_t i = 0; i < a0111; i++)
@@ -549,7 +549,7 @@ void teacher(int64_t& Quoter, double& result1, double& result2, double& result, 
 
 
 	
-	obj71.teachdel4m(delta5, Quoter, Weights5m, Weights4m, Outputs4m, delta4m);
+	obj71.teachdel4m(delta5, Quoter, Weights5m, Weights4m, Outputs4m, Outputs3m, delta4m, alpha);
 	int64_t a011 = delta4.size();
 	cout << "!!!!!teachdel4m(delta5, Quoter, Weights5m, Weights4m, Outputs4m, delta4m) !" << endl;
 	for (int64_t i = 0; i < a011; i++)
@@ -561,7 +561,7 @@ void teacher(int64_t& Quoter, double& result1, double& result2, double& result, 
 
 
 	
-	obj6.teachdel3(delta4, Quoter, Weights4, Weights3, Outputs3, delta3);
+	obj6.teachdel3(delta4, Quoter, Weights4, Weights3, Outputs3, Outputs2, delta3, alpha);
 
 	int64_t a1 = delta3.size();
 	std::cout << "!!!!!teachdel3(delta4, Quoter, Weights4, Weights3, Outputs3, delta3) !" << endl;
@@ -573,7 +573,7 @@ void teacher(int64_t& Quoter, double& result1, double& result2, double& result, 
 
 
 	
-	obj61.teachdel3m(delta4m, Quoter, Weights4m, Weights3m, Outputs3m, delta3m);
+	obj61.teachdel3m(delta4m, Quoter, Weights4m, Weights3m, Outputs3m, Outputs2m, delta3m, alpha);
 
 	int64_t a11 = delta3m.size();
 	std::cout << "!!!!!teachdel3m(delta4m, Quoter, Weights4m, Weights3m, Outputs3m, delta3m) !" << endl;
@@ -585,7 +585,7 @@ void teacher(int64_t& Quoter, double& result1, double& result2, double& result, 
 	
 
 	
-	obj4.teachdel2(delta3, Quoter, Weights3, Weights2, Outputs2, delta2);
+	obj4.teachdel2(delta3, Quoter, Weights3, Weights2, Outputs2, Outputs1, delta2, alpha);
 	int64_t a1111 = delta2.size();
 	std::cout << "!!!!!teachdel2(delta3, Quoter, Weights3, Weights2, Outputs2, delta2) !" << endl;
 	for (int64_t i = 0; i < a1111; i++)
@@ -596,7 +596,7 @@ void teacher(int64_t& Quoter, double& result1, double& result2, double& result, 
 
 
 	
-	obj41.teachdel2m(delta3m, Quoter, Weights3m, Weights2m, Outputs2m, delta2m);
+	obj41.teachdel2m(delta3m, Quoter, Weights3m, Weights2m, Outputs2m, Outputs1m, delta2m, alpha);
 	int64_t a111 = delta2m.size();
 	std::cout << "!!!!!teachdel2m(delta3m, Quoter, Weights3m, Weights2m, Outputs2m, delta2m) !" << endl;
 	for (int64_t i = 0; i < a111; i++)
@@ -609,7 +609,7 @@ void teacher(int64_t& Quoter, double& result1, double& result2, double& result, 
 	
 
 	
-	obj5.teachdel1(delta2, Quoter, Weights2, Weights1, Outputs1, delta1);
+	obj5.teachdel1(delta2, Quoter, Weights2, Weights1, Outputs1, delta1, alpha);
 
 	int64_t a2 = delta1.size();
 	std::cout << "!!!!!teachdel1(delta2, Quoter, Weights2, Weights1, Outputs1, delta1) !" << endl;
@@ -621,7 +621,7 @@ void teacher(int64_t& Quoter, double& result1, double& result2, double& result, 
 
 
 	
-	obj51.teachdel1m(delta2m, Quoter, Weights2m, Weights1m, Outputs1m, delta1m);
+	obj51.teachdel1m(delta2m, Quoter, Weights2m, Weights1m, Outputs1m, delta1m, alpha);
 
 	int64_t a21 = delta1.size();
 	std::cout << "!!!!!teachdel1m(delta2m, Quoter, Weights2m, Weights1m, Outputs1m, delta1m) !" << endl;
@@ -636,7 +636,7 @@ void teacher(int64_t& Quoter, double& result1, double& result2, double& result, 
 
 
 	
-	teachlayer3(Weights5, Quoter, Outputs4, delta5);
+	teachlayer3(Weights5, Quoter, Outputs4, delta5, alpha);
 
 	int64_t a3 = Weights5[0].size();
 	std::cout << "!!!!!teachlayer3(Weights5, Quoter, Outputs4, delta5) !" << endl;
@@ -647,7 +647,7 @@ void teacher(int64_t& Quoter, double& result1, double& result2, double& result, 
 	}
 
 	
-	teachlayer3(Weights5m, Quoter, Outputs4m, delta5m);
+	teachlayer3(Weights5m, Quoter, Outputs4m, delta5m, alpha);
 
 	int64_t a31 = Weights5m[0].size();
 	std::cout << "!!!!!teachlayer3(Weights5m, Quoter, Outputs4m, delta5m) !" << endl;

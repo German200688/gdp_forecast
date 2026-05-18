@@ -4,8 +4,10 @@
 #include <chrono>
 #include <iostream>
 #include <cstdint>
-#include "relu.hpp"
+#include "activat.h"
+#include "other.h"
 
+#pragma once
 
 using namespace std;
 
@@ -95,14 +97,14 @@ double Neyron::valueneyTwoOne(vector<double>& neyronin, vector<double>& weight)
 
  }
 
- vector <double> Neyron::teacherOneTwo(vector <double> weight1, double input, int64_t ig, int64_t ip)
+ vector <double> Neyron::teacherOneTwo(vector <double> weight1, double input, int64_t ig, int64_t ip, double alpha)
  {
 	 
 	 //Signch obj;
 
 	 double igres;
 	 double ipres;
-	 double alpha = 0.07;
+	 //double alpha = 0.21;
 
 	 igres = weight1[ig];
 	 ipres = weight1[ip];
@@ -120,14 +122,12 @@ double Neyron::valueneyTwoOne(vector<double>& neyronin, vector<double>& weight)
 
  }
 
-
-
- double Neyron::valueneyTwoOner(vector<double>& neyronin, vector<double>& weight)
+ double Neyron::valueneyTwoOnerD(vector<double>& neyronin, vector<double>& weight)
 
  {
 
-	// Signch obj;
-	 Relu obj4;
+	 // Signch obj;
+	 //Relu obj4;
 	 if (neyronin.empty() || weight.empty()) return (0);
 
 	 vector<double> vzveshney = {};
@@ -142,9 +142,9 @@ double Neyron::valueneyTwoOne(vector<double>& neyronin, vector<double>& weight)
 		 double t3 = neyronin[i];
 		 double t4 = weight[i];
 		 double t1 = t3 * t4;
-			 //obj.multtt(t3, t4);
+		 //obj.multtt(t3, t4);
 		 double t10 = t1;
-			 //obj4.relup(t1);
+		 //obj4.relup(t1);
 
 		 vzveshney.push_back(t10);
 		 i--;
@@ -177,12 +177,251 @@ double Neyron::valueneyTwoOne(vector<double>& neyronin, vector<double>& weight)
  }
 
 
+ double Neyron::valueneyTwoOner(vector<double>& neyronin, vector<double>& weight)
+
+ {
+
+	 // Signch obj;
+	 //Relu obj4;
+	 //Other Other;
+	 if (neyronin.empty() || weight.empty()) return (0);
+
+	 vector<double> vzveshney = {};
+
+	 int64_t i = 0;
+	 if (weight.size() > neyronin.size()) i = neyronin.size() - 1;
+	 else i = weight.size() - 1;
+
+	 while (i >= 0)
+	 {
+
+		 double t3 = neyronin[i];
+		 double t4 = weight[i];
+		 double t1 = t3 * t4; /////////////////////маленькое число
+		 //obj.multtt(t3, t4);
+//////////////////////////////////////////////////////////////////////////////////	 
+		 //double t10 = Other.ssign(t1);
+		 //t10 = t1 * t10;
+		 //obj4.relup(t1);
+//////////////////////////////////////////////////////////////////////////////////
+		 vzveshney.push_back(t1);
+		 i--;
+
+
+	 }
+	 double t2 = 0;
+	 double t2i = 0;
+	 i = vzveshney.size() - 1;
+
+
+	 while (i >= 0)
+	 {
+
+		 double t5 = neyronin[i];
+		 double t6 = weight[i];
+		 t2i = t2i + vzveshney[i];
+		 //t2 = obj.plusss(t2, vzveshney[i]);
+		 i--;
+
+
+	 }
+	 i = vzveshney.size();
+	 double  t21i = t2i;
+	 t2 = t21i;
+
+	 return (t2);
+
+
+ }
+
+
+
+ double Neyron::valueneyTwoOner2(vector<double>& neyronin, vector<double>& weight)
+
+ {
+
+	// Signch obj;
+	 //Relu obj4;
+	 Activat Activat;
+	 if (neyronin.empty() || weight.empty()) return (0);
+
+	 vector<double> vzveshney = {};
+
+	 int64_t i = 0;
+	 if (weight.size() > neyronin.size()) i = neyronin.size() - 1;
+	 else i = weight.size() - 1;
+
+	 while (i >= 0)
+	 {
+
+		 double t3 = neyronin[i];
+		 double t4 = weight[i];
+		 double t1 = t3 * t4; /////////////////////маленькое число
+			 //obj.multtt(t3, t4);
+	//////////////////////////////////////////////////////////////////////////////////	 
+		 double t10 = Activat.ssign(t1);
+		 t10 = t1 * t10;
+			 //obj4.relup(t1);
+//////////////////////////////////////////////////////////////////////////////////
+		 vzveshney.push_back(t10);
+		 i--;
+
+
+	 }
+	 double t2 = 0;
+	 double t2i = 0;
+	 i = vzveshney.size() - 1;
+
+
+	 while (i >= 0)
+	 {
+
+		 double t5 = neyronin[i];
+		 double t6 = weight[i];
+		 t2i = t2i + vzveshney[i];
+		 //t2 = obj.plusss(t2, vzveshney[i]);
+		 i--;
+
+
+	 }
+	 i = vzveshney.size();
+	 double  t21i = t2i;
+	 t2 = t21i;
+
+	 return (t2);
+
+
+ }
+
+
+
+ double Neyron::valueneyTwoOner3(vector<double>& neyronin, vector<double>& weight)
+
+ {
+
+	 // Signch obj;
+	// Relu obj4;
+	 Activat Activat;
+	 if (neyronin.empty() || weight.empty()) return (0);
+
+	 vector<double> vzveshney = {};
+
+	 int64_t i = 0;
+	 if (weight.size() > neyronin.size()) i = neyronin.size() - 1;
+	 else i = weight.size() - 1;
+
+	 while (i >= 0)
+	 {
+
+		 double t3 = neyronin[i];
+		 double t4 = weight[i];
+		 double t1 = t3 * t4; /////////////////////маленькое число
+		 //obj.multtt(t3, t4);
+//////////////////////////////////////////////////////////////////////////////////	 
+		 double t10 = Activat.tanh(t1);
+		 t10 = t1 * t10;
+		 //obj4.relup(t1);
+//////////////////////////////////////////////////////////////////////////////////
+		 vzveshney.push_back(t10);
+		 i--;
+
+
+	 }
+	 double t2 = 0;
+	 double t2i = 0;
+	 i = vzveshney.size() - 1;
+
+
+	 while (i >= 0)
+	 {
+
+		 double t5 = neyronin[i];
+		 double t6 = weight[i];
+		 t2i = t2i + vzveshney[i];
+		 //t2 = obj.plusss(t2, vzveshney[i]);
+		 i--;
+
+
+	 }
+	 i = vzveshney.size();
+	 double  t21i = t2i;
+	 t2 = t21i;
+
+	 return (t2);
+
+
+ }
+
+
+
+ double Neyron::valueneyTwoOner4(vector<double>& neyronin, vector<double>& weight)
+
+ {
+
+	 // Signch obj;
+	// Relu obj4;
+	 Activat Activat;
+	 if (neyronin.empty() || weight.empty()) return (0);
+
+	 vector<double> vzveshney = {};
+
+	 int64_t i = 0;
+	 if (weight.size() > neyronin.size()) i = neyronin.size() - 1;
+	 else i = weight.size() - 1;
+
+	 while (i >= 0)
+	 {
+
+		 double t3 = neyronin[i];
+		 double t4 = weight[i];
+		 double t1 = t3 * t4; /////////////////////маленькое число
+		 //obj.multtt(t3, t4);
+//////////////////////////////////////////////////////////////////////////////////	 
+		 double t10 = Activat.swish(t1);
+		 //double t10 = Activat.ssign(t1);
+		 t10 = t1 * t10;
+		 //obj4.relup(t1);
+//////////////////////////////////////////////////////////////////////////////////
+		 vzveshney.push_back(t10);
+		 i--;
+
+
+	 }
+	 double t2 = 0;
+	 double t2i = 0;
+	 i = vzveshney.size() - 1;
+
+
+	 while (i >= 0)
+	 {
+
+		 double t5 = neyronin[i];
+		 double t6 = weight[i];
+		 t2i = t2i + vzveshney[i];
+		 //t2 = obj.plusss(t2, vzveshney[i]);
+		 i--;
+
+
+	 }
+	 i = vzveshney.size();
+	 double  t21i = t2i;
+	 t2 = t21i;
+
+	 return (t2);
+
+
+ }
+
+
+
  double Neyron::valueneyTwoOnerm(vector<double>& neyronin, vector<double>& weight)
 
  {
 
 	 //Signch obj;
-	 Relu obj4;
+	 //Relu obj4;
+	 Activat Activat;
+
 	 if (neyronin.empty() || weight.empty()) return (0);
 
 	 vector<double> vzveshney = {};
@@ -198,8 +437,10 @@ double Neyron::valueneyTwoOne(vector<double>& neyronin, vector<double>& weight)
 		 double t4 = weight[i];
 		 double t1 = t3 * t4;
 			 //obj.multtt(t3, t4);
-		 double t10 = t1;
+		 /////////////////////////////////////////
+		 double t10 = t1 * Activat.ssign(t1);;
 			 //obj4.relum(t1);
+		 /////////////////////////////////////////////////////
 
 		 vzveshney.push_back(t10);
 		 i--;
@@ -234,13 +475,18 @@ double Neyron::valueneyTwoOne(vector<double>& neyronin, vector<double>& weight)
 
 
 
-
- vector<double> Neyron::valueneyOneTwor(vector<double>& neyronin, vector<double>& weight)
+ /// <summary>
+ /// //////////////////////////////////ГДЕ ИСПОЛЬЗУЕТСЯ!!!
+ /// </summary>
+ /// <param name="neyronin"></param>
+ /// <param name="weight"></param>
+ /// <returns></returns>
+ vector<double> Neyron::valueneyOneTwor(vector<double>& neyronin, vector<double>& weight, double a)
 
  {
 
 	// Signch obj;
-	 Relu obj4;
+	 Activat obj4;
 
 	 vector<double> vzveshney = {};
 	 if (neyronin.empty() || weight.empty()) return (vzveshney);
@@ -258,7 +504,8 @@ double Neyron::valueneyTwoOne(vector<double>& neyronin, vector<double>& weight)
 		 double t4 = weight[i];
 		 double t1 = t3 * t4;
 			// obj.multtt(t3, t4);
-		 double t10 = obj4.relup(t1);
+		// double t10 = obj4.relup(t1);
+		 double t10 = t1;
 
 		 vzveshney.push_back(t10);
 
@@ -272,14 +519,13 @@ double Neyron::valueneyTwoOne(vector<double>& neyronin, vector<double>& weight)
  }
 
 
-
-
+ 
  vector<double> Neyron::valueneyOneTworm(vector<double>& neyronin, vector<double>& weight)
 
  {
 
 	// Signch obj;
-	 Relu obj4;
+	 Activat obj4;
 
 	 vector<double> vzveshney = {};
 	 if (neyronin.empty() || weight.empty()) return (vzveshney);
@@ -297,8 +543,8 @@ double Neyron::valueneyTwoOne(vector<double>& neyronin, vector<double>& weight)
 		 double t4 = weight[i];
 		 double t1 = t3 * t4;
 			 //obj.multtt(t3, t4);
-		 double t10 = obj4.relum(t1);
-
+		 //double t10 = obj4.relum(t1);
+		 double t10 = t1;
 		 vzveshney.push_back(t10);
 
 	 }
@@ -334,15 +580,15 @@ double Neyron::valueneyTwoOne(vector<double>& neyronin, vector<double>& weight)
  }
 
 
- void Neyron::dellayerlast(vector<vector<double>>& Weights3, int64_t Quoter, vector<vector<double>>& Outputs2, const double& delta)
+ void Neyron::dellayerlast(vector<vector<double>>& Weights3, int64_t Quoter, vector<vector<double>>& Outputs2, const double& delta, double alpha)
 
  {
 	// Signch obj;
 
 	 int64_t t1 = Outputs2[Quoter].size();
 	 int64_t t10 = Outputs2.size();
-
-	 double alpha3 = 0.07;
+	 double alpha3 = alpha;
+	 //double alpha3 = 0.21;
 
 	 for (int64_t i = 0; i < t1; i++)
 	 {
@@ -363,13 +609,15 @@ double Neyron::valueneyTwoOne(vector<double>& neyronin, vector<double>& weight)
  }
 
 
- double Neyron::deltaMiddle(int64_t Weightslsize, vector<double >& Weights, vector<double >& delta, double& alpha, double& Outputs)
+ double Neyron::deltaMiddle(int64_t Weightslsize, vector<double >& Weights, vector<double >& delta, double& alpha, double& Outputs, double& OutputD4f)
  {
-	 Relu obj;
+	 //Relu obj;
 	// Signch obj1;
 	 double deltaraw = 0;
 	 double deltaraw1 = 0;
-	 double alpha3 = 0.07;
+	 double deltaraw2 = 0;
+	 double alpha3 = alpha;
+	 //double alpha3 = 0.21;
 
 	 //if (obj.reludivp(Outputs) == 0) { return 0; }
 	 //else
@@ -385,7 +633,7 @@ double Neyron::valueneyTwoOne(vector<double>& neyronin, vector<double>& weight)
 			// if (deltaraw == 120 || deltaraw == -120) break;
 
 		 }
-
+		 deltaraw2 = deltaraw * OutputD4f;
 		 return deltaraw;
 	 }
 	 
@@ -395,7 +643,7 @@ double Neyron::valueneyTwoOne(vector<double>& neyronin, vector<double>& weight)
 
  double Neyron::deltafin(int64_t Weightslsize, double& Weight, double& delta, double& alpha, double& Outputs)
  {
-	 Relu obj;
+	 //Relu obj;
 	 //Signch obj1;
 	 double deltaraw = 0;
 	 //if (obj.reludivp(Outputs) == 0) { return 0; }
@@ -422,11 +670,11 @@ double Neyron::valueneyTwoOne(vector<double>& neyronin, vector<double>& weight)
 
  double Neyron::deltaMiddlem(int64_t Weightslsize, vector<double >& Weights, vector<double >& delta, double& alpha, double& Outputs)
  {
-	 Relu obj;
+	 Activat obj;
 	// Signch obj1;
 	 double deltaraw = 0;
-	 if (obj.reludivm(Outputs) == 0) { return 0; }
-	 else
+	 //if (obj.reludivm(Outputs) == 0) { return 0; }
+	 //else
 	 {
 
 		 for (int64_t i6 = 0; i6 < Weightslsize; i6++)
@@ -444,13 +692,15 @@ double Neyron::valueneyTwoOne(vector<double>& neyronin, vector<double>& weight)
 	 }
  }
 
+
+
  double Neyron::deltafinm(int64_t Weightslsize, double& Weight, double& delta, double& alpha, double& Outputs)
  {
-	 Relu obj;
+	 Activat obj;
 	// Signch obj1;
 	 double deltaraw = 0;
-	 if (obj.reludivp(Outputs) == 0) { return 0; }
-	 else
+	 //if (obj.reludivp(Outputs) == 0) { return 0; }
+	 //else
 	 {
 
 
@@ -470,23 +720,25 @@ double Neyron::valueneyTwoOne(vector<double>& neyronin, vector<double>& weight)
  }
 
 
- vector<double > Neyron::MiddleTeach(vector<double >& Weights, double& Output, double& delta, int64_t& size, double& alpha1)
+ vector<double > Neyron::MiddleTeach(vector<double >& Weights, vector<double >& Output, double& delta, int64_t& size, double& alpha1)
  {
 	// Relu obj;
 	// Signch obj1;
-	 double alpha = 0.07;
+	 double alpha = alpha1;
+	 
+	 //double alpha = 0.21;
 
 	 for (int64_t i1 = 0; i1 < size; i1++)
 	 {
 		
-		 double t1 = Output * delta;
+		 double t1 = Output[i1] * delta;
 			 //obj1.multtt(Output, delta);
 		 double t2 = t1 * alpha;
 			 //obj1.multtt(t1, alpha);
-		 if (t2 == 0) { t2 = 1; }
-		 double t20 = Weights[i1] * t2;
+		 //if (t2 == 0) { t2 = 1; }
+		 double t20 = Weights[i1] - t2;
 			 //obj1.minusss(Weights[i1], t2);
-		 if (t20 == 0) { Weights[i1] = 1; }
+		 if (t20 == 0) { Weights[i1] = 0.01; }
 		 else Weights[i1] = t20;
 
 			

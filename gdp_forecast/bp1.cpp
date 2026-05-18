@@ -626,7 +626,7 @@ void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vecto
 			double in0 = indicatDateInc[i][qy];
 			int64_t in1 = int64_t(in0);
 			in1 = in1 * 2; // нивелируем шаг
-			double in2 = in1;
+			double in2 = in0 * 100;
 			in2 = in2 / 10; // корректно отображаем десятые процента
 			std::cout << indicators[i] << "    " << in2 << "%;" << endl;
 

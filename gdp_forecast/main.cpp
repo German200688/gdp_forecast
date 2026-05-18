@@ -59,7 +59,7 @@ int main()
 	vector<vector<double>> Outputs4m; // исходы
 
 	string linkfile = "";
-	double alpha = 100;
+	double alpha = 0.21;
 	int64_t iterationney = 1;
 	int64_t iteration = 1;
 
@@ -68,8 +68,8 @@ int main()
 	configf = obj1.configread();
 	linkfile = configf["linkfile:"];
 	string alphas = configf["alpha:"];
-	int64_t alphai = stoi(alphas);
-	alpha = static_cast<double>(alphai);
+	//int64_t alphai = stoi(alphas);
+	alpha = stod(alphas);//static_cast<double>(alphai);
 	string iterationneys = configf["iterationney:"];
 	iterationney = stoi(iterationneys);
 	string iterationst = configf["iteration:"];

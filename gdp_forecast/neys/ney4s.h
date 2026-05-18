@@ -20,9 +20,9 @@ protected:
 public:
 	void summneyquoter4(vector<int64_t>& Count, vector<vector<double>>& Outputs3, vector<vector<double>>& Weights4, vector<vector<double>>& Outputs4, int64_t Quoter);
 	void summneyall4(vector<int64_t>& Count, vector<vector<double>>& Outputs3, vector<vector<double>>& Weights4, vector<vector<double>>& Outputs4);
-	void teachdel4(vector<double >& delta5, int64_t& Quoter, vector<vector<double>>& Weights5, vector<vector<double>>& Weights4, vector<vector<double>>& Outputs4, vector<double >& delta4);
+	void teachdel4(vector<double >& delta5, int64_t& Quoter, vector<vector<double>>& Weights5, vector<vector<double>>& Weights4, vector<vector<double>>& Outputs4, vector<vector<double>>& Outputs3, vector<double >& delta4, double alpha);
 	void teach4(int64_t& Quoter, vector<vector<double>>& Outputs4, double alpha, vector<vector<double>>& Weights4, vector<double >& delta4);
-	void teachdel4ma(vector<double >& delta5, int64_t& Quoter, vector<vector<double>>& Weights5, vector<vector<double>>& Weights4, vector<vector<double>>& Outputs4, vector<double >& delta4, double*& vec_a, double*& vec_b, double*& vec_c, double*& ab);
-	void teach4ma(int64_t& Quoter, vector<vector<double>>& Outputs4, double alpha, vector<vector<double>>& Weights4, vector<double >& delta4, double*& vec_d, double*& vec_a);
+	void teachdel4ma(vector<double >& delta5, int64_t& Quoter, vector<vector<double>>& Weights5, vector<vector<double>>& Weights4, vector<vector<double>>& Outputs4, vector<vector<double>>& Outputs3, vector<double >& delta4, double*& dvec_a4, double*& dvec_b4, double*& dvec_c4, double*& ab, double&  alpha);
+	void teach4ma(int64_t& Quoter, vector<vector<double>>& Outputs4, double alpha, vector<vector<double>>& Weights4, vector<double >& delta4, double*& vec_d, double*& vec_a, double*& vec_b);
 
 };

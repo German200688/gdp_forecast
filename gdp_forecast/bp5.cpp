@@ -110,7 +110,8 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 			check = obj3.checkcin();
 			if (check == true) { cin >> dateraw; }
 
-			char t0 = dateraw.back();
+			char t0 = 0;
+			t0 = dateraw.back();
 
 			char t5 = ';';
 			int64_t a = 4;
@@ -137,7 +138,8 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 					incr3 = -100;
 				}
 				*/
-				double incr4 = incr3;
+				double t685 = 100.0;
+				double incr4 = incr3; /// t685;
 				double incrf = incr4;
 
 				vector <double > dates12(2);
@@ -157,7 +159,7 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 	getline(cin, err);
 	std::cout << "Значения приняты. Начинаем рассчет" << endl;
 
-	double* dvec_a1, * dvec_b1, * dvec_c1, *vec_a23, *vec_b23, *dvec_a4, *dvec_b4, *dvec_c4, *vec_a4, *vec_b4, * ab;
+	double* dvec_a1, * dvec_b1, * dvec_c1, *vec_a23, *vec_b23, *dvec_a4, *dvec_b4, *dvec_c4, *vec_a4, *vec_b4, * ab, *vec_c23;
 		//int N1, int N23, int N4, int N44, double*& ab
 
 	int64_t Quoter = int64_t(dates[0][0]);
@@ -185,7 +187,7 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 	int64_t N4 = Weights5[0].size();
 
 
-	obj1.addobj(dvec_a1, dvec_b1, dvec_c1, vec_a23, vec_b23, dvec_a4, dvec_b4, dvec_c4, vec_a4, vec_b4, N1, N23, N4, N44, ab);
+	obj1.addobj(dvec_a1, dvec_b1, dvec_c1, vec_a23, vec_b23, dvec_a4, dvec_b4, dvec_c4, vec_a4, vec_b4, N1, N23, N4, N44, ab, vec_c23);
 	int64_t t12 = dates.size();
 	int64_t percraw = iterationney * t12 * iteration;
 	double percdr = 0;
@@ -236,15 +238,15 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 					//double*& vec_c1, 
 					vec_a23,
 					vec_b23,
-					//double*& vec_c23, 
+					vec_c23, 
 					dvec_a4,
 					dvec_b4,
 					dvec_c4,
 					vec_a4,
 					vec_b4,
 					//double*& vec_c4, 
-					ab
-					
+					ab,
+					Cash1
 				);
 				percdr += 1.0;
 				unsigned long long tact4 = __rdtsc();
