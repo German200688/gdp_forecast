@@ -312,10 +312,10 @@ void layer4m::teachdel4m(vector<double >& delta5m, int64_t& Quoter, vector<vecto
 
 	}
 
-	double OutputD4f = 0;
+	double OutputD4f = 1;
 	//OutputD4f = Other.sigm(OutputD4);
-	//OutputD4f = Other.tanhd(OutputD4);
-	OutputD4f = Activat.swishd(OutputD4);
+	//OutputD4f = Activat.tanhd(OutputD4);
+	//OutputD4f = Activat.swishd(OutputD4);
 
 	double delta1f = delta1m * OutputD4f;
 	//////////////////////////////////////////////////////////////////
@@ -387,10 +387,10 @@ void layer4m::teachdel4mam(vector<double >& delta5m, int64_t& Quoter, vector<vec
 
 	}
 
-	double OutputD4f = 0;
+	double OutputD4f = 1;
 	//OutputD4f = Other.sigm(OutputD4);
-	//OutputD4f = Other.tanhd(OutputD4);
-	OutputD4f = Activat.swishd(OutputD4);
+	//OutputD4f = Activat.tanhd(OutputD4);
+	//OutputD4f = Activat.swishd(OutputD4);
 
 	double delta1f = delta1 * OutputD4f;
 	//////////////////////////////////////////////////////////////////

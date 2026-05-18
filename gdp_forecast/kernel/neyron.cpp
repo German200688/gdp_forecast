@@ -377,8 +377,11 @@ double Neyron::valueneyTwoOne(vector<double>& neyronin, vector<double>& weight)
 		 double t1 = t3 * t4; /////////////////////маленькое число
 		 //obj.multtt(t3, t4);
 //////////////////////////////////////////////////////////////////////////////////	 
-		 double t10 = Activat.swish(t1);
+		// double t10 = Activat.swish(t1);
+		// 
 		 //double t10 = Activat.ssign(t1);
+		// double t10 = Activat.tanh(t1);
+		 double t10 = 1;
 		 t10 = t1 * t10;
 		 //obj4.relup(t1);
 //////////////////////////////////////////////////////////////////////////////////
@@ -570,7 +573,7 @@ double Neyron::valueneyTwoOne(vector<double>& neyronin, vector<double>& weight)
 		 delta.pop_back();
 		 t0 = delta.size();
 	 }
-
+	 //double t1 = neyrontestres - neyrontest;
 	 double t1 = neyrontest - neyrontestres;
 		 //obj.minusss(neyrontest, neyrontestres);
 	 delta.push_back(t1);

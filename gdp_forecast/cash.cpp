@@ -56,15 +56,16 @@ void cashquoter(int64_t quot, vector<double>& TheoWeights, vector<vector<double>
 	double mean = cashmean(cashq);
 	double var = cashvar(cashq, mean);
 
-	double t100 = 4;
+
+	double t100 = 1;
 
 
 	for (int64_t i = 0; i < t1; i++)
 	{
         
 		double t6 = cashq[i];
-		double t7 = t6 - var;
-		double t8 = t7 / mean;
+		double t7 = t6 - mean;
+		double t8 = t7 / var;
 		double t9 = t8 / t100;
 			//obj1.multtt(t3, t4);
 		Cash1[i][quot] = t9;

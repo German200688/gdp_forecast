@@ -19,7 +19,7 @@ double calculation(double predate, double actdate)
 	if (predate == 0.0) { incr4 = 0;  return incr4;}
 	if (actdate == 0.0) { incr4 = 0;  return incr4; }
 	incr1 = actdate / predate - 1.0;
-	incr2 = incr1; //* t112; //x*100*10/2 - 100-переводим в проценты; 10 - переводим в десятые процента; 2 - добавляем шаг равный 2
+	incr2 = incr1 * t112; //x*100*10/2 - 100-переводим в проценты; 10 - переводим в десятые процента; 2 - добавляем шаг равный 2
 	incr3 = incr2;
 	/*
 	while (incr3 > 100)
