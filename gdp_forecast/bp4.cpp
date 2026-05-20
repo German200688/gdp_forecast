@@ -356,9 +356,9 @@ void calcgdpteach(vector<string>& indicators, vector<vector<double>>& indicatDat
 	result2 = weightsumm(Weights5m, Outputs4m, qy2);
 
 
-	if (std::abs(static_cast<int64_t>(result1)) > std::abs(static_cast<int64_t>(result2))) result = result1;
+	if (std::abs(result1) > std::abs(result2)) result = result1;
 	else 
-		result = result1;
+		result = result2;
 
 
 //	printerrr(result);

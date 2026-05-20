@@ -24,5 +24,5 @@ public:
 	void teach4m(int64_t& Quoter, vector<vector<double>>& Outputs4m, double alpham, vector<vector<double>>& Weights4m, vector<double >& delta4m);
 	void teachdel4mam(vector<double >& delta5, int64_t& Quoter, vector<vector<double>>& Weights5, vector<vector<double>>& Weights4, vector<vector<double>>& Outputs4, vector<vector<double>>& Outputs3m, vector<double >& delta4, double*& vec_a, double*& vec_b, double*& vec_c, double*& vec_d, double& alpha);
 	void teach4mam(int64_t& Quoter, vector<vector<double>>& Outputs4m, double alpham, vector<vector<double>>& Weights4m, vector<double >& delta4m, double*& vec_d, double*& vec_a, double*& vec_b);
-
+	double valueneyTwoOner4m(vector<double>& neyronin, vector<double>& weight);
 };

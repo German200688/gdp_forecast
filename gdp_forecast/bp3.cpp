@@ -168,11 +168,11 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 
 	//рассчет результата 5го слоя отрицительного
 	result2 = weightsumm(Weights5m, Outputs4m, qy2);
-	cout << int(result2) << endl;
+	cout << "result2 " << std::fixed << std::setprecision(17) << result2 << "%" << endl;
 
-	if (std::abs(static_cast<int64_t>(result1)) > std::abs(static_cast<int64_t>(result2))) result = result1;
+	if (std::abs(result1) > std::abs(result2)) result = result1;
 	else 
-		result = result1;
+		result = result2;
 	
 
 	printerrr(result);

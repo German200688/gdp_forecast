@@ -377,11 +377,11 @@ double Neyron::valueneyTwoOne(vector<double>& neyronin, vector<double>& weight)
 		 double t1 = t3 * t4; /////////////////////маленькое число
 		 //obj.multtt(t3, t4);
 //////////////////////////////////////////////////////////////////////////////////	 
-		// double t10 = Activat.swish(t1);
+		 double t10 = Activat.swish(t1);
 		// 
 		 //double t10 = Activat.ssign(t1);
 		// double t10 = Activat.tanh(t1);
-		 double t10 = 1;
+		// double t10 = 1;
 		 t10 = t1 * t10;
 		 //obj4.relup(t1);
 //////////////////////////////////////////////////////////////////////////////////
@@ -415,7 +415,66 @@ double Neyron::valueneyTwoOne(vector<double>& neyronin, vector<double>& weight)
 
  }
 
+ double Neyron::valueneyTwoOner4m(vector<double>& neyronin, vector<double>& weight)
 
+ {
+
+	 // Signch obj;
+	// Relu obj4;
+	 Activat Activat;
+	 if (neyronin.empty() || weight.empty()) return (0);
+
+	 vector<double> vzveshney = {};
+
+	 int64_t i = 0;
+	 if (weight.size() > neyronin.size()) i = neyronin.size() - 1;
+	 else i = weight.size() - 1;
+
+	 while (i >= 0)
+	 {
+
+		 double t3 = neyronin[i];
+		 double t4 = weight[i];
+		 double t1 = t3 * t4; /////////////////////маленькое число
+		 //obj.multtt(t3, t4);
+//////////////////////////////////////////////////////////////////////////////////	 
+		 double t10 = Activat.gswish(t1);
+		 // 
+		  //double t10 = Activat.ssign(t1);
+		 // double t10 = Activat.tanh(t1);
+		// double t10 = 1;
+		 t10 = t1 * t10;
+		 //obj4.relup(t1);
+//////////////////////////////////////////////////////////////////////////////////
+		 vzveshney.push_back(t10);
+		 i--;
+
+
+	 }
+	 double t2 = 0;
+	 double t2i = 0;
+	 i = vzveshney.size() - 1;
+
+
+	 while (i >= 0)
+	 {
+
+		 double t5 = neyronin[i];
+		 double t6 = weight[i];
+		 t2i = t2i + vzveshney[i];
+		 //t2 = obj.plusss(t2, vzveshney[i]);
+		 i--;
+
+
+	 }
+	 i = vzveshney.size();
+	 double  t21i = t2i;
+	 t2 = t21i;
+
+	 return (t2);
+
+
+ }
 
  double Neyron::valueneyTwoOnerm(vector<double>& neyronin, vector<double>& weight)
 

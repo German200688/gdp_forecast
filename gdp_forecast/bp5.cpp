@@ -193,8 +193,15 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 	double percdr = 0;
 	int t666 = 1;
 	unsigned long long tact5 = 0;
+
+	
+	double err3 = 0;
+
 	for (int64_t i0 = 0; i0 < iteration; i0++)
 	{
+		double err2 = 0;
+		double err4 = 0;
+
 		for (int64_t i1 = 0; i1 < t12; i1++)
 		{
 			int64_t quot = int64_t(dates[i1][0]);
@@ -218,7 +225,7 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 					Outputs4m
 				);
 
-
+				double err1 = (result - res) * (result - res);
 
 				teachquoterm(quot, result1, result2, result, Weights5, Weights4, Weights3, Weights2, Weights1, Outputs4, Outputs3, Outputs2, Outputs1, alpha, res,
 					Weights1m,
@@ -251,53 +258,70 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 				percdr += 1.0;
 				unsigned long long tact4 = __rdtsc();
 				tact5 = (tact5 + (tact4 - tact3)) / 2;
-				std::cout << tact5 << endl;
+				//std::cout << tact5 << endl;
+
+				err2 += err1;
 
 				t666++;
 				
 			}
-			double percfd = percdr / double(percraw) * 100.0;
-				int percf = int(percfd);
-				if (percf == 0) { percf = 1; }
-				std::cout << " __________ Пройдено " << percf << "% __________" << endl;
+
+
+
+			err4 = err4 + (err2 / iterationney);
+
+
 			
-				unsigned long long tact6 = tact5 * percdr / tactraw;
-				unsigned long long tact7 = tact6 / percf * (100 - percf);
-				unsigned long long tact8 = 0;
-				if (tact7 > 7200000)
-				{
-
-					tact8 = tact7 / 3600000;
-					std::cout << " __________ До завершения обучения осталось около " << tact8 << " часов __________" << endl;
-				}
-				else if (tact7 > 3600000 && tact7 <= 7200000)
-				{
-					//tact8 = tact7 / 3600000;
-					std::cout << " __________ До завершения обучения осталось около " << "1" << " часа __________" << endl;
-				}
-
-				else if (tact7 > 60000 && tact7 <= 3600000)
-				{
-					tact8 = tact7 / 60000;
-					std::cout << " __________ До завершения обучения осталось около " << tact8 << " минут __________" << endl;
-				}
-
-				else if (tact7 > 1000 && tact7 <= 60000)
-				{
-					tact8 = tact7 / 1000;
-					std::cout << " __________ До завершения обучения осталось около " << tact8 << " секунд __________" << endl;
-				}
-
-				else
-					std::cout << " __________ Рассчет почти завешен __________" << endl; 
-				tact8 = 0;
 				
 		}
 
 
 
+		double percfd = percdr / double(percraw) * 100.0;
+		int percf = int(percfd);
+		if (percf == 0) { percf = 1; }
+		std::cout << " __________ Пройдено " << percf << "% __________" << endl;
+
+		unsigned long long tact6 = tact5 * percdr / tactraw;
+		unsigned long long tact7 = tact6 / percf * (100 - percf);
+		unsigned long long tact8 = 0;
+		if (tact7 > 7200000)
+		{
+
+			tact8 = tact7 / 3600000;
+			std::cout << " __________ До завершения обучения осталось около " << tact8 << " часов __________" << endl;
+		}
+		else if (tact7 > 3600000 && tact7 <= 7200000)
+		{
+			//tact8 = tact7 / 3600000;
+			std::cout << " __________ До завершения обучения осталось около " << "1" << " часа __________" << endl;
+		}
+
+		else if (tact7 > 60000 && tact7 <= 3600000)
+		{
+			tact8 = tact7 / 60000;
+			std::cout << " __________ До завершения обучения осталось около " << tact8 << " минут __________" << endl;
+		}
+
+		else if (tact7 > 1000 && tact7 <= 60000)
+		{
+			tact8 = tact7 / 1000;
+			std::cout << " __________ До завершения обучения осталось около " << tact8 << " секунд __________" << endl;
+		}
+
+		else
+			std::cout << " __________ Рассчет почти завешен __________" << endl;
+		tact8 = 0;
 
 
+
+
+
+		err3 = err4 / t12;
+
+		cout << "Квадрат ошибки составляет " << err3 << endl;
+		cout << "Ошибка составляет " << sqrt(err3) << endl;
+		err3 = 0;
 	}
 
 

@@ -85,6 +85,32 @@ double Activat::sigmd(double out) {
 	return t2;
 }
 
+// функции gсигмоиды
+double Activat::gsigm(double out) {
+	return 1.0 / (1.0 + exp(out));
+}
+
+
+// функции gSwish
+double Activat::gswish(double out) {
+
+	return out * gsigm(out);
+}
+
+
+double Activat::gswishd(double out) {
+	//double t0 = clamp(out, -9.2, 9.2);
+	double t0 = out;
+	double t1 = exp(t0);
+	double t2 = t1*(1 - t0);
+	double t3 = 1 + t2;
+
+	double t4 = (1 + t0) * (1 + t0);
+
+	return t3 / t4;;
+}
+
+
 // функции Swish
 double Activat::swish(double out) {
 	

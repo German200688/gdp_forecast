@@ -27,4 +27,5 @@ public:
 	double deltafin(int64_t Weightslsize, double& Weight, double& delta, double& alpha, double& Outputs);
 	double deltafinm(int64_t Weightslsize, double& Weight, double& delta, double& alpha, double& Outputs);
 	double valueneyTwoOnerD(vector<double>& neyronin, vector<double>& weight);
+	double valueneyTwoOner4m(vector<double>& neyronin, vector<double>& weight);
 };

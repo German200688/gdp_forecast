@@ -32,5 +32,8 @@ public:
 	double sigm(double out);
 	double swish(double out);
 	double swishd(double out);
+	double gsigm(double out);
+	double gswish(double out);
+	double gswishd(double out);
 
 };
