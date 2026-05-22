@@ -17,5 +17,6 @@ public:
 	void additiondatedate(double& datedate);
 	bool checkdate(vector<double>& vecdate, int64_t& Quoter, double& datedate1, double& datedate2);
 	void zerodate(vector<double>& vecdate, double& datedate1, double& datedate2);
+	bool stringToBool(string str);
 
 };

@@ -19,7 +19,7 @@
 
 using namespace std;
 
-void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<double>& TheoWeights, vector<vector<double>>& indicatDateInc, vector<vector<double>>& Cash1, vector<double>& Weights1, vector<int64_t>& Count, vector<vector<double>>& Outputs1, vector<vector<double>>& Weights2, vector<vector<double>>& Outputs2,  vector<vector<double>>& Weights3, vector<vector<double>>& Outputs3, vector<vector<double>>& Weights4, vector<vector<double>>& Outputs4, vector<vector<double>>& Weights5, double& result1, double& result2, double& result,
+void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<double>& TheoWeights, vector<vector<double>>& indicatDateInc, vector<vector<double>>& Cash1, vector<double>& Weights1, vector<int64_t>& Count, vector<vector<double>>& Outputs1, vector<vector<double>>& Weights2, vector<vector<double>>& Outputs2, vector<vector<double>>& Weights3, vector<vector<double>>& Outputs3, vector<vector<double>>& Weights4, vector<vector<double>>& Outputs4, vector<vector<double>>& Weights5, double& result1, double& result2, double& result,
 	vector<double>& Weights1m,
 	vector<vector<double>>& Weights2m,
 	vector<vector<double>>& Weights3m,
@@ -31,7 +31,10 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 	vector<vector<double>>& Outputs4m,
 	const double& alpha,
 	const int64_t& iterationney,
-	const int64_t& iteration)
+	const int64_t& iteration,
+	bool& stop,
+double& stopl
+)
 {
 	Other obj3;
 	nvidiac obj1;
@@ -51,9 +54,11 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 		bool check = obj3.checkcin();
 		if (!check) { std::cout << "Вы ничего не ввели. Введите пожалуйста данные." << endl;  return;}
 		
-		
-
-	
+		double q1 = stopl;
+		double q2 = 0.0;
+		double q3 = 0.0;
+		double q4 = 0.0;
+		double q5 = 0.0;
 
 	//Запись квартала и значения
 	string dateraw = "";
@@ -314,14 +319,30 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 		tact8 = 0;
 
 
-
+		
 
 
 		err3 = err4 / t12;
-
+		q2 = sqrt(err3);
 		cout << "Квадрат ошибки составляет " << err3 << endl;
-		cout << "Ошибка составляет " << sqrt(err3) << endl;
-		err3 = 0;
+		cout << "Ошибка составляет " << q2 << endl;
+		if (stop)
+		{
+			if (q3 < q2 && q5 == 0.0) { q4 = q2; q5 = 1.0; }
+			else if (q3 > q2 && q5 == 1.0) { q4 = 0.0; q5 = 0.0; }
+			else if (q5 == 1.0 && q3 < q2 && q2 - q4 > q1) {
+				cout << "Модель переобучилась после достижения ошибки равной " << q4 << endl;
+
+				break;
+			}
+		}
+		{
+			q3 = q2;
+			q2 = 0;
+
+			err3 = 0;
+		}
+
 	}
 
 

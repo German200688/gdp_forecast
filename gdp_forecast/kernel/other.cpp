@@ -16,7 +16,14 @@ atomic<bool> offlineUse = false;
 
 
 
+bool Other::stringToBool(std::string str) {
+	// Переводим всю строку в нижний регистр для надежности
+	std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) {
+		return std::tolower(c);
+		});
 
+	return (str == "true" || str == "1");
+}
 
 
 string Other::readcincheck(string& errmes, string& data)

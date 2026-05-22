@@ -32,6 +32,7 @@ int main()
 	SetConsoleCP(CP_UTF8);
 	Config obj1;
 	nvidia obj4;
+	Other other;
 	mutex offlinethread;
 	vector<string> indicators = {}; //параметры
 	vector<double> TheoWeights = {}; //весы индикаторов
@@ -57,6 +58,8 @@ int main()
 	vector<vector<double>> Outputs2m; // исходы
 	vector<vector<double>> Outputs3m; // исходы
 	vector<vector<double>> Outputs4m; // исходы
+	bool stop = false;
+	double stopl = 0.01;
 
 	string linkfile = "";
 	double alpha = 0.21;
@@ -75,6 +78,14 @@ int main()
 	string iterationst = configf["iteration:"];
 	iteration = stoi(iterationst);
 	
+	string stopst = configf["stop:"];
+	stop = other.stringToBool(stopst);
+
+	string stoplst = configf["stop_level:"];
+	stopl = stod(stoplst);
+
+	//bool& stop,
+	//	double& stopl
 
 	beginfile(indicators, TheoWeights, indicatDate, indicatDateInc, Cash1, Count, Weights1, Outputs1, Weights2, Outputs2, Outputs3, Outputs4, Weights3, Weights4, Weights5,
 		Weights1m,
@@ -115,8 +126,9 @@ int main()
 	Outputs4m, 
 		alpha,
 		iterationney,
-		iteration
-		
+		iteration,
+		stop,
+		stopl
 		);
 		
 	cout << "Идет процесс сохранения данных. Пожалуйста дождитесь окончания..." << endl;

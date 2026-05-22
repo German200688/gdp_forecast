@@ -698,7 +698,9 @@ void offlinecheck (int64_t& percf, uint64_t& tact7)
 	vector<vector<double>>& Outputs4m,
 		const double& alpha,
 		const int64_t& iterationney,
-		const int64_t& iteration
+		const int64_t& iteration,
+		bool& stop,
+		double& stopl
 
 	)
 {
@@ -818,7 +820,9 @@ void offlinecheck (int64_t& percf, uint64_t& tact7)
 						Outputs4m,
 						alpha,
 						iterationney,
-						iteration);
+						iteration, 
+						stop,
+						stopl);
 				};
 			}
 			else if (vvod == m13) {
