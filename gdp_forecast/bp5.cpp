@@ -19,6 +19,11 @@
 
 using namespace std;
 
+
+
+
+
+
 void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<double>& TheoWeights, vector<vector<double>>& indicatDateInc, vector<vector<double>>& Cash1, vector<double>& Weights1, vector<int64_t>& Count, vector<vector<double>>& Outputs1, vector<vector<double>>& Weights2, vector<vector<double>>& Outputs2, vector<vector<double>>& Weights3, vector<vector<double>>& Outputs3, vector<vector<double>>& Weights4, vector<vector<double>>& Outputs4, vector<vector<double>>& Weights5, double& result1, double& result2, double& result,
 	vector<double>& Weights1m,
 	vector<vector<double>>& Weights2m,
@@ -33,7 +38,9 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 	const int64_t& iterationney,
 	const int64_t& iteration,
 	bool& stop,
-double& stopl
+double& stopl,
+const bool teach,
+const int64_t& teach_count
 )
 {
 	Other obj3;
@@ -59,6 +66,7 @@ double& stopl
 		double q3 = 0.0;
 		double q4 = 0.0;
 		double q5 = 0.0;
+		int64_t tea0 = 0;
 
 	//Запись квартала и значения
 	string dateraw = "";
@@ -320,12 +328,33 @@ double& stopl
 
 
 		
+		
+
 
 
 		err3 = err4 / t12;
 		q2 = sqrt(err3);
 		cout << "Квадрат ошибки составляет " << err3 << endl;
 		cout << "Ошибка составляет " << q2 << endl;
+		
+		if (teach)
+		{
+			if (q2 == q3) { tea0 += 1; }
+			else { tea0 = 0; }
+
+
+
+			if (tea0 == teach_count)
+			{
+				cout << "Модель не обучается уже более " << q4 << " циклов." << endl;
+				break;
+			}
+
+
+		}
+
+
+
 		if (stop)
 		{
 			if (q3 < q2 && q5 == 0.0) { q4 = q2; q5 = 1.0; }

@@ -700,7 +700,9 @@ void offlinecheck (int64_t& percf, uint64_t& tact7)
 		const int64_t& iterationney,
 		const int64_t& iteration,
 		bool& stop,
-		double& stopl
+		double& stopl,
+		bool& teach,
+		int64_t& teach_count
 
 	)
 {
@@ -822,7 +824,9 @@ void offlinecheck (int64_t& percf, uint64_t& tact7)
 						iterationney,
 						iteration, 
 						stop,
-						stopl);
+						stopl,
+						teach,
+						teach_count);
 				};
 			}
 			else if (vvod == m13) {

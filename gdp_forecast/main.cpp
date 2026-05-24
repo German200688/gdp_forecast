@@ -59,7 +59,10 @@ int main()
 	vector<vector<double>> Outputs3m; // исходы
 	vector<vector<double>> Outputs4m; // исходы
 	bool stop = false;
+	bool teach = false;
 	double stopl = 0.01;
+	int64_t teach_count = 10000;
+
 
 	string linkfile = "";
 	double alpha = 0.21;
@@ -83,6 +86,17 @@ int main()
 
 	string stoplst = configf["stop_level:"];
 	stopl = stod(stoplst);
+
+	string teachst = configf["teach:"];
+	teach = other.stringToBool(teachst);
+
+	string teach_countst = configf["teach_count:"];
+	teach_count = stoi(teach_countst);
+
+
+
+
+
 
 	//bool& stop,
 	//	double& stopl
@@ -128,7 +142,9 @@ int main()
 		iterationney,
 		iteration,
 		stop,
-		stopl
+		stopl,
+		teach,
+		teach_count
 		);
 		
 	cout << "Идет процесс сохранения данных. Пожалуйста дождитесь окончания..." << endl;
