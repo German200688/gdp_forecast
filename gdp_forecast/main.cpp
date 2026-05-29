@@ -98,8 +98,7 @@ int main()
 
 
 
-	//bool& stop,
-	//	double& stopl
+	
 
 	beginfile(indicators, TheoWeights, indicatDate, indicatDateInc, Cash1, Count, Weights1, Outputs1, Weights2, Outputs2, Outputs3, Outputs4, Weights3, Weights4, Weights5,
 		Weights1m,
