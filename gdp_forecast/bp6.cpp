@@ -43,7 +43,12 @@ void teachoffline(vector<string>& indicators, vector<vector<double>>& indicatDat
 double& indicс,
 double& theorс,
 int64_t& percfff,
-uint64_t& tact71
+uint64_t& tact71,
+vector<double>& incre,
+const bool teach,
+const int64_t& teach_count,
+bool& stop,
+double& stopl
 )
 {
 	
@@ -51,7 +56,7 @@ uint64_t& tact71
 	Other obj3;
 	nvidiac obj1;
 
-	double* dvec_a1, * dvec_b1, * dvec_c1, * vec_a23, * vec_b23, * dvec_a4, * dvec_b4, * dvec_c4, * vec_a4, * vec_b4, * ab, *vec_c23;
+	double* dvec_a1 = nullptr, * dvec_b1 = nullptr, * dvec_c1 = nullptr, * vec_a23 = nullptr, * vec_b23 = nullptr, * dvec_a4 = nullptr, * dvec_b4 = nullptr, * dvec_c4 = nullptr, * vec_a4 = nullptr, * vec_b4 = nullptr, * ab = nullptr, *vec_c23 = nullptr;
 	//int N1, int N23, int N4, int N44, double*& ab
 
 	int64_t Quoter = dates[0][0];
@@ -63,24 +68,25 @@ uint64_t& tact71
 	unsigned long long tact2 = __rdtsc();
 	unsigned long long tactraw = (tact2 - tact1) / 1000;
 	std::cout << tactraw << endl;
+	{
+		lock_guard<mutex> lock(offlinethread);
 
-	lock_guard<mutex> lock(offlinethread);
-	offlinethread.lock();
-	
 
-	calcgdpteach(indicators, indicatDate, TheoWeights, indicatDateInc, Cash1, Weights1, Count, Outputs1, Weights2, Outputs2, Quoter, Weights3, Outputs3, Weights4, Outputs4, Weights5, result1, result2, result,
-		Weights1m,
-		Weights2m,
-		Weights3m,
-		Weights4m,
-		Weights5m,
-		Outputs1m,
-		Outputs2m,
-		Outputs3m,
-		Outputs4m
-		
-	);
-	offlinethread.unlock();
+
+		calcgdpteach(indicators, indicatDate, TheoWeights, indicatDateInc, Cash1, Weights1, Count, Outputs1, Weights2, Outputs2, Quoter, Weights3, Outputs3, Weights4, Outputs4, Weights5, result1, result2, result,
+			Weights1m,
+			Weights2m,
+			Weights3m,
+			Weights4m,
+			Weights5m,
+			Outputs1m,
+			Outputs2m,
+			Outputs3m,
+			Outputs4m,
+			incre
+
+		);
+	}
 	
 	
 
@@ -98,11 +104,37 @@ uint64_t& tact71
 	int64_t percraw = iterationney * t12 * iteration;
 	double percdr = 0;
 	int64_t t666 = 1;
+
+
+
+
 	unsigned long long tact5 = 0;
+
+	vector<string> indicatorstemp;
+	vector<vector<double>> indicatDatetemp;
+	vector<double> TheoWeightstemp;
+	vector<vector<double>> indicatDateInctemp;
+	vector<double> Weights1temp;
+	vector<int64_t> Counttemp;
+	vector<double> Weights1mtemp;
+	vector<vector<double>> Outputs1temp, Outputs2temp, Outputs3temp, Outputs4temp;
+	vector<vector<double>> Outputs1mtemp, Outputs2mtemp, Outputs3mtemp, Outputs4mtemp;
+
+
 	for (int64_t i0 = 0; i0 < iteration; i0++)
 	{
+		double err4 = 0;
+		double err3 = 0;
+		double q2 = 0;
+		double q3 = 0;
+		double q4 = 0;
+		double q5 = 0;
+		int64_t tea0 = 0;
+		double q1 = stopl;
+		
 		for (int64_t i1 = 0; i1 < t12; i1++)
 		{
+			double err2 = 0;
 			int64_t quot = dates[i1][0];
 			int64_t resi = dates[i1][1];
 			//cout << resi << endl;
@@ -141,106 +173,67 @@ uint64_t& tact71
 
 
 		
-			offlinethread.lock();
-		//indicators
-			int64_t s1 = indicators.size();
-			vector<string> indicatorstemp(s1);
-			indicatorstemp = indicators;
+			{
+				lock_guard<mutex> lock(offlinethread);
+				//indicators
+				indicatorstemp = indicators;
 
-			//indicatDate
-			int64_t s2 = indicatDate.size();
-			int64_t s2_0 = indicatDate[0].size();
-			vector<vector<double>> indicatDatetemp(s2, vector<double>(s2_0));
-			indicatDatetemp = indicatDate;
-			
-
-			//TheoWeights
-			int64_t s3 = TheoWeights.size();
-			vector<double> TheoWeightstemp(s3);
-			TheoWeightstemp = TheoWeights;
+				//indicatDate
+				indicatDatetemp = indicatDate;
 
 
-			//indicatDateInc
-			int64_t s4 = indicatDateInc.size();
-			int64_t s4_0 = indicatDateInc[0].size();
-			vector<vector<double>> indicatDateInctemp(s4, vector<double> (s4_0));
+				//TheoWeights
+				TheoWeightstemp = TheoWeights;
 
 
-			//Weights1
-			int64_t s16 = Weights1.size();
-			vector<double> Weights1temp(s16);
-			Weights1temp = Weights1;
+				//indicatDateInc
+				indicatDateInctemp = indicatDateInc;
+				
+				//Weights1
+				Weights1temp = Weights1;
 
 
 
-			//vector<int64_t>& Count
-			int64_t s6 = Count.size();
-			vector<int64_t> Counttemp(s6);
-			Counttemp = Count;
+				//vector<int64_t>& Count
+				Counttemp = Count;
 
 
 
-			//Weights1m
-			int64_t s11 = Weights1m.size();
-			vector<double> Weights1mtemp(s11);
-			Weights1mtemp = Weights1m;
+				//Weights1m
+				Weights1mtemp = Weights1m;
 
 
 
-			//Outputs1
-			int64_t s12 = Outputs1.size();
-			int64_t s12_0 = Outputs1[0].size();
-			vector<vector<double>> Outputs1temp(s12, vector<double>(s4_0));
-			Outputs1temp = Outputs1;
+				//Outputs1
+				Outputs1temp = Outputs1;
 
-			//Outputs2
-			int64_t s13 = Outputs2.size();
-			int64_t s13_0 = Outputs2[0].size();
-			vector<vector<double>> Outputs2temp(s13, vector<double> (s13_0));
-			Outputs2temp = Outputs2;
+				//Outputs2
+				Outputs2temp = Outputs2;
 
 
-			//Outputs3
-			int64_t s14 = Outputs3.size();
-			int64_t s14_0 = Outputs3[0].size();
-			vector<vector<double>> Outputs3temp(s14, vector<double> (s14_0));
-			Outputs3temp = Outputs3;
+				//Outputs3
+				Outputs3temp = Outputs3;
 
 
-			//Outputs4
-			int64_t s15 = Outputs4.size();
-			int64_t s15_0 = Outputs4[0].size();
-			vector<vector<double>> Outputs4temp(s15, vector<double> (s15_0));
-			Outputs4temp = Outputs4;
+				//Outputs4
+				Outputs4temp = Outputs4;
 
-			//Outputs1m
-			int64_t s22 = Outputs1m.size();
-			int64_t s22_0 = Outputs1m[0].size();
-			vector<vector<double>> Outputs1mtemp(s22, vector<double> (s22_0));
-			Outputs1mtemp = Outputs1m;
+				//Outputs1m
+				Outputs1mtemp = Outputs1m;
 
-			//Outputs2m
-			int64_t s23 = Outputs2m.size();
-			int64_t s23_0 = Outputs2m[0].size();
-			vector<vector<double>> Outputs2mtemp(s23, vector<double> (s23_0));
-			Outputs2mtemp = Outputs2m;
+				//Outputs2m
+				Outputs2mtemp = Outputs2m;
 
-			//Outputs3m
-			int64_t s24 = Outputs3m.size();
-			int64_t s24_0 = Outputs3m[0].size();
-			vector<vector<double>> Outputs3mtemp(s24, vector<double> (s24_0));
-			Outputs3mtemp = Outputs3m;
+				//Outputs3m
+				Outputs3mtemp = Outputs3m;
 
-			//Outputs4m
-			int64_t s25 = Outputs4m.size();
-			int64_t s25_0 = Outputs4m[0].size();
-			vector<vector<double>> Outputs4mtemp(s25, vector<double> (s25_0));
-			Outputs4mtemp = Outputs4m;
+				//Outputs4m
+				Outputs4mtemp = Outputs4m;
 
-			///обнуляем
-			obj3.zerodate(vecdate, indicс, theorс);
-			offlinethread.unlock();
-
+				///обнуляем
+				obj3.zerodate(vecdate, indicс, theorс);
+				
+			}
 
 			
 			for (int64_t i2 = 0; i2 < iterationney; i2++)
@@ -256,10 +249,11 @@ uint64_t& tact71
 					Outputs1mtemp,
 					Outputs2mtemp,
 					Outputs3mtemp,
-					Outputs4mtemp
+					Outputs4mtemp,
+					incre
 				);
 
-
+				double err1 = (result - res) * (result - res);
 				
 				teachquoterm(quot, result1, result2, result, Weights5, Weights4, Weights3, Weights2, Weights1temp, Outputs4temp, Outputs3temp, Outputs2temp, Outputs1temp, alpha, res,
 					Weights1mtemp,
@@ -296,10 +290,11 @@ uint64_t& tact71
 				tact5 = (tact5 + (tact4 - tact3)) / 2;
 				std::cout << tact5 << endl;
 */
+				err2 += err1;
 				t666++;
 
 			}
-
+			err4 = err4 + (err2 / iterationney);
 			
 			//проверяем изменилось ли что-то
 			
@@ -341,10 +336,11 @@ uint64_t& tact71
 					std::cout << " __________ Рассчет почти завешен __________" << endl;
 				tact8 = 0;
 				*/
-				
+			bool t789 = false;
+			{
 				lock_guard<mutex> lock(offlinethread);
-				bool t789 = obj3.checkdate(vecdate, quot, indicс, theorс);
-
+				t789 = obj3.checkdate(vecdate, quot, indicс, theorс);
+			}
 				if (t789) { t12--; }
 				else
 				{
@@ -376,14 +372,43 @@ uint64_t& tact71
 
 
 
+		err3 = err4 / t12;
+		q2 = sqrt(err3);
+		//cout << "Квадрат ошибки составляет " << err3 << endl;
+		//cout << "Ошибка составляет " << q2 << endl;
 
+		if (teach)
+		{
+			if (q2 == q3) { tea0 += 1; }
+			else { tea0 = 0; }
+
+			if (tea0 == teach_count)
+			{
+				cout << "Модель не обучается уже более " << teach_count << " циклов." << endl;
+				break;
+			}
+		}
+
+		if (stop)
+		{
+			if (q3 < q2 && q5 == 0.0) { q4 = q2; q5 = 1.0; }
+			else if (q3 > q2 && q5 == 1.0) { q4 = 0.0; q5 = 0.0; }
+			else if (q5 == 1.0 && q3 < q2 && q2 - q4 > q1) {
+				cout << "Модель переобучилась после достижения ошибки равной " << q4 << endl;
+				break;
+			}
+		}
+
+		q3 = q2;
+		q2 = 0;
+		err3 = 0;
 
 	}
 
 
-	obj1.delobj(dvec_a1, dvec_b1, dvec_c1, vec_a23, vec_b23, dvec_a4, dvec_b4, dvec_c4, vec_a4, vec_b4, ab);
+	obj1.delobj(dvec_a1, dvec_b1, dvec_c1, vec_a23, vec_b23, vec_c23, dvec_a4, dvec_b4, dvec_c4, vec_a4, vec_b4, ab);
 	offlineUse.store(false);
-	std::cout << "Рассчет завершен" << endl << ">>> ";;
+	std::cout << "Рассчет завершен" << endl << ">>> ";
 
 
 
@@ -410,7 +435,12 @@ uint64_t& tact71
 			double& indicс,
 			double& theorс,
 			int64_t& percf,
-			uint64_t& tact71
+			uint64_t& tact71,
+			vector<double>& incre,
+			const bool teach,
+			const int64_t& teach_count,
+			bool& stop,
+			double& stopl
 			)
 		{
 			
@@ -553,7 +583,7 @@ uint64_t& tact71
 
 
 
-			/*
+			
 				thread t0(teachoffline, ref(indicators), ref(indicatDate), ref(TheoWeights), ref(indicatDateInc), Cash1, ref(Weights1), ref(Count), ref(Outputs1), ref(Weights2), ref(Outputs2), ref(Weights3), ref(Outputs3), ref(Weights4), ref(Outputs4), ref(Weights5), result1, result2, result,
 					ref(Weights1m),
 					ref(Weights2m),
@@ -572,10 +602,15 @@ uint64_t& tact71
 					ref(indicс),
 						ref(theorс),
 					ref(percf),
-					ref(tact71));
+					ref(tact71),
+					ref(incre),
+					ref(teach),
+						ref(teach_count),
+							ref(stop),
+								ref(stopl));
 				
 				t0.detach();
-			*/	
+				
 			}
 
 

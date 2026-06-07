@@ -278,7 +278,8 @@ void calcgdpteach(vector<string>& indicators, vector<vector<double>>& indicatDat
 	vector<vector<double>>& Outputs1m,
 	vector<vector<double>>& Outputs2m,
 	vector<vector<double>>& Outputs3m,
-	vector<vector<double>>& Outputs4m
+	vector<vector<double>>& Outputs4m,
+	vector<double>& incre
 )
 {
 
@@ -298,7 +299,7 @@ void calcgdpteach(vector<string>& indicators, vector<vector<double>>& indicatDat
 
 	
 	// "Прирост данных:" 
-	incrquotercalc(qy2, indicatDate, indicatDateInc);
+	incrquotercalc(qy2, indicatDate, indicatDateInc, incre);
 	cashquoter(qy2, TheoWeights, indicatDateInc, Cash1);
 
 

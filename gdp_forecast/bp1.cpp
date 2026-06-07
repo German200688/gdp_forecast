@@ -228,21 +228,24 @@ void info()
 	string err;
 	std::cout <<
 		"Справка по командам программы:" << endl
-		<< "   \033[34m uploadparamd \033[35m Команда данные показателя с разделителем - uploadparamd показатель в конце которого стоит двоеточие квартал.год данные;.\033[0m Пример - uploadparamd param: 4.1999 28,5; 2.1998 28; нажимаем enter" << endl
-		<< "   \033[34m addparam \033[35m Команда добавляет новый экономический индикатор. \033[0m Пример - addparam salery" << endl
-		<< "   \033[34m paramlist \033[35m Команда выводит список используемых экономических индикаторов. \033[0m Пример - paramlist" << endl
-		<< "   \033[34m  paramdatelist \033[35m Команда выводит все имеющие данные по определенному экономическому индикатору. \033[0m Пример - paramdatelist param нажимаем enter" << endl
+		<< "   \033[34m info \033[35m Команда выводит текущую справку по командам. \033[0m Пример - info нажимаем enter" << endl
+		<< "   \033[34m addparam \033[35m Команда добавляет новый экономический индикатор. \033[0m Пример - addparam salery нажимаем enter" << endl
+		<< "   \033[34m paramlist \033[35m Команда выводит все введенные используемые индикаторы. \033[0m Пример - paramlist нажимаем enter" << endl
+		<< "   \033[34m uploadtheor \033[35m Команда загружает теоретические веса для каждого показателя. Показатель может быть от минус 100 процентов до 100 процентов. \033[0m Пример1 - uploadtheor param: 10 нажимаем enter. Пример2 - uploadtheor param: -15 нажимаем enter." << endl
+		<< "   \033[34m theorlist \033[35m Команда выводит список теоретических коэффициентов \033[0m Пример - theorlist нажимаем enter" << endl
+		<< "   \033[34m uploadincre \033[35m Команда включает или отключает нормализацию данных. По умолчанию нормализация включена. Показатель может быть YES Y - включение нормализации или NO N - выключение нормализации." << endl << "\033[0m -- Пример1 по включению нормализации - uploadincre param : Y нажимаем enter. Пример2 по включению нормализации - uploadincre param : N нажимаем enter." << endl << "\033[0m -- Пример1 по выключению нормализации - uploadincre param : YES нажимаем enter. Пример2 по выключению нормализации - uploadincre param : NO нажимаем enter." << endl
+		<< "   \033[34m increlist \033[35m Команды показывает подаются в модель сырые данные или нормализованные \033[0m Пример - increlist нажимаем enter" << endl
+		<< "   \033[34m uploadparamd \033[35m Команда добавляет данные показателя с разделителем - uploadparamd показатель в конце которого стоит двоеточие квартал.год данные;.\033[0m Пример - uploadparamd param: 4.1999 28,5; 2.1998 28; нажимаем enter" << endl
+		<< "   \033[34m paramdatelist \033[35m Команда выводит все имеющие данные по определенному экономическому индикатору. \033[0m Пример - paramdatelist param нажимаем enter" << endl
 		<< "   \033[34m quoterlist \033[35m Команда выводит все имеющиеся данные по всем показателям за квартал. \033[0m Пример - quoterlist 4.1998 нажимаем enter" << endl
 		<< "   \033[34m incr \033[35m Команда выводит прирост по отношению к пердыдущему кварталу всех имеющихся данных по всем показателям за квартал. \033[0m Пример - incr 4.1998 нажимаем enter" << endl
-		<< "   \033[34m theorlist \033[35m Команда выводит список теоретических коэффициентов \033[0m Пример - theorlist нажимаем enter" << endl
-		<< "   \033[34m uploadtheor \033[35m Команда загружает теоретические веса для каждого показателя. Показатель может быть от минус 100 процентов до 100 процентов. \033[0m Пример1 - uploadtheor param: 10 нажимаем enter. Пример2 - uploadtheor param: -15 нажимаем enter." << endl
 		<< "   \033[34m calcgdp \033[35m Команда рассчитывает прогноз прироста ВВП в определенном квартале. \033[0m Пример - calcgdp 3.2010" << endl
 		<< "   \033[34m teachonline \033[35m Команда осуществляет обучение на основе нужного количества кварталов. \033[0m Пример - teachonline 4.1999 28,5; 2.1998 28; нажимаем enter" << endl
-		<< "   \033[34m info \033[35m Команда выводит текущую справку по командам. \033[0m Пример - info нажимаем enter" << endl
-		<< "   \033[34m end \033[35m Команда заверщает программу с сохранением всех данных. Если надо завершить программу без сохранения, нажмите крестик в текущем окне. \033[0m  Пример - end нажимаем enter" << endl
-	    << "   \033[34m teachoffline \033[35m Команда осуществляет обучение в фоновом режиме на основе нужного количества кварталов. \033[0m Пример - teachoffline 4.1999 28,5; 2.1998 28; нажимаем enter" << endl
-	    << "   \033[34m offlinecheck \033[35m Команда проверяет наличие и статус процесса офлайн обучения. \033[0m Пример - offlinecheck нажимаем enter" << endl;
-	
+		<< "   \033[34m teachoffline \033[35m Команда осуществляет обучение в фоновом режиме на основе нужного количества кварталов. \033[0m Пример - teachoffline 4.1999 28,5; 2.1998 28; нажимаем enter" << endl
+		<< "   \033[34m offlinecheck \033[35m Команда проверяет наличие и статус процесса офлайн обучения. \033[0m Пример - offlinecheck нажимаем enter" << endl
+	    << "   \033[34m end \033[35m Команда заверщает программу с сохранением всех данных. Если надо завершить программу без сохранения, нажмите крестик в текущем окне. \033[0m  Пример - end нажимаем enter" << endl;
+
+
 #ifdef _DEBUG 
 	std::cout
 		<< " \033[31m -------- СТРОГО ДЛЯ РАЗРАБОТКИ И ОТЛАДКИ --------" << endl
@@ -255,7 +258,7 @@ void info()
 
 
 
-void addparam(vector<string>& indicators, vector<double>& TheoWeights, vector<vector<double>>& indicatDate, int64_t count1, vector<vector<double>>& indicatDateInc, vector<vector<double>>& Cash1, vector<double>& Weights1, vector<double>& Weights1m, vector<int64_t>& Count, double& indicс)
+void addparam(vector<string>& indicators, vector<double>& TheoWeights, vector<vector<double>>& indicatDate, int64_t count1, vector<vector<double>>& indicatDateInc, vector<vector<double>>& Cash1, vector<double>& Weights1, vector<double>& Weights1m, vector<int64_t>& Count, double& indicс, vector<double>& incre)
 {
 	
 	
@@ -288,6 +291,7 @@ void addparam(vector<string>& indicators, vector<double>& TheoWeights, vector<ve
 	{
 		indicators.push_back(vvodparam);
 		TheoWeights.push_back(weight);
+		incre.push_back(weight);
 
 		vector<double > dates = {};
 		vector<double > dates2 = {};
@@ -406,6 +410,81 @@ void uploadtheor(vector<string>& indicators, vector<double>& TheoWeights, double
 
 
 
+void uploadincre(vector<string>& indicators, vector<double>& incre, double& theorс) // Пример2: uploadincre param: Y  нажимаем enter.
+{
+
+	Other obj3;
+
+	vector<string> vvoduploadtheo;
+	string space = " ";
+	string err = "";
+	string indicator = "";
+	string vvoduploadtheor;
+	char t1 = ':';
+	int64_t t2 = 0;
+
+	while (t2 < 1)
+	{
+
+		bool check = obj3.checkcin();
+		if (check == true) { cin >> vvoduploadtheor; }
+		if (!vvoduploadtheor.empty()) {
+			char t0 = vvoduploadtheor.back();
+			if (t0 == t1) {
+				vvoduploadtheor.pop_back(); vvoduploadtheo.push_back(vvoduploadtheor); vvoduploadtheor = ""; t2 = 1;
+			}
+			else
+			{
+				vvoduploadtheo.push_back(vvoduploadtheor);
+				vvoduploadtheor = "";
+			}
+		}
+		else
+		{
+			std::cout << "Вы ничего не ввели. Введите пожалуйста данные." << endl;
+			return;
+		}
+
+	}
+
+	int64_t t0 = vvoduploadtheo.size();
+	for (int64_t t1 = 0; t1 < t0; t1++)
+	{
+		indicator = indicator + vvoduploadtheo[t1] + space;
+
+	}
+	indicator.pop_back();
+	// Проверка наличия параметра
+	auto t4 = find(indicators.begin(), indicators.end(), indicator);
+	if (t4 == indicators.end())
+	{
+
+		std::cout << "Параметр " << indicator << " еще не добавлен. Добавьте, пожалуйста, параметр " << indicator << " и повторите попытку." << endl;
+		getline(cin, err);
+		return;
+	}
+	auto t9 = std::distance(indicators.begin(), t4);
+
+
+
+	string t5;
+	int64_t t6 = 0;
+	while (t6 < 1 && cin >> t5) { t6++; }
+	double TheoWeight = 0.0;
+	if (t5 == "YES" || t5 == "Y") { TheoWeight = 1.0;  std::cout << "Параметр " << indicator << " будет передаваться в модель в киде неадаптированных сырых ваших данных! " << endl;
+	}
+	else { std::cout << "Параметр " << indicator << " будет сглаживаться и передаваться в виде прироста! " << endl;
+	}
+	incre[t9] = TheoWeight;
+	getline(cin, err);
+
+
+}
+
+
+
+
+
 void theorlist(vector<string>& indicators, vector<double>& TheoWeights)
 {
 	string err;
@@ -418,6 +497,26 @@ void theorlist(vector<string>& indicators, vector<double>& TheoWeights)
 	}
 	getline(cin, err);
 }
+
+
+void increlist(vector<string>& indicators, vector<double>& incre)
+{
+	string err;
+	int64_t i1 = indicators.size();
+
+	for (int64_t i = 0; i < i1; i++)
+	{
+		if (incre[i] == 1.0) {
+			std::cout << "Параметр " << indicators[i] << " - на вход модели идут нормированные данные в виде прироста;" << endl;
+		}
+		else {
+			std::cout << "Параметр " << indicators[i] << " - на вход модели идут сырые ненормированные данные;" << endl;
+		}
+
+	}
+	getline(cin, err);
+}
+
 
 
 
@@ -573,7 +672,7 @@ void paramdatelist(vector<string>& indicators, vector<vector<double>>& indicatDa
 
 
 
-void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<vector<double>>& indicatDateInc)
+void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vector<vector<double>>& indicatDateInc, vector<double>& incre)
 {
 	
 	Other obj3;
@@ -618,18 +717,24 @@ void incr(vector<string>& indicators, vector<vector<double>>& indicatDate, vecto
 		int64_t q4 = indicatDate[0].size();
 		if (q4 == 0) { std::cout << "Нет данных" << endl; return; }
 
-		incrquotercalc(qy, indicatDate, indicatDateInc);
+		incrquotercalc(qy, indicatDate, indicatDateInc, incre);
 
 
 		for (int64_t i = 0; i < q3; i++)
 		{
-			double in0 = indicatDateInc[i][qy];
-			int64_t in1 = int64_t(in0);
-			in1 = in1 * 2; // нивелируем шаг
-			double in2 = in0 * 100;
-			in2 = in2 / 10; // корректно отображаем десятые процента
-			std::cout << indicators[i] << "    " << in2 << "%;" << endl;
-
+			if (incre[i] == 1.0) { 
+				
+				double in2_1 = indicatDateInc[i][qy];
+				std::cout << indicators[i] << "    " << in2_1 << " ПОДАЮТСЯ СЫРЫЕ ДАННЫЕ, прирост не рассчитывается!!!!!!;" << endl;
+				  }
+			else {
+				double in0 = indicatDateInc[i][qy];
+				int64_t in1 = int64_t(in0);
+				in1 = in1 * 2; // нивелируем шаг
+				double in2_2 = in0 * 100;
+				in2_2 = in2_2 / 10; // корректно отображаем десятые процента
+				std::cout << indicators[i] << "    " << in2_2 << "%;" << endl;
+			}
 		}
 		getline(cin, err);
 	}
@@ -702,7 +807,8 @@ void offlinecheck (int64_t& percf, uint64_t& tact7)
 		bool& stop,
 		double& stopl,
 		bool& teach,
-		int64_t& teach_count
+		int64_t& teach_count,
+		vector<double>& incre
 
 	)
 {
@@ -740,6 +846,8 @@ void offlinecheck (int64_t& percf, uint64_t& tact7)
 	string m12 = "calcgdpt";
 	string m13 = "teachoffline";
 	string m14 = "offlinecheck";
+	string m15 = "increlist";
+	string m16 = "uploadincre";
 
 	
 
@@ -775,13 +883,15 @@ void offlinecheck (int64_t& percf, uint64_t& tact7)
 			}
 			else if (vvod == m10) info();
 			else if (vvod == m0) uploadparamd(indicators, indicatDate, Count, indicatDateInc, Cash1, vecdate);
-			else if (vvod == m1) addparam(indicators, TheoWeights, indicatDate, count, indicatDateInc, Cash1, Weights1, Weights1m, Count, *indicс);
+			else if (vvod == m1) addparam(indicators, TheoWeights, indicatDate, count, indicatDateInc, Cash1, Weights1, Weights1m, Count, *indicс, incre);
 			else if (vvod == m2) paramlist(indicators);
 			else if (vvod == m3) paramdatelist(indicators, indicatDate);
 			else if (vvod == m4) quoterlist(indicators, indicatDate);
-			else if (vvod == m5) incr(indicators, indicatDate, indicatDateInc);
+			else if (vvod == m5) incr(indicators, indicatDate, indicatDateInc, incre);
 			else if (vvod == m6) theorlist(indicators, TheoWeights);
+			else if (vvod == m15) increlist(indicators, incre);
 			else if (vvod == m7) uploadtheor(indicators, TheoWeights, *theorс);
+			else if (vvod == m16) uploadincre(indicators, incre, *theorс);
 			else if (vvod == m14) if (!offlineUse) {
 				cout << "\033[31m Офлайн процесс обучения еще не начат. \033[0m" << endl; getline(cin, err);
 			}
@@ -799,7 +909,8 @@ void offlinecheck (int64_t& percf, uint64_t& tact7)
 					Outputs1m,
 					Outputs2m,
 					Outputs3m,
-					Outputs4m
+					Outputs4m,
+					incre
 				);
 				if (a11) b2 = 2;
 				else b2 = 0;
@@ -826,7 +937,8 @@ void offlinecheck (int64_t& percf, uint64_t& tact7)
 						stop,
 						stopl,
 						teach,
-						teach_count);
+						teach_count,
+						incre);
 				};
 			}
 			else if (vvod == m13) {
@@ -843,7 +955,12 @@ void offlinecheck (int64_t& percf, uint64_t& tact7)
 					alpha,
 					iterationney,
 					iteration, vecdate, *indicс, *theorс, *percf,
-					*tact71);
+					*tact71, 
+					incre,
+					teach,
+					teach_count,
+					stop,
+					stopl);
 			}
 			
 			
@@ -857,7 +974,8 @@ void offlinecheck (int64_t& percf, uint64_t& tact7)
 				Outputs1m,
 				Outputs2m,
 				Outputs3m,
-				Outputs4m
+				Outputs4m,
+				incre
 				); b2 = 1; }
 #endif
 			else {
@@ -882,7 +1000,8 @@ void offlinecheck (int64_t& percf, uint64_t& tact7)
 				Outputs1m,
 				Outputs2m,
 				Outputs3m,
-				Outputs4m
+				Outputs4m,
+				incre
 			);
 
 			b2 = 0;
@@ -909,7 +1028,7 @@ void offlinecheck (int64_t& percf, uint64_t& tact7)
 					Outputs1m,
 					Outputs2m,
 					Outputs3m,
-					Outputs4m
+					Outputs4m					
 				);
 
 				b2 = 0;

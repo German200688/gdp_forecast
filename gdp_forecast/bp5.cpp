@@ -40,7 +40,8 @@ void teachonline(vector<string>& indicators, vector<vector<double>>& indicatDate
 	bool& stop,
 double& stopl,
 const bool teach,
-const int64_t& teach_count
+const int64_t& teach_count,
+vector<double>& incre
 )
 {
 	Other obj3;
@@ -172,7 +173,7 @@ const int64_t& teach_count
 	getline(cin, err);
 	std::cout << "Значения приняты. Начинаем рассчет" << endl;
 
-	double* dvec_a1, * dvec_b1, * dvec_c1, *vec_a23, *vec_b23, *dvec_a4, *dvec_b4, *dvec_c4, *vec_a4, *vec_b4, * ab, *vec_c23;
+	double* dvec_a1 = nullptr, * dvec_b1 = nullptr, * dvec_c1 = nullptr, *vec_a23 = nullptr, *vec_b23 = nullptr, *dvec_a4 = nullptr, *dvec_b4 = nullptr, *dvec_c4 = nullptr, *vec_a4 = nullptr, *vec_b4 = nullptr, * ab = nullptr, *vec_c23 = nullptr;
 		//int N1, int N23, int N4, int N44, double*& ab
 
 	int64_t Quoter = int64_t(dates[0][0]);
@@ -192,7 +193,8 @@ const int64_t& teach_count
 		Outputs1m,
 		Outputs2m,
 		Outputs3m,
-		Outputs4m
+		Outputs4m,
+		incre
 	);
 	int64_t N1 = 3;
 	int64_t N23 = Weights2[0].size();
@@ -200,7 +202,7 @@ const int64_t& teach_count
 	int64_t N4 = Weights5[0].size();
 
 
-	obj1.addobj(dvec_a1, dvec_b1, dvec_c1, vec_a23, vec_b23, dvec_a4, dvec_b4, dvec_c4, vec_a4, vec_b4, N1, N23, N4, N44, ab, vec_c23);
+	obj1.addobj(dvec_a1, dvec_b1, dvec_c1, vec_a23, vec_b23,  dvec_a4, dvec_b4, dvec_c4, vec_a4, vec_b4, N1, N23, N4, N44, ab, vec_c23);
 	int64_t t12 = dates.size();
 	int64_t percraw = iterationney * t12 * iteration;
 	double percdr = 0;
@@ -235,7 +237,8 @@ const int64_t& teach_count
 					Outputs1m,
 					Outputs2m,
 					Outputs3m,
-					Outputs4m
+					Outputs4m,
+					incre
 				);
 
 				double err1 = (result - res) * (result - res);
@@ -375,7 +378,7 @@ const int64_t& teach_count
 	}
 
 
-	obj1.delobj(dvec_a1, dvec_b1, dvec_c1, vec_a23, vec_b23, dvec_a4, dvec_b4, dvec_c4, vec_a4, vec_b4, ab);
+	obj1.delobj(dvec_a1, dvec_b1, dvec_c1, vec_a23, vec_b23, vec_c23, dvec_a4, dvec_b4, dvec_c4, vec_a4, vec_b4, ab);
 
 
 	std::cout << "Рассчет завершен" << endl;

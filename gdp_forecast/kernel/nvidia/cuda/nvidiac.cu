@@ -310,7 +310,7 @@ void nvidiac::addobj(double*& dvec_a1, double*& dvec_b1, double*& dvec_c1, doubl
 }
 
 
-void nvidiac::delobj(double*& dvec_a1, double*& dvec_b1, double*& dvec_c1, double*& vec_a23, double*& vec_b23, double*& dvec_a4, double*& dvec_b4, double*& dvec_c4, double*& vec_a4, double*& vec_b4, double*& ab)
+void nvidiac::delobj(double*& dvec_a1, double*& dvec_b1, double*& dvec_c1, double*& vec_a23, double*& vec_b23, double*& vec_c23, double*& dvec_a4, double*& dvec_b4, double*& dvec_c4, double*& vec_a4, double*& vec_b4, double*& ab)
 {
 	cudaFree(dvec_a1);
 	cudaFree(dvec_b1);
@@ -321,7 +321,7 @@ void nvidiac::delobj(double*& dvec_a1, double*& dvec_b1, double*& dvec_c1, doubl
 	
 	cudaFree(vec_a23);
 	cudaFree(vec_b23);
-	//cudaFree(vec_c23);
+	cudaFree(vec_c23);
 	cudaFree(dvec_a4);
 	cudaFree(dvec_b4);
 	cudaFree(dvec_c4);

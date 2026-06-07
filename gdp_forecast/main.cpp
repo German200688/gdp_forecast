@@ -39,6 +39,7 @@ int main()
 	vector<vector<double>> indicatDate = {}; //данные индикатора
 	vector<vector<double>> indicatDateInc = {}; //прирост за квартал
 	vector<int64_t> Count = {}; //служебный
+	vector<double> incre = {}; //служебный
 	vector<vector<double>> Cash1; //драфтовые параметры
 	vector<double> Weights1; //слой
 	vector<vector<double>> Weights2; //слой
@@ -110,7 +111,8 @@ int main()
 		Outputs2m,
 		Outputs3m,
 		Outputs4m,
-		linkfile
+		linkfile,
+		incre
 		);
 		
 	
@@ -143,7 +145,8 @@ int main()
 		stop,
 		stopl,
 		teach,
-		teach_count
+		teach_count,
+		incre
 		);
 		
 	cout << "Идет процесс сохранения данных. Пожалуйста дождитесь окончания..." << endl;
@@ -158,7 +161,8 @@ int main()
 		Outputs2m,
 		Outputs3m,
 		Outputs4m,
-		linkfile
+		linkfile,
+		incre
 		);
 
 	 

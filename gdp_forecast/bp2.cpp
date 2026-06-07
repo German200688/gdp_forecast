@@ -32,7 +32,8 @@ void calcgdpt(vector<string>& indicators, vector<vector<double>>& indicatDate, v
 	vector<vector<double>>& Outputs1m,
 	vector<vector<double>>& Outputs2m,
 	vector<vector<double>>& Outputs3m,
-	vector<vector<double>>& Outputs4m
+	vector<vector<double>>& Outputs4m,
+	vector<double>& incre
 	)
 {
 	
@@ -111,7 +112,7 @@ void calcgdpt(vector<string>& indicators, vector<vector<double>>& indicatDate, v
 	
 	            
 	cout << "Прирост данных:" << endl;
-	incrquotercalc(qy, indicatDate, indicatDateInc);
+	incrquotercalc(qy, indicatDate, indicatDateInc, incre);
 	cashquoter(qy, TheoWeights, indicatDateInc, Cash1);
 
 	for (int64_t i = 0; i < q3; i++)
@@ -442,7 +443,8 @@ void teacher(int64_t& Quoter, double& result1, double& result2, double& result, 
 	vector<vector<double>>& Outputs1m,
 	vector<vector<double>>& Outputs2m,
 	vector<vector<double>>& Outputs3m,
-	vector<vector<double>>& Outputs4m
+	vector<vector<double>>& Outputs4m,
+	vector<double>& incre
 	)
 {
 	Other obj3;

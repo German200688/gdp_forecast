@@ -383,8 +383,8 @@ vector<vector<double>>& Outputs1m,
 vector<vector<double>>& Outputs2m,
 vector<vector<double>>& Outputs3m,
 vector<vector<double>>& Outputs4m,
-string linkfile
-
+string linkfile,
+vector<double>& incre
 )
 {
 	Filework<string> obj1;
@@ -397,6 +397,9 @@ string linkfile
 
 	string filename2 = "teoweights";
 	TheoWeights = obj2.myfileread(filename2, TheoWeights, linkfile);
+
+	string filename232 = "incre";
+	TheoWeights = obj2.myfileread(filename232, incre, linkfile);
 
 	string filename3 = "count";
 	Count = obj3.myfileread(filename3, Count, linkfile);
@@ -591,7 +594,8 @@ void endfile(vector<string>& indicators, vector<double>& TheoWeights, vector<vec
 	vector<vector<double>>& Outputs2m,
 	vector<vector<double>>& Outputs3m,
 	vector<vector<double>>& Outputs4m,
-	string linkfile
+	string linkfile,
+	vector<double>& incre
 	
 
 )
@@ -608,6 +612,10 @@ cout << "Идет сохранение обновленных данных..." <
 
 	filename6 = "teoweights";
 	obj2.myfilerewtite(filename6, TheoWeights, linkfile);
+
+
+	filename6 = "incre";
+	obj2.myfilerewtite(filename6, incre, linkfile);
 
 	filename6 = "count";
 	obj3.myfilerewtite(filename6, Count, linkfile);

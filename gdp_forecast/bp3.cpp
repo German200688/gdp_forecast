@@ -35,7 +35,8 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 	vector<vector<double>>& Outputs1m,
 	vector<vector<double>>& Outputs2m,
 	vector<vector<double>>& Outputs3m,
-	vector<vector<double>>& Outputs4m
+	vector<vector<double>>& Outputs4m,
+	vector<double>& incre
 )
 {
 
@@ -102,7 +103,7 @@ bool calcgdp(vector<string>& indicators, vector<vector<double>>& indicatDate, ve
 	if (qy2 > te1) { cout << "К сожалению данные за предыдущий квартал отсутствуют и рассчет не может быть осуществлен. Введите данные и повторите снова." << endl; return false; }
 	
 	// "Прирост данных:" 
-	incrquotercalc(qy2, indicatDate, indicatDateInc);
+	incrquotercalc(qy2, indicatDate, indicatDateInc, incre);
 	cashquoter(qy2, TheoWeights, indicatDateInc, Cash1);
 
 	
