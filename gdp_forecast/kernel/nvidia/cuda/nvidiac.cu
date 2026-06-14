@@ -460,7 +460,7 @@ void nvidiac::deltafimanma4(double*& delta, double& delta1, int64_t& size, doubl
 	cudaMemcpy(dvec_a4, Outputs, size * sizeof(double), cudaMemcpyHostToDevice);
 	//cudaMemcpy(ab, &delta1, sizeof(double), cudaMemcpyHostToDevice);
 
-	finplussdel << < 1, 512 >> > (delta1, dvec_a4, dvec_b4, size, dvec_c4, alpha3);
+	finplussdel << < t_block, t_thread >> > (delta1, dvec_a4, dvec_b4, size, dvec_c4, alpha3);
 
 
 	cudaMemcpy(delta, dvec_c4, size * sizeof(double), cudaMemcpyDeviceToHost);

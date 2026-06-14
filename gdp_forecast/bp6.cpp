@@ -38,7 +38,7 @@ void teachoffline(vector<string>& indicators, vector<vector<double>>& indicatDat
 	const double& alpha,
 	const int64_t& iterationney,
 	const int64_t& iteration,
-	vector <vector <int64_t>> dates,
+	vector <vector <double>> dates,
 	vector<double>& vecdate,
 double& indicс,
 double& theorс,
@@ -455,7 +455,8 @@ double& stopl
 				//string vvodindic;
 				//char t1 = ':';
 				//int64_t t2 = 0;
-				vector <vector <double>> dates;
+				//vector <vector <double>> dates;
+				auto dates = std::make_shared<vector<vector<double>>>();
 				double d0 = 0.0;
 				vector<int64_t> index;
 
@@ -560,7 +561,8 @@ double& stopl
 							vector <double > dates12(2);
 							dates12[0] = double(qy);
 							dates12[1] = incrf;
-							dates.push_back(dates12);
+							//dates.push_back(dates12);
+							dates->push_back(dates12);
 
 
 						}
@@ -584,6 +586,20 @@ double& stopl
 
 
 			
+				std::thread t0([&, dates, alpha, iterationney, iteration, teach, teach_count]() mutable {
+					teachoffline(
+						indicators, indicatDate, TheoWeights, indicatDateInc, Cash1, Weights1,
+						Count, Outputs1, Weights2, Outputs2, Weights3, Outputs3, Weights4,
+						Outputs4, Weights5, result1, result2, result, Weights1m, Weights2m,
+						Weights3m, Weights4m, Weights5m, Outputs1m, Outputs2m, Outputs3m,
+						Outputs4m, alpha, iterationney, iteration, *dates, vecdate, indicс,
+						theorс, percf, tact71, incre, teach, teach_count, stop, stopl
+					);
+					});
+
+				t0.detach();
+
+/*
 				thread t0(teachoffline, ref(indicators), ref(indicatDate), ref(TheoWeights), ref(indicatDateInc), Cash1, ref(Weights1), ref(Count), ref(Outputs1), ref(Weights2), ref(Outputs2), ref(Weights3), ref(Outputs3), ref(Weights4), ref(Outputs4), ref(Weights5), result1, result2, result,
 					ref(Weights1m),
 					ref(Weights2m),
@@ -610,7 +626,7 @@ double& stopl
 								ref(stopl));
 				
 				t0.detach();
-				
+				*/
 			}
 
 

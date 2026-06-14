@@ -399,7 +399,7 @@ vector<double>& incre
 	TheoWeights = obj2.myfileread(filename2, TheoWeights, linkfile);
 
 	string filename232 = "incre";
-	TheoWeights = obj2.myfileread(filename232, incre, linkfile);
+	incre = obj2.myfileread(filename232, incre, linkfile);
 
 	string filename3 = "count";
 	Count = obj3.myfileread(filename3, Count, linkfile);
